@@ -37,9 +37,15 @@ import java.util.ArrayList;
 import java.util.HashMap;
 
 public class MainMapsActivity extends AppCompatActivity implements
+
         GoogleMap.OnMyLocationButtonClickListener,
         OnMapReadyCallback,
-        ActivityCompat.OnRequestPermissionsResultCallback, LocationListener, GoogleApiClient.OnConnectionFailedListener, GoogleApiClient.ConnectionCallbacks {
+        ActivityCompat.OnRequestPermissionsResultCallback,
+        LocationListener,
+        GoogleApiClient.OnConnectionFailedListener,
+        GoogleApiClient.ConnectionCallbacks
+
+{
 
 
     private static final int LOCATION_PERMISSION_REQUEST_CODE = 1;
@@ -225,13 +231,12 @@ try {
             latLng = new LatLng(mLastLocation.getLatitude(), mLastLocation.getLongitude());
             MarkerOptions markerOptions = new MarkerOptions();
             markerOptions.position(latLng);
-            markerOptions.title("Current Position");
-            markerOptions.icon(BitmapDescriptorFactory.defaultMarker(BitmapDescriptorFactory.HUE_MAGENTA));
+           // markerOptions.icon(BitmapDescriptorFactory.defaultMarker(BitmapDescriptorFactory.HUE_MAGENTA));
             currLocationMarker = mMap.addMarker(markerOptions);
         }
             mLocationRequest = new LocationRequest();
-            mLocationRequest.setInterval(5000); //5 seconds
-            mLocationRequest.setFastestInterval(3000); //3 seconds
+            mLocationRequest.setInterval(50000); //5 seconds
+            mLocationRequest.setFastestInterval(50000); //3 seconds
             mLocationRequest.setPriority(LocationRequest.PRIORITY_BALANCED_POWER_ACCURACY);
             //mLocationRequest.setSmallestDisplacement(0.1F); //1/10 meter
 try {
@@ -258,11 +263,11 @@ try {
         latLng = new LatLng(location.getLatitude(), location.getLongitude());
         MarkerOptions markerOptions = new MarkerOptions();
         markerOptions.position(latLng);
-        markerOptions.title("Current Position");
-        markerOptions.icon(BitmapDescriptorFactory.defaultMarker(BitmapDescriptorFactory.HUE_MAGENTA));
-        currLocationMarker = mMap.addMarker(markerOptions);
+       // markerOptions.title("Current Position");
+       // markerOptions.icon(BitmapDescriptorFactory.defaultMarker(BitmapDescriptorFactory.HUE_MAGENTA));
+      //  currLocationMarker = mMap.addMarker(markerOptions);
 
-        Toast.makeText(this,"Location Changed",Toast.LENGTH_SHORT).show();
+       // Toast.makeText(this,"Location Changed",Toast.LENGTH_SHORT).show();
 
         //zoom to current position:
         CameraPosition cameraPosition = new CameraPosition.Builder()
@@ -308,12 +313,7 @@ try {
             TextView anotherLabel = (TextView)v.findViewById(R.id.another_label);
 
             Button b = (Button)v.findViewById(R.id.call);
-            b.setOnClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(View v) {
-                    Toast.makeText(getApplicationContext(),myMarker.getmLabel(),Toast.LENGTH_LONG).show();
-                }
-            });
+
 
             markerIcon.setImageResource(manageMarkerIcon(myMarker.getmIcon()));
 
