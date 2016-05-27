@@ -18,7 +18,7 @@ public class Details_Parking extends AppCompatActivity {
         setContentView(R.layout.activity_details__parking);
         Intent intent = getIntent();
         String mLabel = intent.getExtras().getString("mLabel");
-        String mIcon = intent.getExtras().getString("mIcon");
+       // String mIcon = intent.getExtras().getString("mIcon");
         double mLatitude = intent.getExtras().getDouble("mLatitude");
         double mLongitude = intent.getExtras().getDouble("mLongitude");
 
@@ -27,7 +27,7 @@ public class Details_Parking extends AppCompatActivity {
         tv_lat = (TextView)findViewById(R.id.lat);
         tv_long = (TextView)findViewById(R.id.ong);
 
-        tv_icon.setText(mIcon);
+      //  tv_icon.setText(mIcon);
         tv_label.setText(mLabel);
         tv_lat.setText(Double.toString(mLatitude));
         tv_long.setText(Double.toString(mLongitude));

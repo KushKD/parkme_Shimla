@@ -1,20 +1,27 @@
 package findparking.hp.dit.himachal.com.shimlaparking;
 
 import android.Manifest;
+import android.app.ProgressDialog;
+import android.content.Context;
 import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.location.Criteria;
 import android.location.Location;
 import android.location.LocationManager;
+import android.net.ConnectivityManager;
+import android.net.NetworkInfo;
+import android.os.AsyncTask;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.support.v4.app.ActivityCompat;
 import android.support.v4.content.ContextCompat;
 import android.support.v7.app.AppCompatActivity;
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.ImageView;
+import android.widget.ProgressBar;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -34,8 +41,20 @@ import com.google.android.gms.maps.model.LatLng;
 import com.google.android.gms.maps.model.Marker;
 import com.google.android.gms.maps.model.MarkerOptions;
 
+import org.json.JSONArray;
+import org.json.JSONException;
+import org.json.JSONObject;
+import org.json.JSONTokener;
+
+import java.io.BufferedReader;
+import java.io.IOException;
+import java.io.InputStreamReader;
+import java.net.HttpURLConnection;
+import java.net.MalformedURLException;
+import java.net.URL;
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.List;
 
 public class MainMapsActivity extends AppCompatActivity implements
 
@@ -56,24 +75,26 @@ public class MainMapsActivity extends AppCompatActivity implements
 
     LocationRequest mLocationRequest;
     GoogleApiClient mGoogleApiClient;
-
     LatLng latLng;
     Marker currLocationMarker;
-
-
     private GoogleMap mMap;
-
-    private ArrayList<MyMarker> mMyMarkersArray = new ArrayList<MyMarker>();
-    private HashMap<Marker, MyMarker> mMarkersHashMap;
+    private ArrayList<My_Marker> mMyMarkersArray = new ArrayList<My_Marker>();
+    private HashMap<Marker, My_Marker> mMarkersHashMap;
+    List<Get_Parking_Details> tasks;
+    ProgressBar pb;
+    URL url_;
+    HttpURLConnection conn_;
+    StringBuilder sb = new StringBuilder();
 
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        // setContentView(R.layout.activity_main_maps);
+        // setContentView(R.layout.activity_main_maps);`
         setContentView(R.layout.my_location_demo);
+        tasks = new ArrayList<>();
 
-        // Initialize the HashMap for Markers and MyMarker object
+       /* // Initialize the HashMap for Markers and MyMarker object
         mMarkersHashMap = new HashMap<>();
 
         mMyMarkersArray.add(new MyMarker("Khalini", "ic_launcher", Double.parseDouble("31.089749"), Double.parseDouble("77.17067")));
@@ -83,7 +104,7 @@ public class MainMapsActivity extends AppCompatActivity implements
         mMyMarkersArray.add(new MyMarker("Sabji Mandi", "ic_launcher", Double.parseDouble("31.102719"), Double.parseDouble("77.17467")));
         mMyMarkersArray.add(new MyMarker("Below Metro Poll", "ic_launcher", Double.parseDouble("31.100736"), Double.parseDouble("77.17529")));
         mMyMarkersArray.add(new MyMarker("Olr Railway Staytion", "ic_launcher", Double.parseDouble("31.104103"), Double.parseDouble("77.16817")));
-        mMyMarkersArray.add(new MyMarker("Old Bus Stand", "ic_launcher", Double.parseDouble("31.101348"), Double.parseDouble("77.17098")));
+        mMyMarkersArray.add(new MyMarker("Old Bus Stand", "ic_launcher", Double.parseDouble("31.101348"), Double.parseDouble("77.17098")));*/
 
 
         // setUpMap();
@@ -106,12 +127,12 @@ public class MainMapsActivity extends AppCompatActivity implements
 
 
 
-    private void plotMarkers(ArrayList<MyMarker> markers) {
+    private void plotMarkers(ArrayList<My_Marker> markers) {
         if (markers.size() > 0) {
-            for (MyMarker myMarker : markers) {
+            for (My_Marker myMarker : markers) {
 
                 // Create user marker with custom icon and other options
-                MarkerOptions markerOption = new MarkerOptions().position(new LatLng(myMarker.getmLatitude(), myMarker.getmLongitude()));
+                MarkerOptions markerOption = new MarkerOptions().position(new LatLng(myMarker.getLatitude(), myMarker.getLongitude()));
                 markerOption.icon(BitmapDescriptorFactory.fromResource(R.drawable.currentlocation_icon));
 
                 Marker currentMarker = mMap.addMarker(markerOption);
@@ -162,12 +183,41 @@ try {
                 mGoogleApiClient.connect();
 
                 enableMyLocation();
-                plotMarkers(mMyMarkersArray);
 
+        if (isOnline()) {
+            try {
+                Get_Parking_Details GPD = new Get_Parking_Details();
+                GPD.execute(Econstants.URL_GENERIC);
+            }catch(Exception e){
+                Log.e("CAUGHT",e.getMessage().toString());
+            }
+
+        } else {
+            Toast.makeText(this,"Unable to Connect to Internet. Please check your Network connection.", Toast.LENGTH_LONG).show();
+        }
+        // Async Task Starts Here
+
+
+       /* if(mMyMarkersArray.size() > 0) {
+            plotMarkers(mMyMarkersArray);
+        }else{
+            Log.d("List is","Empty");
+        }*/
 
                 
 
             }
+
+    protected boolean isOnline() {
+        ConnectivityManager cm = (ConnectivityManager) getSystemService(Context.CONNECTIVITY_SERVICE);
+        NetworkInfo netInfo = cm.getActiveNetworkInfo();
+        if (netInfo != null && netInfo.isConnectedOrConnecting()) {
+            return true;
+        } else {
+            return false;
+        }
+    }
+
 
     protected synchronized void buildGoogleApiClient() {
        // Toast.makeText(this,"buildGoogleApiClient",Toast.LENGTH_SHORT).show();
@@ -318,10 +368,10 @@ try {
 
         if (mMyMarkersArray.size() > 0) {
             //Toast.makeText(getApplicationContext(),"List Not Empty"+ id_GetData, Toast.LENGTH_LONG).show();
-            mLabel= mMyMarkersArray.get(Integer.parseInt(id_GetData)).getmLabel();
-            mIcon= mMyMarkersArray.get(Integer.parseInt(id_GetData)).getmIcon();
-            mLatitude = mMyMarkersArray.get(Integer.parseInt(id_GetData)).getmLatitude();
-            mLongitude = mMyMarkersArray.get(Integer.parseInt(id_GetData)).getmLongitude();
+            mLabel= mMyMarkersArray.get(Integer.parseInt(id_GetData)).getIdentifier();
+           // mIcon= mMyMarkersArray.get(Integer.parseInt(id_GetData)).getmIcon();
+            mLatitude = mMyMarkersArray.get(Integer.parseInt(id_GetData)).getLatitude();
+            mLongitude = mMyMarkersArray.get(Integer.parseInt(id_GetData)).getLongitude();
 
             }
         else{
@@ -330,7 +380,7 @@ try {
 
         Intent i = new Intent(MainMapsActivity.this,Details_Parking.class);
         i.putExtra("mLabel",mLabel);
-        i.putExtra("mIcon",mIcon);
+       // i.putExtra("mIcon",mIcon);
         i.putExtra("mLatitude",mLatitude);
         i.putExtra("mLongitude",mLongitude);
 
@@ -369,7 +419,7 @@ try {
         {
             View v  = getLayoutInflater().inflate(R.layout.infowindow_layout, null);
 
-            final MyMarker myMarker = mMarkersHashMap.get(marker);
+            final My_Marker myMarker = mMarkersHashMap.get(marker);
 
             ImageView markerIcon = (ImageView)v.findViewById(R.id.marker_icon);
 
@@ -380,12 +430,123 @@ try {
             //Button b = (Button)v.findViewById(R.id.call);
 
 
-            markerIcon.setImageResource(manageMarkerIcon(myMarker.getmIcon()));
+           // markerIcon.setImageResource(manageMarkerIcon(myMarker.getmIcon()));
 
-            markerLabel.setText(myMarker.getmLabel());
-            anotherLabel.setText("A custom text");
+            markerLabel.setText(myMarker.getIdentifier());
+            anotherLabel.setText(myMarker.getParkingFullTag());
 
             return v;
+        }
+    }
+
+
+    public class Get_Parking_Details extends AsyncTask<String,String,String>{
+
+      //  ProgressDialog dialog;
+
+        @Override
+        protected void onPreExecute() {
+            super.onPreExecute();
+
+               // dialog.show();
+               // dialog.setMessage("Please wait as we are fetching the near by Parking places.");
+              //  dialog.setCancelable(false);
+
+        }
+
+        @Override
+        protected String doInBackground(String... params) {
+            try {
+            url_ =new URL(params[0]);
+            conn_ = (HttpURLConnection)url_.openConnection();
+            conn_.setRequestMethod("GET");
+            conn_.setUseCaches(false);
+            conn_.setConnectTimeout(20000);
+            conn_.setReadTimeout(20000);
+            conn_.connect();
+
+            int HttpResult =conn_.getResponseCode();
+            if(HttpResult ==HttpURLConnection.HTTP_OK){
+                BufferedReader br = new BufferedReader(new InputStreamReader(conn_.getInputStream(),"utf-8"));
+                String line = null;
+                while ((line = br.readLine()) != null) {
+                    sb.append(line + "\n");
+                }
+                br.close();
+                System.out.print(sb.toString());
+
+            }else{
+            }
+
+        } catch (MalformedURLException e) {
+            e.printStackTrace();
+        } catch (IOException e) {
+            e.printStackTrace();
+        } finally{
+            if(conn_!=null)
+                conn_.disconnect();
+        }
+        return sb.toString();
+        }
+
+        @Override
+        protected void onPostExecute(String s) {
+            super.onPostExecute(s);
+
+            Log.d("PARAMS[0] result is:- ",s);
+
+            //Send String JSON FOr Parsing
+            try {
+                String g_Table = null;
+                Object json = new JSONTokener(s).nextValue();
+                if (json instanceof JSONObject){
+                    JSONObject obj = new JSONObject(s);
+                    g_Table = obj.optString("getParking_JSONResult");
+                }
+                else if (json instanceof JSONArray){
+                }
+                JSONArray ar = new JSONArray(g_Table);
+
+
+                for (int i = 0; i < ar.length(); i++) {
+                    JSONObject obj = ar.getJSONObject(i);
+                    // Initialize the HashMap for Markers and MyMarker object
+                    mMarkersHashMap = new HashMap<>();
+
+                    mMyMarkersArray.add(new My_Marker(obj.getString("Capacity"),
+                                                      obj.getString("ContactNumber1"),
+                                                      obj.getString("ContactNumber2"),
+                                                      obj.getString("ContactNumber3"),
+                                                      obj.getString("ContactPerson1"),
+                                                      obj.getString("ContactPerson2"),
+                                                      obj.getString("ContactPerson3"),
+                                                      obj.getString("Identifier"),
+                                                      obj.getString("Image"),
+                                                      obj.getString("Image1"),
+                                                      obj.getString("Image2"),
+                                                      obj.getDouble("Latitude"),
+                                                      obj.getDouble("Longitude"),
+                                                      obj.getString("ParkingArea"),
+                                                      obj.getString("ParkingFullTag"),
+                                                      obj.getString("ParkingPlace"),
+                                                      obj.getString("Remarks"),
+                                                      obj.getString("SutedFor"),
+                                                      obj.getString("ThrashholdValue")));
+
+                }
+
+            } catch (JSONException e) {
+                e.printStackTrace();
+
+            }
+
+            if(mMyMarkersArray.size() > 0) {
+                plotMarkers(mMyMarkersArray);
+            }else{
+                Log.d("List is","Empty");
+            }
+           // dialog.dismiss();
+
         }
     }
 }
