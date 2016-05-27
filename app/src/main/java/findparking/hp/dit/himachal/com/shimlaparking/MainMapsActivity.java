@@ -1,6 +1,7 @@
 package findparking.hp.dit.himachal.com.shimlaparking;
 
 import android.Manifest;
+import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.location.Criteria;
 import android.location.Location;
@@ -43,7 +44,9 @@ public class MainMapsActivity extends AppCompatActivity implements
         ActivityCompat.OnRequestPermissionsResultCallback,
         LocationListener,
         GoogleApiClient.OnConnectionFailedListener,
-        GoogleApiClient.ConnectionCallbacks
+        GoogleApiClient.ConnectionCallbacks,
+        GoogleMap.OnInfoWindowClickListener,
+        GoogleMap.OnInfoWindowLongClickListener
 
 {
 
@@ -71,7 +74,7 @@ public class MainMapsActivity extends AppCompatActivity implements
         setContentView(R.layout.my_location_demo);
 
         // Initialize the HashMap for Markers and MyMarker object
-        mMarkersHashMap = new HashMap<Marker, MyMarker>();
+        mMarkersHashMap = new HashMap<>();
 
         mMyMarkersArray.add(new MyMarker("Khalini", "ic_launcher", Double.parseDouble("31.089749"), Double.parseDouble("77.17067")));
         mMyMarkersArray.add(new MyMarker("Bemloe", "ic_launcher", Double.parseDouble("31.09776"), Double.parseDouble("77.17455")));
@@ -88,8 +91,20 @@ public class MainMapsActivity extends AppCompatActivity implements
                 (SupportMapFragment) getSupportFragmentManager().findFragmentById(R.id.map);
         mapFragment.getMapAsync(this);
 
+       /* mMap.setOnInfoWindowClickListener(new GoogleMap.OnInfoWindowClickListener() {
+            @Override
+            public void onInfoWindowClick(Marker marker) {
+                Intent intent = new Intent(MainMapsActivity.this,Details_Parking.class);
+                startActivity(intent);
+
+
+            }
+        });*/
+
 
     }
+
+
 
     private void plotMarkers(ArrayList<MyMarker> markers) {
         if (markers.size() > 0) {
@@ -127,11 +142,15 @@ public class MainMapsActivity extends AppCompatActivity implements
     }
 
 
+
+
     @Override
     public void onMapReady(GoogleMap map) {
         mMap = map;
 
         mMap.setOnMyLocationButtonClickListener(this);
+        mMap.setOnInfoWindowClickListener(this);
+        mMap.setOnInfoWindowLongClickListener(this);
 try {
     mMap.setMyLocationEnabled(true);
 }catch(SecurityException s){
@@ -144,12 +163,14 @@ try {
 
                 enableMyLocation();
                 plotMarkers(mMyMarkersArray);
+
+
                 
 
             }
 
     protected synchronized void buildGoogleApiClient() {
-        Toast.makeText(this,"buildGoogleApiClient",Toast.LENGTH_SHORT).show();
+       // Toast.makeText(this,"buildGoogleApiClient",Toast.LENGTH_SHORT).show();
         mGoogleApiClient = new GoogleApiClient.Builder(this)
                 .addConnectionCallbacks(this)
                 .addOnConnectionFailedListener(this)
@@ -174,7 +195,7 @@ try {
 
             @Override
             public boolean onMyLocationButtonClick() {
-                Toast.makeText(this, "MyLocation button clicked", Toast.LENGTH_SHORT).show();
+                Toast.makeText(this, "Getting Latest Location", Toast.LENGTH_SHORT).show();
                 // Return false so that we don't consume the event and the default behavior still occurs
                 // (the camera animates to the user's current position).
                 return false;
@@ -271,7 +292,7 @@ try {
 
         //zoom to current position:
         CameraPosition cameraPosition = new CameraPosition.Builder()
-                .target(latLng).zoom(14).build();
+                .target(latLng).zoom(14).build();  //default was 14
 
         mMap.animateCamera(CameraUpdateFactory
                 .newCameraPosition(cameraPosition));
@@ -284,6 +305,50 @@ try {
     public void onConnectionFailed(@NonNull ConnectionResult connectionResult) {
         Toast.makeText(this,"onConnectionFailed",Toast.LENGTH_SHORT).show();
     }
+
+    @Override
+    public void onInfoWindowClick(Marker marker) {
+
+         String mLabel = null;
+         String mIcon = null;
+         double mLatitude = 0;
+         double mLongitude = 0;
+
+        String id_GetData = removeFirstCharacter(marker.getId().toString());
+
+        if (mMyMarkersArray.size() > 0) {
+            //Toast.makeText(getApplicationContext(),"List Not Empty"+ id_GetData, Toast.LENGTH_LONG).show();
+            mLabel= mMyMarkersArray.get(Integer.parseInt(id_GetData)).getmLabel();
+            mIcon= mMyMarkersArray.get(Integer.parseInt(id_GetData)).getmIcon();
+            mLatitude = mMyMarkersArray.get(Integer.parseInt(id_GetData)).getmLatitude();
+            mLongitude = mMyMarkersArray.get(Integer.parseInt(id_GetData)).getmLongitude();
+
+            }
+        else{
+            Toast.makeText(getApplicationContext(),"Nothing to search from.", Toast.LENGTH_LONG).show();
+        }
+
+        Intent i = new Intent(MainMapsActivity.this,Details_Parking.class);
+        i.putExtra("mLabel",mLabel);
+        i.putExtra("mIcon",mIcon);
+        i.putExtra("mLatitude",mLatitude);
+        i.putExtra("mLongitude",mLongitude);
+
+        startActivity(i);
+
+    }
+
+
+
+    public String removeFirstCharacter(String s){
+        return s.substring(1);
+    }
+    @Override
+    public void onInfoWindowLongClick(Marker marker) {
+        Toast.makeText(getApplicationContext(),"Please Work Long Press", Toast.LENGTH_LONG).show();
+    }
+
+
 
 
     /* Custom Marker */
@@ -312,7 +377,7 @@ try {
 
             TextView anotherLabel = (TextView)v.findViewById(R.id.another_label);
 
-            Button b = (Button)v.findViewById(R.id.call);
+            //Button b = (Button)v.findViewById(R.id.call);
 
 
             markerIcon.setImageResource(manageMarkerIcon(myMarker.getmIcon()));
