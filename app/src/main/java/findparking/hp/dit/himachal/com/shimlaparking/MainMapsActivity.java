@@ -142,7 +142,7 @@ public class MainMapsActivity extends AppCompatActivity implements
                  }if(myMarker.getParkingFullTag().equalsIgnoreCase("true")){
                      markerOption.icon(BitmapDescriptorFactory.fromResource(R.drawable.pnotavailable));
                  }else{
-                    Toast.makeText(getApplicationContext(),myMarker.getParkingFullTag().toString(),Toast.LENGTH_LONG).show();
+                    //Toast.makeText(getApplicationContext(),myMarker.getParkingFullTag().toString(),Toast.LENGTH_LONG).show();
                     markerOption.icon(BitmapDescriptorFactory.fromResource(R.drawable.pp));
                 }
 
@@ -575,6 +575,7 @@ try {
                 plotMarkers(mMyMarkersArray);
             }else{
                 Log.d("List is","Empty");
+                Toast.makeText(getApplicationContext(),"List Empty",Toast.LENGTH_LONG).show();
             }
            // dialog.dismiss();
 
