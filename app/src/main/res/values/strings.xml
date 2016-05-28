@@ -1,6 +1,6 @@
 <resources>
-    <string name="app_name">Shimla Parking</string>
-    <string name="title_activity_main_maps">Park Me</string>
+    <string name="app_name">HP Parking</string>
+    <string name="title_activity_main_maps">HP Parking</string>
 
     <!--    Permissions    -->
     <string name="permission_rationale_location">Access to the location service is required to demonstrate the \'my location\' feature, which shows your current location on the map.</string>

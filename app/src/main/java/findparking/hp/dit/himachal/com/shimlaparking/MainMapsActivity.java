@@ -493,7 +493,7 @@ try {
         protected void onPostExecute(String s) {
             super.onPostExecute(s);
 
-            Log.d("PARAMS[0] result is:- ",s);
+           // Log.d("PARAMS[0] result is:- ",s);
 
             //Send String JSON FOr Parsing
             try {
