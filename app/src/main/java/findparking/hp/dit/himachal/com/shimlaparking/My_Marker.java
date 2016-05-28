@@ -180,6 +180,34 @@ public class My_Marker implements Serializable {
     public String SutedFor;
     public String ThrashholdValue;
 
+    public String getMinimumParkingTime() {
+        return MinimumParkingTime;
+    }
+
+    public void setMinimumParkingTime(String minimumParkingTime) {
+        MinimumParkingTime = minimumParkingTime;
+    }
+
+    public String getMinimumParkingFeeSmallCar() {
+        return MinimumParkingFeeSmallCar;
+    }
+
+    public void setMinimumParkingFeeSmallCar(String minimumParkingFeeSmallCar) {
+        MinimumParkingFeeSmallCar = minimumParkingFeeSmallCar;
+    }
+
+    public String getMinimumParkingFeebigCar() {
+        return MinimumParkingFeebigCar;
+    }
+
+    public void setMinimumParkingFeebigCar(String minimumParkingFeebigCar) {
+        MinimumParkingFeebigCar = minimumParkingFeebigCar;
+    }
+
+    public String MinimumParkingFeeSmallCar;
+    public String MinimumParkingFeebigCar;
+    public String MinimumParkingTime;
+
     public My_Marker(String Capacity,
                      String ContactNumber1, String ContactNumber2, String ContactNumber3,
                      String ContactPerson1, String ContactPerson2, String ContactPerson3,
@@ -187,7 +215,8 @@ public class My_Marker implements Serializable {
                      String Image, String Image1, String Image2,
                      Double Latitude, Double Longitude,
                      String ParkingArea, String ParkingFullTag,String ParkingPlace,
-                     String Remarks, String SutedFor, String ThrashholdValue  )
+                     String Remarks, String SutedFor, String ThrashholdValue,
+                     String MinimumParkingFeeSmallCar, String MinimumParkingFeebigCar, String MinimumParkingTime )
     {
         this.Capacity = Capacity;
         this.ContactNumber1 = ContactNumber1;
@@ -208,6 +237,9 @@ public class My_Marker implements Serializable {
         this.Remarks = Remarks;
         this.SutedFor = SutedFor;
         this.ThrashholdValue = ThrashholdValue;
+        this.MinimumParkingTime = MinimumParkingTime;
+        this.MinimumParkingFeebigCar = MinimumParkingFeebigCar;
+        this.MinimumParkingFeeSmallCar = MinimumParkingFeeSmallCar;
 
     }
 

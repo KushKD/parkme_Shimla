@@ -16,6 +16,7 @@ import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.support.v4.app.ActivityCompat;
 import android.support.v4.content.ContextCompat;
+import android.support.v7.app.ActionBar;
 import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
 import android.view.View;
@@ -106,7 +107,8 @@ public class MainMapsActivity extends AppCompatActivity implements
         mMyMarkersArray.add(new MyMarker("Olr Railway Staytion", "ic_launcher", Double.parseDouble("31.104103"), Double.parseDouble("77.16817")));
         mMyMarkersArray.add(new MyMarker("Old Bus Stand", "ic_launcher", Double.parseDouble("31.101348"), Double.parseDouble("77.17098")));*/
 
-
+        ActionBar actionBar = getSupportActionBar();
+        actionBar.hide();
         // setUpMap();
         SupportMapFragment mapFragment =
                 (SupportMapFragment) getSupportFragmentManager().findFragmentById(R.id.map);
@@ -133,7 +135,17 @@ public class MainMapsActivity extends AppCompatActivity implements
 
                 // Create user marker with custom icon and other options
                 MarkerOptions markerOption = new MarkerOptions().position(new LatLng(myMarker.getLatitude(), myMarker.getLongitude()));
-                markerOption.icon(BitmapDescriptorFactory.fromResource(R.drawable.currentlocation_icon));
+
+
+                 if(myMarker.getParkingFullTag().equalsIgnoreCase("false")){
+                     markerOption.icon(BitmapDescriptorFactory.fromResource(R.drawable.pavailable));
+                 }if(myMarker.getParkingFullTag().equalsIgnoreCase("true")){
+                     markerOption.icon(BitmapDescriptorFactory.fromResource(R.drawable.pnotavailable));
+                 }else{
+                    Toast.makeText(getApplicationContext(),myMarker.getParkingFullTag().toString(),Toast.LENGTH_LONG).show();
+                    markerOption.icon(BitmapDescriptorFactory.fromResource(R.drawable.pp));
+                }
+
 
                 Marker currentMarker = mMap.addMarker(markerOption);
                 mMarkersHashMap.put(currentMarker, myMarker);
@@ -342,7 +354,7 @@ try {
 
         //zoom to current position:
         CameraPosition cameraPosition = new CameraPosition.Builder()
-                .target(latLng).zoom(14).build();  //default was 14
+                .target(latLng).zoom(13).build();  //default was 14
 
         mMap.animateCamera(CameraUpdateFactory
                 .newCameraPosition(cameraPosition));
@@ -423,17 +435,33 @@ try {
 
             ImageView markerIcon = (ImageView)v.findViewById(R.id.marker_icon);
 
-            TextView markerLabel = (TextView)v.findViewById(R.id.marker_label);
-
-            TextView anotherLabel = (TextView)v.findViewById(R.id.another_label);
-
-            //Button b = (Button)v.findViewById(R.id.call);
+            TextView parking_place = (TextView) v.findViewById(R.id.parking_place);
+            TextView identifier= (TextView) v.findViewById(R.id.identifier);
+            TextView capacity= (TextView) v.findViewById(R.id.capacity);
+            TextView available= (TextView) v.findViewById(R.id.available);
+            TextView minparkingtime= (TextView) v.findViewById(R.id.minparkingtime);
+            TextView smallcarfare= (TextView) v.findViewById(R.id.smallcarfare);
+            TextView bigcarfare= (TextView) v.findViewById(R.id.bigcarfare);
+            TextView more= (TextView) v.findViewById(R.id.more);
 
 
            // markerIcon.setImageResource(manageMarkerIcon(myMarker.getmIcon()));
 
-            markerLabel.setText(myMarker.getIdentifier());
-            anotherLabel.setText(myMarker.getParkingFullTag());
+            parking_place.setText(myMarker.getParkingPlace());
+            identifier.setText(myMarker.getIdentifier());
+            capacity.setText(myMarker.getCapacity()+ " vehicles");
+
+
+
+
+            if(myMarker.getParkingFullTag()=="false"){
+                available.setText("Parking Available");
+            }else{
+                available.setText("Parking Full");
+            }
+            minparkingtime.setText(myMarker.getMinimumParkingTime());
+            smallcarfare.setText(myMarker.getMinimumParkingFeeSmallCar());
+            bigcarfare.setText(myMarker.getMinimumParkingFeebigCar());
 
             return v;
         }
@@ -531,7 +559,10 @@ try {
                                                       obj.getString("ParkingPlace"),
                                                       obj.getString("Remarks"),
                                                       obj.getString("SutedFor"),
-                                                      obj.getString("ThrashholdValue")));
+                                                      obj.getString("ThrashholdValue"),
+                                                      obj.getString("MinimumParkingFeeSmallCar"),
+                                                      obj.getString("MinimumParkingFeebigCar"),
+                                                      obj.getString("MinimumParkingTime")));
 
                 }
 
