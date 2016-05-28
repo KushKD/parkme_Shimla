@@ -137,14 +137,15 @@ public class MainMapsActivity extends AppCompatActivity implements
                 MarkerOptions markerOption = new MarkerOptions().position(new LatLng(myMarker.getLatitude(), myMarker.getLongitude()));
 
 
-                 if(!myMarker.getParkingFullTag()){
+                System.out.println(myMarker.getParkingFullTag() + "###" +myMarker.getParkingFullTag().toUpperCase());
+                 if(myMarker.getParkingFullTag().toUpperCase()=="FALSE"){
                      markerOption.icon(BitmapDescriptorFactory.fromResource(R.drawable.pavailable));
-                 }if(myMarker.getParkingFullTag()){
-                     markerOption.icon(BitmapDescriptorFactory.fromResource(R.drawable.pnotavailable));
                  }else{
+                     markerOption.icon(BitmapDescriptorFactory.fromResource(R.drawable.pnotavailable));
+                 }/*else{
                     //Toast.makeText(getApplicationContext(),myMarker.getParkingFullTag().toString(),Toast.LENGTH_LONG).show();
                     markerOption.icon(BitmapDescriptorFactory.fromResource(R.drawable.pp));
-                }
+                }*/
 
 
                 Marker currentMarker = mMap.addMarker(markerOption);
@@ -453,10 +454,11 @@ try {
 
 
 
-
-            if(!myMarker.getParkingFullTag()){
+            System.out.println(myMarker.getParkingFullTag());
+            System.out.println(myMarker.getParkingFullTag().toUpperCase());
+            if(myMarker.getParkingFullTag().toUpperCase()=="FALSE"){
                 available.setText("Parking Available");
-            } if(myMarker.getParkingFullTag()){
+            } if(myMarker.getParkingFullTag().toUpperCase()=="TRUE"){
                 available.setText("Parking Full");
             }else{
             available.setText("No Idea!!");
@@ -557,7 +559,7 @@ try {
                                                       obj.getDouble("Latitude"),
                                                       obj.getDouble("Longitude"),
                                                       obj.getString("ParkingArea"),
-                                                      obj.getBoolean("ParkingFullTag"),
+                                                      obj.getString("ParkingFullTag").trim(),
                                                       obj.getString("ParkingPlace"),
                                                       obj.getString("Remarks"),
                                                       obj.getString("SutedFor"),
@@ -565,7 +567,7 @@ try {
                                                       obj.getString("MinimumParkingFeeSmallCar"),
                                                       obj.getString("MinimumParkingFeebigCar"),
                                                       obj.getString("MinimumParkingTime")));
-                    System.out.println(obj.getBoolean("ParkingFullTag"));
+                    System.out.println(obj.getString("ParkingFullTag"));
 
                 }
 

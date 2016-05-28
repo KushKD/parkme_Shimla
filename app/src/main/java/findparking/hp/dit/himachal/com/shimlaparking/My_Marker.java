@@ -40,11 +40,11 @@ public class My_Marker implements Serializable {
         ParkingPlace = parkingPlace;
     }
 
-    public Boolean getParkingFullTag() {
+    public String getParkingFullTag() {
         return ParkingFullTag;
     }
 
-    public void setParkingFullTag(Boolean parkingFullTag) {
+    public void setParkingFullTag(String parkingFullTag) {
         ParkingFullTag = parkingFullTag;
     }
 
@@ -174,7 +174,7 @@ public class My_Marker implements Serializable {
     public Double Latitude;
     public Double Longitude;
     public String ParkingArea;
-    public Boolean ParkingFullTag;
+    public String ParkingFullTag;
     public String ParkingPlace;
     public String Remarks;
     public String SutedFor;
@@ -214,7 +214,7 @@ public class My_Marker implements Serializable {
                      String Identifier,
                      String Image, String Image1, String Image2,
                      Double Latitude, Double Longitude,
-                     String ParkingArea, Boolean ParkingFullTag,String ParkingPlace,
+                     String ParkingArea, String ParkingFullTag,String ParkingPlace,
                      String Remarks, String SutedFor, String ThrashholdValue,
                      String MinimumParkingFeeSmallCar, String MinimumParkingFeebigCar, String MinimumParkingTime )
     {
