@@ -23,14 +23,14 @@ public class Details_Parking extends AppCompatActivity {
         double mLongitude = intent.getExtras().getDouble("mLongitude");
 
         tv_icon = (TextView)findViewById(R.id.icon);
-        tv_label = (TextView)findViewById(R.id.label);
-        tv_lat = (TextView)findViewById(R.id.lat);
-        tv_long = (TextView)findViewById(R.id.ong);
+       // tv_label = (TextView)findViewById(R.id.label);
+       // tv_lat = (TextView)findViewById(R.id.lat);
+       // tv_long = (TextView)findViewById(R.id.ong);
 
       //  tv_icon.setText(mIcon);
-        tv_label.setText(mLabel);
-        tv_lat.setText(Double.toString(mLatitude));
-        tv_long.setText(Double.toString(mLongitude));
+       // tv_label.setText(mLabel);
+       // tv_lat.setText(Double.toString(mLatitude));
+       // tv_long.setText(Double.toString(mLongitude));
 
 
 

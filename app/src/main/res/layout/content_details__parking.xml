@@ -1,37 +1,501 @@
-<?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools"
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/rightLayout"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:paddingBottom="@dimen/activity_vertical_margin"
-    android:paddingLeft="@dimen/activity_horizontal_margin"
-    android:paddingRight="@dimen/activity_horizontal_margin"
-    android:paddingTop="@dimen/activity_vertical_margin"
     android:orientation="vertical"
-    app:layout_behavior="@string/appbar_scrolling_view_behavior"
-    tools:context="findparking.hp.dit.himachal.com.shimlaparking.Details_Parking"
-    tools:showIn="@layout/activity_details__parking">
+    android:background="#f2f2f2"
+    android:weightSum="3">
 
+    <!-- ImageView -->
 
-    <TextView
+    <LinearLayout
+        android:id="@+id/lay1"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:id="@+id/icon"/>
+        android:layout_height="0dp"
+        android:layout_weight="0.5"
+        android:background="#366988"
+        android:gravity="left|center_vertical|center_horizontal"
+        android:orientation="horizontal">
 
-    <TextView
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:id="@+id/label"/>
+        <ImageView
+            android:layout_margin="10dp"
+            android:id="@+id/ImageUser"
+            android:layout_width="60dp"
+            android:layout_height="60dp"
+            android:src="@drawable/ic_launcher" />
+        <TextView
+            android:id="@+id/postname"
+            android:layout_width="match_parent"
+            android:layout_height="fill_parent"
+            android:gravity="center|center_horizontal|center_vertical"
+            android:textColor="#FFFFFF"
+            android:textSize="20sp"
+            android:textStyle="bold"/>
+    </LinearLayout>
 
-    <TextView
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:id="@+id/lat"/>
+    <!-- Buttons -->
 
-    <TextView
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:id="@+id/ong"/>
+    <LinearLayout
+        android:id="@+id/laydetails"
+        android:layout_width="fill_parent"
+        android:layout_height="0dip"
+        android:background="#40666666"
+        android:layout_margin="5dp"
+        android:layout_weight="2.2" >
+
+        <ScrollView
+            android:id="@+id/mainScrollView"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
+            <LinearLayout
+                android:id="@+id/linearLayout1"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:orientation="vertical">
+
+                <!-- ParkingPlace -->
+                <LinearLayout
+                    android:id="@+id/textview1"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:gravity="left"
+                    android:visibility="visible"
+                    android:layout_margin="5dp"
+                    android:orientation="vertical">
+
+
+                    <TextView
+                        android:text="Department Name"
+                        android:textColor="#366988"
+                        android:textSize="18sp"
+                        android:textStyle="bold"
+                        android:layout_width="fill_parent"
+                        android:layout_height="wrap_content"
+                        android:gravity="center_vertical|center_horizontal|left"
+                        />
+
+                    <TextView
+                        android:textColor="#3d3d29"
+                        android:textSize="16sp"
+                        android:textStyle="bold"
+                        android:id="@+id/department"
+                        android:layout_width="fill_parent"
+                        android:layout_height="wrap_content"
+                        android:gravity="center_vertical|center_horizontal|left"
+                        />
+                </LinearLayout>
+                <!-- ParkingArea -->
+                <LinearLayout
+                    android:id="@+id/textview3"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:gravity="left"
+                    android:layout_margin="5dp"
+                    android:orientation="vertical">
+
+                    <TextView
+                        android:text="Post Code"
+                        android:textColor="#366988"
+                        android:textSize="18sp"
+                        android:textStyle="bold"
+                        android:layout_width="fill_parent"
+                        android:layout_height="wrap_content"
+                        android:gravity="center_vertical|center_horizontal|left"
+                        />
+
+                    <TextView
+                        android:textColor="#3d3d29"
+                        android:textSize="16sp"
+                        android:textStyle="bold"
+                        android:id="@+id/postcode"
+                        android:layout_width="fill_parent"
+                        android:layout_height="wrap_content"
+                        android:gravity="center_vertical|center_horizontal|left"
+                        android:text=""/>
+                </LinearLayout>
+                <!-- ParkingFullTag -->
+                <LinearLayout
+                    android:id="@+id/textview2"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:gravity="left"
+                    android:visibility="visible"
+                    android:layout_margin="5dp"
+                    android:orientation="vertical">
+
+                    <TextView
+                        android:text="Details"
+                        android:textColor="#366988"
+                        android:textSize="18sp"
+                        android:textStyle="bold"
+                        android:layout_width="fill_parent"
+                        android:layout_height="wrap_content"
+                        android:gravity="center_vertical|center_horizontal|left"
+                        />
+
+
+                    <TextView
+                        android:textColor="#3d3d29"
+                        android:textSize="16sp"
+                        android:textStyle="bold"
+                        android:id="@+id/details"
+                        android:layout_width="fill_parent"
+                        android:layout_height="wrap_content"
+                        android:gravity="center_vertical|center_horizontal|left"/>
+                </LinearLayout>
+                <!-- Remarks-->
+                <LinearLayout
+                    android:id="@+id/textview4"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:gravity="left"
+                    android:visibility="visible"
+                    android:layout_margin="5dp"
+                    android:orientation="vertical">
+
+
+                    <TextView
+                        android:id="@+id/postid"
+                        android:layout_width="fill_parent"
+                        android:layout_height="wrap_content"
+                        android:gravity="center_vertical|center_horizontal|left"
+                        android:text=""/>
+                </LinearLayout>
+                <!-- SutedFor -->
+                <LinearLayout
+                    android:id="@+id/textview5"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:gravity="left"
+                    android:layout_margin="5dp"
+                    android:orientation="vertical"
+                    android:visibility="visible">
+
+                    <TextView
+                        android:text="Published Date"
+                        android:textColor="#366988"
+                        android:textSize="18sp"
+                        android:textStyle="bold"
+                        android:layout_width="fill_parent"
+                        android:layout_height="wrap_content"
+                        android:gravity="center_vertical|center_horizontal|left"
+                        />
+
+                    <TextView
+                        android:textColor="#3d3d29"
+                        android:textSize="16sp"
+                        android:textStyle="bold"
+                        android:id="@+id/pubdate"
+                        android:layout_width="fill_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:gravity="center_vertical|center_horizontal|left"
+                        android:text=""/>
+
+
+                </LinearLayout>
+                <!-- ThrashholdValue -->
+                <LinearLayout
+                    android:id="@+id/textview6"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:gravity="left"
+                    android:layout_margin="5dp"
+                    android:orientation="vertical"
+                    android:visibility="visible">
+
+                    <TextView
+                        android:text="Last Date"
+                        android:textColor="#366988"
+                        android:textSize="18sp"
+                        android:textStyle="bold"
+                        android:layout_width="fill_parent"
+                        android:layout_height="wrap_content"
+                        android:gravity="center_vertical|center_horizontal|left"
+                        />
+
+                    <TextView
+                        android:textColor="#3d3d29"
+                        android:textSize="16sp"
+                        android:textStyle="bold"
+                        android:id="@+id/lastdate"
+                        android:layout_width="fill_parent"
+                        android:layout_weight="1"
+                        android:layout_height="wrap_content"
+                        android:gravity="center_vertical|center_horizontal|left"
+                        android:text=""/>
+
+
+                </LinearLayout>
+                <!-- Fees small cars and big cars -->
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:gravity="left"
+                    android:layout_margin="5dp"
+                    android:orientation="vertical"
+                    android:visibility="visible">
+
+                    <TextView
+                        android:text="Last Date"
+                        android:textColor="#366988"
+                        android:textSize="18sp"
+                        android:textStyle="bold"
+                        android:layout_width="fill_parent"
+                        android:layout_height="wrap_content"
+                        android:gravity="center_vertical|center_horizontal|left"
+                        />
+
+                    <TextView
+                        android:textColor="#3d3d29"
+                        android:textSize="16sp"
+                        android:textStyle="bold"
+                        android:layout_width="fill_parent"
+                        android:layout_weight="1"
+                        android:layout_height="wrap_content"
+                        android:gravity="center_vertical|center_horizontal|left"
+                        android:text=""/>
+
+
+                </LinearLayout>
+                <!-- Parking Time -->
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:gravity="left"
+                    android:layout_margin="5dp"
+                    android:orientation="vertical"
+                    android:visibility="visible">
+
+                    <TextView
+                        android:text="Last Date"
+                        android:textColor="#366988"
+                        android:textSize="18sp"
+                        android:textStyle="bold"
+                        android:layout_width="fill_parent"
+                        android:layout_height="wrap_content"
+                        android:gravity="center_vertical|center_horizontal|left"
+                        />
+
+                    <TextView
+                        android:textColor="#3d3d29"
+                        android:textSize="16sp"
+                        android:textStyle="bold"
+                        android:layout_width="fill_parent"
+                        android:layout_weight="1"
+                        android:layout_height="wrap_content"
+                        android:gravity="center_vertical|center_horizontal|left"
+                        android:text=""/>
+
+
+                </LinearLayout>
+                <!-- Capacity -->
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:gravity="left"
+                    android:layout_margin="5dp"
+                    android:orientation="vertical"
+                    android:visibility="visible">
+
+                    <TextView
+                        android:text="Last Date"
+                        android:textColor="#366988"
+                        android:textSize="18sp"
+                        android:textStyle="bold"
+                        android:layout_width="fill_parent"
+                        android:layout_height="wrap_content"
+                        android:gravity="center_vertical|center_horizontal|left"
+                        />
+
+                    <TextView
+                        android:textColor="#3d3d29"
+                        android:textSize="16sp"
+                        android:textStyle="bold"
+                        android:layout_width="fill_parent"
+                        android:layout_weight="1"
+                        android:layout_height="wrap_content"
+                        android:gravity="center_vertical|center_horizontal|left"
+                        android:text=""/>
+
+
+                </LinearLayout>
+                <!-- Contact Numbers Numbers1 and Person1 Number 2 and Person2 Number 3 and Person3 -->
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:gravity="left"
+                    android:layout_margin="5dp"
+                    android:orientation="vertical"
+                    android:visibility="visible">
+
+                    <TextView
+                        android:text="Last Date"
+                        android:textColor="#366988"
+                        android:textSize="18sp"
+                        android:textStyle="bold"
+                        android:layout_width="fill_parent"
+                        android:layout_height="wrap_content"
+                        android:gravity="center_vertical|center_horizontal|left"
+                        />
+
+                    <TextView
+                        android:textColor="#3d3d29"
+                        android:textSize="16sp"
+                        android:textStyle="bold"
+                        android:layout_width="fill_parent"
+                        android:layout_weight="1"
+                        android:layout_height="wrap_content"
+                        android:gravity="center_vertical|center_horizontal|left"
+                        android:text=""/>
+
+
+                </LinearLayout>
+                <!--Identifier -->
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:gravity="left"
+                    android:layout_margin="5dp"
+                    android:orientation="vertical"
+                    android:visibility="visible">
+
+                    <TextView
+                        android:text="Last Date"
+                        android:textColor="#366988"
+                        android:textSize="18sp"
+                        android:textStyle="bold"
+                        android:layout_width="fill_parent"
+                        android:layout_height="wrap_content"
+                        android:gravity="center_vertical|center_horizontal|left"
+                        />
+
+                    <TextView
+                        android:textColor="#3d3d29"
+                        android:textSize="16sp"
+                        android:textStyle="bold"
+                        android:layout_width="fill_parent"
+                        android:layout_weight="1"
+                        android:layout_height="wrap_content"
+                        android:gravity="center_vertical|center_horizontal|left"
+                        android:text=""/>
+
+
+                </LinearLayout>
+                <!-- Image Image 1, Image 2,Image 3  -->
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:gravity="left"
+                    android:layout_margin="5dp"
+                    android:orientation="vertical"
+                    android:visibility="visible">
+
+                    <TextView
+                        android:text="Last Date"
+                        android:textColor="#366988"
+                        android:textSize="18sp"
+                        android:textStyle="bold"
+                        android:layout_width="fill_parent"
+                        android:layout_height="wrap_content"
+                        android:gravity="center_vertical|center_horizontal|left"
+                        />
+
+                    <TextView
+                        android:textColor="#3d3d29"
+                        android:textSize="16sp"
+                        android:textStyle="bold"
+                        android:layout_width="fill_parent"
+                        android:layout_weight="1"
+                        android:layout_height="wrap_content"
+                        android:gravity="center_vertical|center_horizontal|left"
+                        android:text=""/>
+
+
+                </LinearLayout>
+                <!-- Latitude and Longitude -->
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:gravity="left"
+                    android:layout_margin="5dp"
+                    android:orientation="vertical"
+                    android:visibility="visible">
+
+                    <TextView
+                        android:text="Last Date"
+                        android:textColor="#366988"
+                        android:textSize="18sp"
+                        android:textStyle="bold"
+                        android:layout_width="fill_parent"
+                        android:layout_height="wrap_content"
+                        android:gravity="center_vertical|center_horizontal|left"
+                        />
+
+                    <TextView
+                        android:textColor="#3d3d29"
+                        android:textSize="16sp"
+                        android:textStyle="bold"
+                        android:layout_width="fill_parent"
+                        android:layout_weight="1"
+                        android:layout_height="wrap_content"
+                        android:gravity="center_vertical|center_horizontal|left"
+                        android:text=""/>
+
+
+                </LinearLayout>
+
+
+
+
+            </LinearLayout>
+
+
+
+
+        </ScrollView>
+
+    </LinearLayout>
+
+
+    <!-- Button -->
+    <LinearLayout
+        android:id="@+id/lay3"
+        android:layout_width="fill_parent"
+        android:layout_height="0dip"
+        android:layout_weight="0.3"
+        android:orientation="horizontal"
+        android:layout_gravity="bottom"
+        android:gravity="right|center_horizontal|center_vertical"
+        android:background="#F2F2F2"
+        android:layout_margin="3dp">
+
+        <Button
+            android:id="@+id/back"
+            android:layout_width="wrap_content"
+            android:layout_height="fill_parent"
+            android:layout_weight="1"
+            android:text="  Get Directions  "
+            android:background="#366988"
+            android:textColor="#FFFFFF"
+            android:layout_marginRight="2dp"
+            android:gravity="center|center_horizontal|center_vertical"/>
+
+        <Button
+            android:id="@+id/apply"
+            android:layout_width="wrap_content"
+            android:layout_height="fill_parent"
+            android:layout_weight="1"
+            android:text="  Feedback and Issues "
+            android:background="#ff8000"
+            android:textColor="#FFFFFF"
+            android:gravity="center|center_horizontal|center_vertical"/>
+
+
+    </LinearLayout>
+
+
 
 </LinearLayout>
