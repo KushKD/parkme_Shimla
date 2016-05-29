@@ -114,16 +114,6 @@ public class MainMapsActivity extends AppCompatActivity implements
                 (SupportMapFragment) getSupportFragmentManager().findFragmentById(R.id.map);
         mapFragment.getMapAsync(this);
 
-       /* mMap.setOnInfoWindowClickListener(new GoogleMap.OnInfoWindowClickListener() {
-            @Override
-            public void onInfoWindowClick(Marker marker) {
-                Intent intent = new Intent(MainMapsActivity.this,Details_Parking.class);
-                startActivity(intent);
-
-
-            }
-        });*/
-
 
     }
 
@@ -137,8 +127,8 @@ public class MainMapsActivity extends AppCompatActivity implements
                 MarkerOptions markerOption = new MarkerOptions().position(new LatLng(myMarker.getLatitude(), myMarker.getLongitude()));
 
 
-                System.out.println(myMarker.getParkingFullTag() + "###" +myMarker.getParkingFullTag().toUpperCase());
-                 if(myMarker.getParkingFullTag().toUpperCase()=="FALSE"){
+                System.out.println(myMarker.getParkingFullTag() + "###" +myMarker.getParkingFullTag().toUpperCase() +"###"+ myMarker.getParkingFullTag().length() );
+                 if(myMarker.getParkingFullTag().length()==5){
                      markerOption.icon(BitmapDescriptorFactory.fromResource(R.drawable.pavailable));
                  }else{
                      markerOption.icon(BitmapDescriptorFactory.fromResource(R.drawable.pnotavailable));
@@ -258,7 +248,7 @@ try {
 
             @Override
             public boolean onMyLocationButtonClick() {
-                Toast.makeText(this, "Getting Latest Location", Toast.LENGTH_SHORT).show();
+                Toast.makeText(this, "Fetching your location.", Toast.LENGTH_SHORT).show();
                 // Return false so that we don't consume the event and the default behavior still occurs
                 // (the camera animates to the user's current position).
                 return false;
@@ -319,8 +309,8 @@ try {
             currLocationMarker = mMap.addMarker(markerOptions);
         }
             mLocationRequest = new LocationRequest();
-            mLocationRequest.setInterval(50000); //5 seconds
-            mLocationRequest.setFastestInterval(50000); //3 seconds
+            mLocationRequest.setInterval(150000); //5 seconds
+            mLocationRequest.setFastestInterval(100000); //3 seconds
             mLocationRequest.setPriority(LocationRequest.PRIORITY_BALANCED_POWER_ACCURACY);
             //mLocationRequest.setSmallestDisplacement(0.1F); //1/10 meter
 try {
@@ -372,32 +362,57 @@ try {
     @Override
     public void onInfoWindowClick(Marker marker) {
 
-         String mLabel = null;
-         String mIcon = null;
-         double mLatitude = 0;
-         double mLongitude = 0;
+
+        //Declare Object
+         Sending_Object_All_details SOAD = null;
 
         String id_GetData = removeFirstCharacter(marker.getId().toString());
 
         if (mMyMarkersArray.size() > 0) {
-            //Toast.makeText(getApplicationContext(),"List Not Empty"+ id_GetData, Toast.LENGTH_LONG).show();
-            mLabel= mMyMarkersArray.get(Integer.parseInt(id_GetData)).getIdentifier();
-           // mIcon= mMyMarkersArray.get(Integer.parseInt(id_GetData)).getmIcon();
-            mLatitude = mMyMarkersArray.get(Integer.parseInt(id_GetData)).getLatitude();
-            mLongitude = mMyMarkersArray.get(Integer.parseInt(id_GetData)).getLongitude();
+
+            SOAD = new Sending_Object_All_details();
+
+            SOAD.setParkingPlace(mMyMarkersArray.get(Integer.parseInt(id_GetData)).getParkingPlace());
+            SOAD.setParkingArea(mMyMarkersArray.get(Integer.parseInt(id_GetData)).getParkingArea());
+            SOAD.setParkingFullTag(mMyMarkersArray.get(Integer.parseInt(id_GetData)).getParkingFullTag());
+            SOAD.setRemarks(mMyMarkersArray.get(Integer.parseInt(id_GetData)).getRemarks());
+            SOAD.setSutedFor(mMyMarkersArray.get(Integer.parseInt(id_GetData)).getSutedFor());
+            SOAD.setThrashholdValue(mMyMarkersArray.get(Integer.parseInt(id_GetData)).getThrashholdValue());
+            SOAD.setMinimumParkingFeeSmallCar(mMyMarkersArray.get(Integer.parseInt(id_GetData)).getMinimumParkingFeeSmallCar());
+            SOAD.setMinimumParkingFeebigCar(mMyMarkersArray.get(Integer.parseInt(id_GetData)).getMinimumParkingFeebigCar());
+            SOAD.setMinimumParkingTime(mMyMarkersArray.get(Integer.parseInt(id_GetData)).getMinimumParkingTime());
+            SOAD.setCapacity(mMyMarkersArray.get(Integer.parseInt(id_GetData)).getCapacity());
+            SOAD.setContactNumber1(mMyMarkersArray.get(Integer.parseInt(id_GetData)).getContactNumber1());
+            SOAD.setContactNumber2(mMyMarkersArray.get(Integer.parseInt(id_GetData)).getContactNumber2());
+            SOAD.setContactNumber3(mMyMarkersArray.get(Integer.parseInt(id_GetData)).getContactNumber3());
+            SOAD.setContactPerson1(mMyMarkersArray.get(Integer.parseInt(id_GetData)).getContactPerson1());
+            SOAD.setContactPerson2(mMyMarkersArray.get(Integer.parseInt(id_GetData)).getContactPerson2());
+            SOAD.setContactPerson3(mMyMarkersArray.get(Integer.parseInt(id_GetData)).getContactPerson3());
+            SOAD.setIdentifier(mMyMarkersArray.get(Integer.parseInt(id_GetData)).getIdentifier());
+            SOAD.setImage(mMyMarkersArray.get(Integer.parseInt(id_GetData)).getImage());
+            SOAD.setImage1(mMyMarkersArray.get(Integer.parseInt(id_GetData)).getImage1());
+            SOAD.setImage2(mMyMarkersArray.get(Integer.parseInt(id_GetData)).getImage2());
+            SOAD.setLatitude(mMyMarkersArray.get(Integer.parseInt(id_GetData)).getLatitude());
+            SOAD.setLongitude(mMyMarkersArray.get(Integer.parseInt(id_GetData)).getLongitude());
+            SOAD.setLatitude_my_Location(latLng.latitude);
+            SOAD.setLongitude_my_Location(latLng.longitude);
+
+            //Now Pass the Object
+            Intent userSearch = new Intent();
+            userSearch.putExtra("DETAILS_ALL", SOAD);
+            userSearch.setClass(MainMapsActivity.this, Details_Parking.class);
+
+            startActivity(userSearch);
+
 
             }
         else{
-            Toast.makeText(getApplicationContext(),"Nothing to search from.", Toast.LENGTH_LONG).show();
+            Toast.makeText(getApplicationContext(),"Something Went Wrong. Please restart the application.", Toast.LENGTH_LONG).show();
         }
 
-        Intent i = new Intent(MainMapsActivity.this,Details_Parking.class);
-        i.putExtra("mLabel",mLabel);
-       // i.putExtra("mIcon",mIcon);
-        i.putExtra("mLatitude",mLatitude);
-        i.putExtra("mLongitude",mLongitude);
 
-        startActivity(i);
+
+
 
     }
 
@@ -456,16 +471,14 @@ try {
 
             System.out.println(myMarker.getParkingFullTag());
             System.out.println(myMarker.getParkingFullTag().toUpperCase());
-            if(myMarker.getParkingFullTag().toUpperCase()=="FALSE"){
+            if(myMarker.getParkingFullTag().length()==5){
                 available.setText("Parking Available");
-            } if(myMarker.getParkingFullTag().toUpperCase()=="TRUE"){
+            } else{
                 available.setText("Parking Full");
-            }else{
-            available.setText("No Idea!!");
-        }
+            }
             minparkingtime.setText(myMarker.getMinimumParkingTime());
-            smallcarfare.setText(myMarker.getMinimumParkingFeeSmallCar());
-            bigcarfare.setText(myMarker.getMinimumParkingFeebigCar());
+            smallcarfare.setText(myMarker.getMinimumParkingFeeSmallCar()+".00/-");
+            bigcarfare.setText(myMarker.getMinimumParkingFeebigCar()+".00/-");
 
             return v;
         }

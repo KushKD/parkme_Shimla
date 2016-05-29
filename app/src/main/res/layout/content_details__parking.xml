@@ -40,7 +40,6 @@
         android:id="@+id/laydetails"
         android:layout_width="fill_parent"
         android:layout_height="0dip"
-        android:background="#40666666"
         android:layout_margin="5dp"
         android:layout_weight="2.2" >
 
@@ -67,7 +66,7 @@
 
 
                     <TextView
-                        android:text="Department Name"
+                        android:text="Parking Place"
                         android:textColor="#366988"
                         android:textSize="18sp"
                         android:textStyle="bold"
@@ -80,7 +79,7 @@
                         android:textColor="#3d3d29"
                         android:textSize="16sp"
                         android:textStyle="bold"
-                        android:id="@+id/department"
+                        android:id="@+id/parking_place"
                         android:layout_width="fill_parent"
                         android:layout_height="wrap_content"
                         android:gravity="center_vertical|center_horizontal|left"
@@ -96,7 +95,7 @@
                     android:orientation="vertical">
 
                     <TextView
-                        android:text="Post Code"
+                        android:text="Parking Area"
                         android:textColor="#366988"
                         android:textSize="18sp"
                         android:textStyle="bold"
@@ -109,7 +108,7 @@
                         android:textColor="#3d3d29"
                         android:textSize="16sp"
                         android:textStyle="bold"
-                        android:id="@+id/postcode"
+                        android:id="@+id/parking_area"
                         android:layout_width="fill_parent"
                         android:layout_height="wrap_content"
                         android:gravity="center_vertical|center_horizontal|left"
@@ -126,7 +125,7 @@
                     android:orientation="vertical">
 
                     <TextView
-                        android:text="Details"
+                        android:text="Parking Availability"
                         android:textColor="#366988"
                         android:textSize="18sp"
                         android:textStyle="bold"
@@ -140,7 +139,7 @@
                         android:textColor="#3d3d29"
                         android:textSize="16sp"
                         android:textStyle="bold"
-                        android:id="@+id/details"
+                        android:id="@+id/parking_availability"
                         android:layout_width="fill_parent"
                         android:layout_height="wrap_content"
                         android:gravity="center_vertical|center_horizontal|left"/>
@@ -157,7 +156,7 @@
 
 
                     <TextView
-                        android:id="@+id/postid"
+                        android:id="@+id/remarks"
                         android:layout_width="fill_parent"
                         android:layout_height="wrap_content"
                         android:gravity="center_vertical|center_horizontal|left"
@@ -174,7 +173,7 @@
                     android:visibility="visible">
 
                     <TextView
-                        android:text="Published Date"
+                        android:text="Suited For:"
                         android:textColor="#366988"
                         android:textSize="18sp"
                         android:textStyle="bold"
@@ -187,7 +186,7 @@
                         android:textColor="#3d3d29"
                         android:textSize="16sp"
                         android:textStyle="bold"
-                        android:id="@+id/pubdate"
+                        android:id="@+id/suitedfor"
                         android:layout_width="fill_parent"
                         android:layout_height="wrap_content"
                         android:layout_weight="1"
@@ -207,7 +206,7 @@
                     android:visibility="visible">
 
                     <TextView
-                        android:text="Last Date"
+                        android:text="Thrashold Value:"
                         android:textColor="#366988"
                         android:textSize="18sp"
                         android:textStyle="bold"
@@ -220,7 +219,7 @@
                         android:textColor="#3d3d29"
                         android:textSize="16sp"
                         android:textStyle="bold"
-                        android:id="@+id/lastdate"
+                        android:id="@+id/thrash_hold_value"
                         android:layout_width="fill_parent"
                         android:layout_weight="1"
                         android:layout_height="wrap_content"
@@ -239,7 +238,7 @@
                     android:visibility="visible">
 
                     <TextView
-                        android:text="Last Date"
+                        android:text="Fees:-"
                         android:textColor="#366988"
                         android:textSize="18sp"
                         android:textStyle="bold"
@@ -248,15 +247,37 @@
                         android:gravity="center_vertical|center_horizontal|left"
                         />
 
-                    <TextView
-                        android:textColor="#3d3d29"
-                        android:textSize="16sp"
-                        android:textStyle="bold"
-                        android:layout_width="fill_parent"
-                        android:layout_weight="1"
+                    <LinearLayout
+                        android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:gravity="center_vertical|center_horizontal|left"
-                        android:text=""/>
+                        android:weightSum="2"
+                        android:orientation="horizontal">
+
+                        <TextView
+                            android:id="@+id/smallcarsfare"
+                            android:textColor="#3d3d29"
+                            android:textSize="16sp"
+                            android:textStyle="bold"
+                            android:layout_width="fill_parent"
+                            android:layout_weight="1"
+                            android:layout_height="wrap_content"
+                            android:gravity="center_vertical|center_horizontal|left"
+                            android:text=""/>
+
+                        <TextView
+                            android:id="@+id/bigcarsfare"
+                            android:textColor="#3d3d29"
+                            android:textSize="16sp"
+                            android:textStyle="bold"
+                            android:layout_width="fill_parent"
+                            android:layout_weight="1"
+                            android:layout_height="wrap_content"
+                            android:gravity="center_vertical|center_horizontal|left"
+                            android:text=""/>
+
+                    </LinearLayout>
+
+
 
 
                 </LinearLayout>
@@ -270,7 +291,7 @@
                     android:visibility="visible">
 
                     <TextView
-                        android:text="Last Date"
+                        android:text="Parking Time"
                         android:textColor="#366988"
                         android:textSize="18sp"
                         android:textStyle="bold"
@@ -280,6 +301,7 @@
                         />
 
                     <TextView
+                        android:id="@+id/parking_time"
                         android:textColor="#3d3d29"
                         android:textSize="16sp"
                         android:textStyle="bold"
@@ -301,7 +323,7 @@
                     android:visibility="visible">
 
                     <TextView
-                        android:text="Last Date"
+                        android:text="Capacity"
                         android:textColor="#366988"
                         android:textSize="18sp"
                         android:textStyle="bold"
@@ -311,6 +333,7 @@
                         />
 
                     <TextView
+                        android:id="@+id/capacity"
                         android:textColor="#3d3d29"
                         android:textSize="16sp"
                         android:textStyle="bold"
@@ -363,7 +386,7 @@
                     android:visibility="visible">
 
                     <TextView
-                        android:text="Last Date"
+                        android:text="Identifier"
                         android:textColor="#366988"
                         android:textSize="18sp"
                         android:textStyle="bold"
@@ -373,6 +396,7 @@
                         />
 
                     <TextView
+                        android:id="@+id/identifier"
                         android:textColor="#3d3d29"
                         android:textSize="16sp"
                         android:textStyle="bold"
@@ -421,14 +445,16 @@
                     android:layout_height="wrap_content"
                     android:gravity="left"
                     android:layout_margin="5dp"
-                    android:orientation="vertical"
+                    android:weightSum="2"
+                    android:orientation="horizontal"
                     android:visibility="visible">
 
                     <TextView
-                        android:text="Last Date"
+                        android:id="@+id/latitude"
                         android:textColor="#366988"
                         android:textSize="18sp"
                         android:textStyle="bold"
+                        android:layout_weight="1"
                         android:layout_width="fill_parent"
                         android:layout_height="wrap_content"
                         android:gravity="center_vertical|center_horizontal|left"
@@ -436,6 +462,7 @@
 
                     <TextView
                         android:textColor="#3d3d29"
+                        android:id="@+id/longitude"
                         android:textSize="16sp"
                         android:textStyle="bold"
                         android:layout_width="fill_parent"
@@ -477,6 +504,7 @@
             android:layout_width="wrap_content"
             android:layout_height="fill_parent"
             android:layout_weight="1"
+            android:visibility="gone"
             android:text="  Get Directions  "
             android:background="#366988"
             android:textColor="#FFFFFF"

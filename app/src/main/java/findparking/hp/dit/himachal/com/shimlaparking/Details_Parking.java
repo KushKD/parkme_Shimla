@@ -11,32 +11,66 @@ import android.widget.TextView;
 
 public class Details_Parking extends AppCompatActivity {
 
-    private TextView tv_label,tv_icon, tv_lat, tv_long;
+    private TextView
+            parking_place,
+            parking_area,
+            parking_availability,
+            remarks,
+            suitedfor,
+            thrash_hold_value,
+            smallcarsfare,
+            bigcarsfare,
+            parking_time,
+            identifier,
+            latitude,
+            longitude,
+            capacity;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_details__parking);
-        Intent intent = getIntent();
-        String mLabel = intent.getExtras().getString("mLabel");
-       // String mIcon = intent.getExtras().getString("mIcon");
-        double mLatitude = intent.getExtras().getDouble("mLatitude");
-        double mLongitude = intent.getExtras().getDouble("mLongitude");
 
-        tv_icon = (TextView)findViewById(R.id.icon);
-       // tv_label = (TextView)findViewById(R.id.label);
-       // tv_lat = (TextView)findViewById(R.id.lat);
-       // tv_long = (TextView)findViewById(R.id.ong);
+        Intent getRoomDetailsIntent = getIntent();
+        final Sending_Object_All_details MArkerDetails =  (Sending_Object_All_details) getRoomDetailsIntent.getSerializableExtra("DETAILS_ALL");
 
-      //  tv_icon.setText(mIcon);
-       // tv_label.setText(mLabel);
-       // tv_lat.setText(Double.toString(mLatitude));
-       // tv_long.setText(Double.toString(mLongitude));
+                parking_place = (TextView)findViewById(R.id.parking_place);
+                parking_area = (TextView)findViewById(R.id.parking_area);
+                parking_availability = (TextView)findViewById(R.id.parking_availability);
+                remarks = (TextView)findViewById(R.id.remarks);
+                suitedfor= (TextView)findViewById(R.id.suitedfor);
+                thrash_hold_value = (TextView)findViewById(R.id.thrash_hold_value);
+                smallcarsfare = (TextView)findViewById(R.id.smallcarsfare);
+                bigcarsfare = (TextView)findViewById(R.id.bigcarsfare);
+                parking_time = (TextView)findViewById(R.id.parking_time);
+                identifier = (TextView)findViewById(R.id.identifier);
+                latitude = (TextView)findViewById(R.id.latitude);
+                longitude = (TextView)findViewById(R.id.longitude);
+                capacity = (TextView)findViewById(R.id.capacity);
+
+
+
+        parking_place.setText(MArkerDetails.getParkingPlace());
+        parking_area.setText(MArkerDetails.getParkingArea());
+        parking_availability.setText(MArkerDetails.getParkingFullTag());
+        remarks.setText(MArkerDetails.getRemarks());
+        suitedfor.setText(MArkerDetails.getSutedFor());
+        thrash_hold_value.setText(MArkerDetails.getThrashholdValue());
+        smallcarsfare.setText(MArkerDetails.getMinimumParkingFeeSmallCar());
+        bigcarsfare.setText(MArkerDetails.getMinimumParkingFeebigCar());
+
+        parking_time.setText(MArkerDetails.getMinimumParkingTime());
+        identifier.setText(MArkerDetails.getIdentifier());
+        latitude.setText(Double.toString(MArkerDetails.getLatitude()));
+        longitude.setText(Double.toString(MArkerDetails.getLongitude()));
+        capacity.setText(MArkerDetails.getCapacity());
 
 
 
 
-        Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
-        setSupportActionBar(toolbar);
+
+       /* Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
+        setSupportActionBar(toolbar);*/
 
         FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.fab);
         fab.setOnClickListener(new View.OnClickListener() {
