@@ -146,7 +146,7 @@ public class MainMapsActivity extends AppCompatActivity implements
         }
     }
 
-    private int manageMarkerIcon(String markerIcon) {
+   /* private int manageMarkerIcon(String markerIcon) {
         if (markerIcon.equals("ic_launcher"))
             return R.drawable.ic_launcher;
         else if (markerIcon.equals("ic_launcher"))
@@ -163,7 +163,7 @@ public class MainMapsActivity extends AppCompatActivity implements
             return R.drawable.ic_launcher;
         else
             return R.drawable.icondefault;
-    }
+    }*/
 
 
 

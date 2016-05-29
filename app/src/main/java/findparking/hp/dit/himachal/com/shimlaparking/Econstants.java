@@ -5,5 +5,8 @@ package findparking.hp.dit.himachal.com.shimlaparking;
  */
 public class Econstants {
 
-    public static final String URL_GENERIC = "http://10.241.9.72/HPParking/HPParking.svc/getparkingLocation_JSON/1";
+    public static final String URL_GENERIC = "http://192.168.0.171/HPParking/HPParking.svc/getparkingLocation_JSON/10297";
 }
+
+
+//http://192.168.0.171/HPParking/HPParking.svc/getparkingLocation_JSON/1

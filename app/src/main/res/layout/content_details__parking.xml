@@ -22,14 +22,14 @@
             android:layout_margin="10dp"
             android:id="@+id/ImageUser"
             android:layout_width="60dp"
-            android:visibility="gone"
+            android:visibility="visible"
             android:layout_height="60dp"
-            android:src="@drawable/ic_launcher" />
+            android:src="@mipmap/ic_launcher" />
         <TextView
-            android:text="PArking Details"
+            android:text="Parking Details"
             android:layout_width="match_parent"
             android:layout_height="fill_parent"
-            android:gravity="center|center_horizontal|center_vertical"
+            android:gravity="left|center_horizontal|center_vertical"
             android:textColor="#FFFFFF"
             android:textSize="20sp"
             android:textStyle="bold"/>
@@ -89,7 +89,74 @@
                         android:gravity="center_vertical|center_horizontal|left"
                         />
                 </LinearLayout>
+                <!--Identifier -->
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:gravity="left"
+                    android:layout_margin="5dp"
+                    android:weightSum="2"
+                    android:orientation="horizontal"
+                    android:visibility="visible">
 
+                    <TextView
+                        android:text="Landmark"
+                        android:textColor="#366988"
+                        android:textSize="18sp"
+                        android:textStyle="bold"
+                        android:layout_width="fill_parent"
+                        android:layout_weight="1"
+                        android:layout_height="wrap_content"
+                        android:gravity="center_vertical|center_horizontal|left"
+                        />
+
+                    <TextView
+                        android:id="@+id/identifier"
+                        android:textColor="#3d3d29"
+                        android:textSize="16sp"
+                        android:textStyle="bold"
+                        android:layout_width="fill_parent"
+                        android:layout_weight="1"
+                        android:layout_height="wrap_content"
+                        android:gravity="center_vertical|center_horizontal|left"
+                        android:text=""/>
+
+
+                </LinearLayout>
+                <!-- Capacity -->
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:gravity="left"
+                    android:layout_margin="5dp"
+                    android:weightSum="2"
+                    android:orientation="horizontal"
+                    android:visibility="visible">
+
+                    <TextView
+                        android:text="Capacity"
+                        android:textColor="#366988"
+                        android:textSize="18sp"
+                        android:textStyle="bold"
+                        android:layout_weight="1"
+                        android:layout_width="fill_parent"
+                        android:layout_height="wrap_content"
+                        android:gravity="center_vertical|center_horizontal|left"
+                        />
+
+                    <TextView
+                        android:id="@+id/capacity"
+                        android:textColor="#3d3d29"
+                        android:textSize="16sp"
+                        android:textStyle="bold"
+                        android:layout_width="fill_parent"
+                        android:layout_weight="1"
+                        android:layout_height="wrap_content"
+                        android:gravity="center_vertical|center_horizontal|left"
+                        android:text=""/>
+
+
+                </LinearLayout>
                 <!-- ParkingArea -->
                 <LinearLayout
                     android:id="@+id/textview3"
@@ -162,7 +229,7 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:gravity="left"
-                    android:visibility="visible"
+                    android:visibility="gone"
                     android:layout_margin="5dp"
                     android:orientation="vertical">
 
@@ -217,8 +284,8 @@
                     android:gravity="left"
                     android:weightSum="2"
                     android:layout_margin="5dp"
-                    android:orientation="vertical"
-                    android:visibility="visible">
+                    android:orientation="horizontal"
+                    android:visibility="gone">
 
                     <TextView
                         android:text="Thrashold Value:"
@@ -333,14 +400,16 @@
                     android:layout_height="wrap_content"
                     android:gravity="left"
                     android:layout_margin="5dp"
-                    android:orientation="vertical"
-                    android:visibility="visible">
+                    android:weightSum="2"
+                    android:orientation="horizontal"
+                    android:visibility="gone">
 
                     <TextView
                         android:text="Parking Time"
                         android:textColor="#366988"
                         android:textSize="18sp"
                         android:textStyle="bold"
+                        android:layout_weight="1"
                         android:layout_width="fill_parent"
                         android:layout_height="wrap_content"
                         android:gravity="center_vertical|center_horizontal|left"
@@ -359,61 +428,33 @@
 
 
                 </LinearLayout>
-                <!-- Capacity -->
+
+                <!-- Contact Numbers Numbers1 and Person1 Number 2 and Person2 Number 3 and Person3 -->
+                <TextView
+                    android:text="Contact Details:-"
+                    android:textColor="#366988"
+                    android:textSize="18sp"
+                    android:textStyle="bold"
+                    android:layout_width="fill_parent"
+                    android:layout_height="wrap_content"
+                    android:gravity="center_vertical|center_horizontal|left"
+                    />
+
+                <!-- Contact Person 1 -->
                 <LinearLayout
+                    android:id="@+id/contactperson1_layout"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:gravity="left"
+                    android:weightSum="3"
                     android:layout_margin="5dp"
-                    android:orientation="vertical"
-                    android:visibility="visible">
-
-                    <TextView
-                        android:text="Capacity"
-                        android:textColor="#366988"
-                        android:textSize="18sp"
-                        android:textStyle="bold"
-                        android:layout_width="fill_parent"
-                        android:layout_height="wrap_content"
-                        android:gravity="center_vertical|center_horizontal|left"
-                        />
-
-                    <TextView
-                        android:id="@+id/capacity"
-                        android:textColor="#3d3d29"
-                        android:textSize="16sp"
-                        android:textStyle="bold"
-                        android:layout_width="fill_parent"
-                        android:layout_weight="1"
-                        android:layout_height="wrap_content"
-                        android:gravity="center_vertical|center_horizontal|left"
-                        android:text=""/>
-
-
-                </LinearLayout>
-                <!--Identifier -->
-                <LinearLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:gravity="left"
-                    android:layout_margin="5dp"
-                    android:weightSum="2"
                     android:orientation="horizontal"
                     android:visibility="visible">
 
-                    <TextView
-                        android:text="Identifier"
-                        android:textColor="#366988"
-                        android:textSize="18sp"
-                        android:textStyle="bold"
-                        android:layout_width="fill_parent"
-                        android:layout_weight="1"
-                        android:layout_height="wrap_content"
-                        android:gravity="center_vertical|center_horizontal|left"
-                        />
+
 
                     <TextView
-                        android:id="@+id/identifier"
+                        android:id="@+id/contactperson1"
                         android:textColor="#3d3d29"
                         android:textSize="16sp"
                         android:textStyle="bold"
@@ -421,16 +462,121 @@
                         android:layout_weight="1"
                         android:layout_height="wrap_content"
                         android:gravity="center_vertical|center_horizontal|left"
-                        android:text=""/>
+                        android:text="Kush"/>
+
+                    <TextView
+                        android:id="@+id/contactphone1"
+                        android:textColor="#3d3d29"
+                        android:textSize="16sp"
+                        android:textStyle="bold"
+                        android:layout_width="fill_parent"
+                        android:layout_weight="1"
+                        android:layout_height="wrap_content"
+                        android:gravity="center_vertical|center_horizontal|left"
+                        android:text="9459619235"/>
+
+                    <Button
+                        android:layout_width="fill_parent"
+                        android:layout_weight="1"
+                        android:layout_height="wrap_content"
+                        android:text="CALL"/>
+
+
+                </LinearLayout>
+
+                <!-- Contact Person 2-->
+                <LinearLayout
+                    android:id="@+id/contactperson2_layout"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:gravity="left"
+                    android:weightSum="3"
+                    android:layout_margin="5dp"
+                    android:orientation="horizontal"
+                    android:visibility="visible">
+
+
+
+                    <TextView
+                        android:id="@+id/contactperson2"
+                        android:textColor="#3d3d29"
+                        android:textSize="16sp"
+                        android:textStyle="bold"
+                        android:layout_width="fill_parent"
+                        android:layout_weight="1"
+                        android:layout_height="wrap_content"
+                        android:gravity="center_vertical|center_horizontal|left"
+                        android:text="Luv"/>
+
+                    <TextView
+                        android:id="@+id/contactphone2"
+                        android:textColor="#3d3d29"
+                        android:textSize="16sp"
+                        android:textStyle="bold"
+                        android:layout_width="fill_parent"
+                        android:layout_weight="1"
+                        android:layout_height="wrap_content"
+                        android:gravity="center_vertical|center_horizontal|left"
+                        android:text="9459619235"/>
+
+                    <Button
+                        android:layout_width="fill_parent"
+                        android:layout_weight="1"
+                        android:layout_height="wrap_content"
+                        android:text="CALL"/>
+
+
+                </LinearLayout>
+
+                <!-- Contact Person 3 -->
+                <LinearLayout
+                    android:id="@+id/contactperson3_layout"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:gravity="left"
+                    android:weightSum="3"
+                    android:layout_margin="5dp"
+                    android:orientation="horizontal"
+                    android:visibility="visible">
+
+
+
+                    <TextView
+                        android:id="@+id/contactperson3"
+                        android:textColor="#3d3d29"
+                        android:textSize="16sp"
+                        android:textStyle="bold"
+                        android:layout_width="fill_parent"
+                        android:layout_weight="1"
+                        android:layout_height="wrap_content"
+                        android:gravity="center_vertical|center_horizontal|left"
+                        android:text="Mayank"/>
+
+                    <TextView
+                        android:id="@+id/contactphone3"
+                        android:textColor="#3d3d29"
+                        android:textSize="16sp"
+                        android:textStyle="bold"
+                        android:layout_width="fill_parent"
+                        android:layout_weight="1"
+                        android:layout_height="wrap_content"
+                        android:gravity="center_vertical|center_horizontal|left"
+                        android:text="9459619235"/>
+
+                    <Button
+                        android:layout_width="fill_parent"
+                        android:layout_weight="1"
+                        android:layout_height="wrap_content"
+                        android:text="CALL"/>
 
 
                 </LinearLayout>
                 <!-- Image  -->
-
                 <TextView
                     android:text="Images:"
                     android:textColor="#366988"
                     android:textSize="18sp"
+                    android:visibility="gone"
                     android:textStyle="bold"
                     android:layout_width="fill_parent"
                     android:layout_height="wrap_content"
@@ -444,28 +590,28 @@
                     android:gravity="left"
                     android:weightSum="3"
                     android:layout_margin="5dp"
-                    android:orientation="vertical"
-                    android:visibility="visible">
+                    android:orientation="horizontal"
+                    android:visibility="gone">
 
                     <ImageView
                         android:id="@+id/iv1"
                         android:layout_width="fill_parent"
                         android:layout_weight="1"
-                        android:src="@drawable/ic_launcher"
+                        android:src="@mipmap/ic_launcher"
                         android:layout_height="wrap_content" />
 
                     <ImageView
                         android:id="@+id/iv2"
                         android:layout_width="fill_parent"
                         android:layout_weight="1"
-                        android:src="@drawable/ic_launcher"
+                        android:src="@mipmap/ic_launcher"
                         android:layout_height="wrap_content" />
 
                     <ImageView
                         android:id="@+id/iv3"
                         android:layout_width="fill_parent"
                         android:layout_weight="1"
-                        android:src="@drawable/ic_launcher"
+                        android:src="@mipmap/ic_launcher"
                         android:layout_height="wrap_content" />
 
 
@@ -545,6 +691,7 @@
                     android:text="Current Location:-"
                     android:textColor="#366988"
                     android:textSize="18sp"
+                    android:layout_marginTop="5dp"
                     android:textStyle="bold"
                     android:layout_width="fill_parent"
                     android:layout_height="wrap_content"
@@ -617,60 +764,9 @@
 
 
                 </LinearLayout>
-                <!-- Contact Numbers Numbers1 and Person1 Number 2 and Person2 Number 3 and Person3 -->
-
-
-                <TextView
-                    android:text="Contact Details:-"
-                    android:textColor="#366988"
-                    android:textSize="18sp"
-                    android:textStyle="bold"
-                    android:layout_width="fill_parent"
-                    android:layout_height="wrap_content"
-                    android:gravity="center_vertical|center_horizontal|left"
-                    />
-
-                <LinearLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:gravity="left"
-                    android:weightSum="3"
-                    android:layout_margin="5dp"
-                    android:orientation="vertical"
-                    android:visibility="visible">
 
 
 
-                    <TextView
-                        android:id="@+id/contactperson1"
-                        android:textColor="#3d3d29"
-                        android:textSize="16sp"
-                        android:textStyle="bold"
-                        android:layout_width="fill_parent"
-                        android:layout_weight="1"
-                        android:layout_height="wrap_content"
-                        android:gravity="center_vertical|center_horizontal|left"
-                        android:text=""/>
-
-                    <TextView
-                        android:id="@+id/contactname1"
-                        android:textColor="#3d3d29"
-                        android:textSize="16sp"
-                        android:textStyle="bold"
-                        android:layout_width="fill_parent"
-                        android:layout_weight="1"
-                        android:layout_height="wrap_content"
-                        android:gravity="center_vertical|center_horizontal|left"
-                        android:text=""/>
-
-                    <Button
-                        android:layout_width="fill_parent"
-                        android:layout_weight="1"
-                        android:layout_height="wrap_content"
-                        android:text="CALL"/>
-
-
-                </LinearLayout>
 
 
 
