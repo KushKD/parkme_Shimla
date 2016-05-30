@@ -72,6 +72,7 @@ public class MainMapsActivity extends AppCompatActivity implements
 
 
     private static final int LOCATION_PERMISSION_REQUEST_CODE = 1;
+
     private boolean mPermissionDenied = false;
 
     LocationRequest mLocationRequest;
@@ -80,7 +81,7 @@ public class MainMapsActivity extends AppCompatActivity implements
     Marker currLocationMarker;
     private GoogleMap mMap;
     private ArrayList<My_Marker> mMyMarkersArray = new ArrayList<My_Marker>();
-    private HashMap<Marker, My_Marker> mMarkersHashMap;
+    private static HashMap<Marker, My_Marker> mMarkersHashMap;
     List<Get_Parking_Details> tasks;
     ProgressBar pb;
     URL url_;
@@ -122,6 +123,8 @@ public class MainMapsActivity extends AppCompatActivity implements
     private void plotMarkers(ArrayList<My_Marker> markers) {
         if (markers.size() > 0) {
             for (My_Marker myMarker : markers) {
+
+                System.out.println(markers.size() );
 
                 // Create user marker with custom icon and other options
                 MarkerOptions markerOption = new MarkerOptions().position(new LatLng(myMarker.getLatitude(), myMarker.getLongitude()));
@@ -366,36 +369,44 @@ try {
         //Declare Object
          Sending_Object_All_details SOAD = null;
 
+
+        //  int id_ = Integer.parseInt(marker.getId())-1;
+         // Toast.makeText(getApplicationContext(),mMyMarkersArray.size()+"$$$$$$"+marker.getId().toString(),Toast.LENGTH_LONG).show();
         String id_GetData = removeFirstCharacter(marker.getId().toString());
+        int id_ = Integer.parseInt(id_GetData)-1;
 
         if (mMyMarkersArray.size() > 0) {
+try {
+    SOAD = new Sending_Object_All_details();
 
-            SOAD = new Sending_Object_All_details();
-
-            SOAD.setParkingPlace(mMyMarkersArray.get(Integer.parseInt(id_GetData)).getParkingPlace());
-            SOAD.setParkingArea(mMyMarkersArray.get(Integer.parseInt(id_GetData)).getParkingArea());
-            SOAD.setParkingFullTag(mMyMarkersArray.get(Integer.parseInt(id_GetData)).getParkingFullTag());
-            SOAD.setRemarks(mMyMarkersArray.get(Integer.parseInt(id_GetData)).getRemarks());
-            SOAD.setSutedFor(mMyMarkersArray.get(Integer.parseInt(id_GetData)).getSutedFor());
-            SOAD.setThrashholdValue(mMyMarkersArray.get(Integer.parseInt(id_GetData)).getThrashholdValue());
-            SOAD.setMinimumParkingFeeSmallCar(mMyMarkersArray.get(Integer.parseInt(id_GetData)).getMinimumParkingFeeSmallCar());
-            SOAD.setMinimumParkingFeebigCar(mMyMarkersArray.get(Integer.parseInt(id_GetData)).getMinimumParkingFeebigCar());
-            SOAD.setMinimumParkingTime(mMyMarkersArray.get(Integer.parseInt(id_GetData)).getMinimumParkingTime());
-            SOAD.setCapacity(mMyMarkersArray.get(Integer.parseInt(id_GetData)).getCapacity());
-            SOAD.setContactNumber1(mMyMarkersArray.get(Integer.parseInt(id_GetData)).getContactNumber1());
-            SOAD.setContactNumber2(mMyMarkersArray.get(Integer.parseInt(id_GetData)).getContactNumber2());
-            SOAD.setContactNumber3(mMyMarkersArray.get(Integer.parseInt(id_GetData)).getContactNumber3());
-            SOAD.setContactPerson1(mMyMarkersArray.get(Integer.parseInt(id_GetData)).getContactPerson1());
-            SOAD.setContactPerson2(mMyMarkersArray.get(Integer.parseInt(id_GetData)).getContactPerson2());
-            SOAD.setContactPerson3(mMyMarkersArray.get(Integer.parseInt(id_GetData)).getContactPerson3());
-            SOAD.setIdentifier(mMyMarkersArray.get(Integer.parseInt(id_GetData)).getIdentifier());
-            SOAD.setImage(mMyMarkersArray.get(Integer.parseInt(id_GetData)).getImage());
-            SOAD.setImage1(mMyMarkersArray.get(Integer.parseInt(id_GetData)).getImage1());
-            SOAD.setImage2(mMyMarkersArray.get(Integer.parseInt(id_GetData)).getImage2());
-            SOAD.setLatitude(mMyMarkersArray.get(Integer.parseInt(id_GetData)).getLatitude());
-            SOAD.setLongitude(mMyMarkersArray.get(Integer.parseInt(id_GetData)).getLongitude());
-            SOAD.setLatitude_my_Location(latLng.latitude);
-            SOAD.setLongitude_my_Location(latLng.longitude);
+    SOAD.setParkingPlace(mMyMarkersArray.get(id_).getParkingPlace());
+    SOAD.setParkingArea(mMyMarkersArray.get(id_).getParkingArea());
+    SOAD.setParkingFullTag(mMyMarkersArray.get(id_).getParkingFullTag());
+    SOAD.setRemarks(mMyMarkersArray.get(id_).getRemarks());
+    SOAD.setSutedFor(mMyMarkersArray.get(id_).getSutedFor());
+    SOAD.setThrashholdValue(mMyMarkersArray.get(id_).getThrashholdValue());
+    SOAD.setMinimumParkingFeeSmallCar(mMyMarkersArray.get(id_).getMinimumParkingFeeSmallCar());
+    SOAD.setMinimumParkingFeebigCar(mMyMarkersArray.get(id_).getMinimumParkingFeebigCar());
+    SOAD.setMinimumParkingTime(mMyMarkersArray.get(id_).getMinimumParkingTime());
+    SOAD.setCapacity(mMyMarkersArray.get(id_).getCapacity());
+    SOAD.setContactNumber1(mMyMarkersArray.get(id_).getContactNumber1());
+    SOAD.setContactNumber2(mMyMarkersArray.get(id_).getContactNumber2());
+    SOAD.setContactNumber3(mMyMarkersArray.get(id_).getContactNumber3());
+    SOAD.setContactPerson1(mMyMarkersArray.get(id_).getContactPerson1());
+    SOAD.setContactPerson2(mMyMarkersArray.get(id_).getContactPerson2());
+    SOAD.setContactPerson3(mMyMarkersArray.get(id_).getContactPerson3());
+    SOAD.setIdentifier(mMyMarkersArray.get(id_).getIdentifier());
+    SOAD.setImage(mMyMarkersArray.get(id_).getImage());
+    SOAD.setImage1(mMyMarkersArray.get(id_).getImage1());
+    SOAD.setImage2(mMyMarkersArray.get(id_).getImage2());
+    SOAD.setLatitude(mMyMarkersArray.get(id_).getLatitude());
+    SOAD.setLongitude(mMyMarkersArray.get(id_).getLongitude());
+    SOAD.setLatitude_my_Location(latLng.latitude);
+    SOAD.setLongitude_my_Location(latLng.longitude);
+    SOAD.setParkingId(mMyMarkersArray.get(id_).getParkingID());
+}catch(Exception e){
+    Log.d("Error",e.getLocalizedMessage().toString());
+}
 
             //Now Pass the Object
             Intent userSearch = new Intent();
@@ -579,8 +590,10 @@ try {
                                                       obj.getString("ThrashholdValue"),
                                                       obj.getString("MinimumParkingFeeSmallCar"),
                                                       obj.getString("MinimumParkingFeebigCar"),
-                                                      obj.getString("MinimumParkingTime")));
-                    System.out.println(obj.getString("ParkingFullTag"));
+                                                      obj.getString("MinimumParkingTime"),
+                                                      obj.getString("ParkingId")));
+
+                    System.out.println(obj.getString("ParkingId"));
 
                 }
 
@@ -598,5 +611,15 @@ try {
            // dialog.dismiss();
 
         }
+    }
+
+    @Override
+    public void onBackPressed() {
+        super.onBackPressed();
+       // MArkerDetails = null;
+        mMarkersHashMap = null;
+        mMyMarkersArray = null;
+       // My_Marker = null;
+        MainMapsActivity.this.finish();
     }
 }

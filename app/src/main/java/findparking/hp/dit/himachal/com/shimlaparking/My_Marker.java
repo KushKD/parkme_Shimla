@@ -179,6 +179,20 @@ public class My_Marker implements Serializable {
     public String Remarks;
     public String SutedFor;
     public String ThrashholdValue;
+    public String MinimumParkingFeeSmallCar;
+    public String MinimumParkingFeebigCar;
+    public String MinimumParkingTime;
+    public String ParkingID;
+
+    public String getParkingID() {
+        return ParkingID;
+    }
+
+    public void setParkingID(String parkingID) {
+        ParkingID = parkingID;
+    }
+
+
 
     public String getMinimumParkingTime() {
         return MinimumParkingTime;
@@ -204,9 +218,7 @@ public class My_Marker implements Serializable {
         MinimumParkingFeebigCar = minimumParkingFeebigCar;
     }
 
-    public String MinimumParkingFeeSmallCar;
-    public String MinimumParkingFeebigCar;
-    public String MinimumParkingTime;
+
 
     public My_Marker(String Capacity,
                      String ContactNumber1, String ContactNumber2, String ContactNumber3,
@@ -216,7 +228,8 @@ public class My_Marker implements Serializable {
                      Double Latitude, Double Longitude,
                      String ParkingArea, String ParkingFullTag,String ParkingPlace,
                      String Remarks, String SutedFor, String ThrashholdValue,
-                     String MinimumParkingFeeSmallCar, String MinimumParkingFeebigCar, String MinimumParkingTime )
+                     String MinimumParkingFeeSmallCar, String MinimumParkingFeebigCar, String MinimumParkingTime,
+                     String ParkingID)
     {
         this.Capacity = Capacity;
         this.ContactNumber1 = ContactNumber1;
@@ -240,6 +253,8 @@ public class My_Marker implements Serializable {
         this.MinimumParkingTime = MinimumParkingTime;
         this.MinimumParkingFeebigCar = MinimumParkingFeebigCar;
         this.MinimumParkingFeeSmallCar = MinimumParkingFeeSmallCar;
+        this.ParkingID = ParkingID;
+
 
     }
 

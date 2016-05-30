@@ -4,7 +4,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
-    android:background="#f2f2f2"
+    android:background="#e6e6e6"
     android:weightSum="3">
 
     <!-- ImageView -->
@@ -14,7 +14,7 @@
         android:layout_width="match_parent"
         android:layout_height="0dp"
         android:layout_weight="0.5"
-        android:background="#366988"
+        android:background="#FFFFFF"
         android:gravity="left|center_vertical|center_horizontal"
         android:orientation="horizontal">
 
@@ -30,9 +30,9 @@
             android:layout_width="match_parent"
             android:layout_height="fill_parent"
             android:gravity="left|center_horizontal|center_vertical"
-            android:textColor="#FFFFFF"
-            android:textSize="20sp"
-            android:textStyle="bold"/>
+            android:textColor="#006600"
+            android:textSize="18sp"
+            />
     </LinearLayout>
 
     <!-- Buttons -->
@@ -51,9 +51,11 @@
 
             <LinearLayout
                 android:id="@+id/linearLayout1"
+                android:background="#e6e6e6"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:orientation="vertical">
+
 
                 <!-- ParkingPlace -->
                 <LinearLayout
@@ -71,7 +73,7 @@
                         android:text="Parking Place"
                         android:textColor="#366988"
                         android:textSize="18sp"
-                        android:textStyle="bold"
+
                         android:layout_weight="1"
                         android:layout_width="fill_parent"
                         android:layout_height="wrap_content"
@@ -80,8 +82,8 @@
 
                     <TextView
                         android:textColor="#3d3d29"
-                        android:textSize="16sp"
-                        android:textStyle="bold"
+                        android:textSize="15sp"
+
                         android:layout_weight="1"
                         android:id="@+id/parking_place"
                         android:layout_width="fill_parent"
@@ -89,40 +91,7 @@
                         android:gravity="center_vertical|center_horizontal|left"
                         />
                 </LinearLayout>
-                <!--Identifier -->
-                <LinearLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:gravity="left"
-                    android:layout_margin="5dp"
-                    android:weightSum="2"
-                    android:orientation="horizontal"
-                    android:visibility="visible">
 
-                    <TextView
-                        android:text="Landmark"
-                        android:textColor="#366988"
-                        android:textSize="18sp"
-                        android:textStyle="bold"
-                        android:layout_width="fill_parent"
-                        android:layout_weight="1"
-                        android:layout_height="wrap_content"
-                        android:gravity="center_vertical|center_horizontal|left"
-                        />
-
-                    <TextView
-                        android:id="@+id/identifier"
-                        android:textColor="#3d3d29"
-                        android:textSize="16sp"
-                        android:textStyle="bold"
-                        android:layout_width="fill_parent"
-                        android:layout_weight="1"
-                        android:layout_height="wrap_content"
-                        android:gravity="center_vertical|center_horizontal|left"
-                        android:text=""/>
-
-
-                </LinearLayout>
                 <!-- Capacity -->
                 <LinearLayout
                     android:layout_width="match_parent"
@@ -137,7 +106,7 @@
                         android:text="Capacity"
                         android:textColor="#366988"
                         android:textSize="18sp"
-                        android:textStyle="bold"
+
                         android:layout_weight="1"
                         android:layout_width="fill_parent"
                         android:layout_height="wrap_content"
@@ -147,8 +116,8 @@
                     <TextView
                         android:id="@+id/capacity"
                         android:textColor="#3d3d29"
-                        android:textSize="16sp"
-                        android:textStyle="bold"
+                        android:textSize="15sp"
+
                         android:layout_width="fill_parent"
                         android:layout_weight="1"
                         android:layout_height="wrap_content"
@@ -156,38 +125,6 @@
                         android:text=""/>
 
 
-                </LinearLayout>
-                <!-- ParkingArea -->
-                <LinearLayout
-                    android:id="@+id/textview3"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:gravity="left"
-                    android:weightSum="2"
-                    android:layout_margin="5dp"
-                    android:orientation="horizontal">
-
-                    <TextView
-                        android:text="Parking Area"
-                        android:textColor="#366988"
-                        android:textSize="18sp"
-                        android:textStyle="bold"
-                        android:layout_weight="1"
-                        android:layout_width="fill_parent"
-                        android:layout_height="wrap_content"
-                        android:gravity="center_vertical|center_horizontal|left"
-                        />
-
-                    <TextView
-                        android:textColor="#3d3d29"
-                        android:textSize="16sp"
-                        android:textStyle="bold"
-                        android:id="@+id/parking_area"
-                        android:layout_weight="1"
-                        android:layout_width="fill_parent"
-                        android:layout_height="wrap_content"
-                        android:gravity="center_vertical|center_horizontal|left"
-                        android:text=""/>
                 </LinearLayout>
 
                 <!-- ParkingFullTag -->
@@ -205,7 +142,7 @@
                         android:text="Parking Availability"
                         android:textColor="#366988"
                         android:textSize="18sp"
-                        android:textStyle="bold"
+
                         android:layout_weight="1"
                         android:layout_width="fill_parent"
                         android:layout_height="wrap_content"
@@ -215,14 +152,15 @@
 
                     <TextView
                         android:textColor="#3d3d29"
-                        android:textSize="16sp"
-                        android:textStyle="bold"
+                        android:textSize="15sp"
+
                         android:layout_weight="1"
                         android:id="@+id/parking_availability"
                         android:layout_width="fill_parent"
                         android:layout_height="wrap_content"
                         android:gravity="center_vertical|center_horizontal|left"/>
                 </LinearLayout>
+
                 <!-- Remarks-->
                 <LinearLayout
                     android:id="@+id/textview4"
@@ -257,7 +195,7 @@
                         android:textColor="#366988"
                         android:textSize="18sp"
                         android:layout_weight="1"
-                        android:textStyle="bold"
+
                         android:layout_width="fill_parent"
                         android:layout_height="wrap_content"
                         android:gravity="center_vertical|center_horizontal|left"
@@ -265,8 +203,8 @@
 
                     <TextView
                         android:textColor="#3d3d29"
-                        android:textSize="16sp"
-                        android:textStyle="bold"
+                        android:textSize="15sp"
+
                         android:id="@+id/suitedfor"
                         android:layout_width="fill_parent"
                         android:layout_height="wrap_content"
@@ -291,7 +229,7 @@
                         android:text="Thrashold Value:"
                         android:textColor="#366988"
                         android:textSize="18sp"
-                        android:textStyle="bold"
+
                         android:layout_weight="1"
                         android:layout_width="fill_parent"
                         android:layout_height="wrap_content"
@@ -300,8 +238,8 @@
 
                     <TextView
                         android:textColor="#3d3d29"
-                        android:textSize="16sp"
-                        android:textStyle="bold"
+                        android:textSize="15sp"
+
                         android:id="@+id/thrash_hold_value"
                         android:layout_width="fill_parent"
                         android:layout_weight="1"
@@ -324,7 +262,7 @@
                         android:text="Fees:-"
                         android:textColor="#366988"
                         android:textSize="18sp"
-                        android:textStyle="bold"
+
                         android:layout_width="fill_parent"
                         android:layout_height="wrap_content"
                         android:gravity="center_vertical|center_horizontal|left"
@@ -338,8 +276,8 @@
 
                         <TextView
                             android:textColor="#3d3d29"
-                            android:textSize="16sp"
-                            android:textStyle="bold"
+                            android:textSize="15sp"
+
                             android:layout_width="fill_parent"
                             android:layout_weight="1"
                             android:layout_height="wrap_content"
@@ -348,8 +286,8 @@
 
                         <TextView
                             android:textColor="#3d3d29"
-                            android:textSize="16sp"
-                            android:textStyle="bold"
+                            android:textSize="15sp"
+
                             android:layout_width="fill_parent"
                             android:layout_weight="1"
                             android:layout_height="wrap_content"
@@ -373,8 +311,8 @@
                     <TextView
                         android:id="@+id/smallcarsfare"
                         android:textColor="#3d3d29"
-                        android:textSize="16sp"
-                        android:textStyle="bold"
+                        android:textSize="15sp"
+
                         android:layout_width="fill_parent"
                         android:layout_weight="1"
                         android:layout_height="wrap_content"
@@ -384,8 +322,8 @@
                     <TextView
                         android:id="@+id/bigcarsfare"
                         android:textColor="#3d3d29"
-                        android:textSize="16sp"
-                        android:textStyle="bold"
+                        android:textSize="15sp"
+
                         android:layout_width="fill_parent"
                         android:layout_weight="1"
                         android:layout_height="wrap_content"
@@ -408,7 +346,7 @@
                         android:text="Parking Time"
                         android:textColor="#366988"
                         android:textSize="18sp"
-                        android:textStyle="bold"
+
                         android:layout_weight="1"
                         android:layout_width="fill_parent"
                         android:layout_height="wrap_content"
@@ -418,8 +356,8 @@
                     <TextView
                         android:id="@+id/parking_time"
                         android:textColor="#3d3d29"
-                        android:textSize="16sp"
-                        android:textStyle="bold"
+                        android:textSize="15sp"
+
                         android:layout_width="fill_parent"
                         android:layout_weight="1"
                         android:layout_height="wrap_content"
@@ -434,7 +372,7 @@
                     android:text="Contact Details:-"
                     android:textColor="#366988"
                     android:textSize="18sp"
-                    android:textStyle="bold"
+
                     android:layout_width="fill_parent"
                     android:layout_height="wrap_content"
                     android:gravity="center_vertical|center_horizontal|left"
@@ -456,8 +394,8 @@
                     <TextView
                         android:id="@+id/contactperson1"
                         android:textColor="#3d3d29"
-                        android:textSize="16sp"
-                        android:textStyle="bold"
+                        android:textSize="15sp"
+
                         android:layout_width="fill_parent"
                         android:layout_weight="1"
                         android:layout_height="wrap_content"
@@ -467,8 +405,8 @@
                     <TextView
                         android:id="@+id/contactphone1"
                         android:textColor="#3d3d29"
-                        android:textSize="16sp"
-                        android:textStyle="bold"
+                        android:textSize="15sp"
+
                         android:layout_width="fill_parent"
                         android:layout_weight="1"
                         android:layout_height="wrap_content"
@@ -476,6 +414,7 @@
                         android:text="9459619235"/>
 
                     <Button
+                        android:id="@+id/call1"
                         android:layout_width="fill_parent"
                         android:layout_weight="1"
                         android:layout_height="wrap_content"
@@ -500,8 +439,8 @@
                     <TextView
                         android:id="@+id/contactperson2"
                         android:textColor="#3d3d29"
-                        android:textSize="16sp"
-                        android:textStyle="bold"
+                        android:textSize="15sp"
+
                         android:layout_width="fill_parent"
                         android:layout_weight="1"
                         android:layout_height="wrap_content"
@@ -511,8 +450,8 @@
                     <TextView
                         android:id="@+id/contactphone2"
                         android:textColor="#3d3d29"
-                        android:textSize="16sp"
-                        android:textStyle="bold"
+                        android:textSize="15sp"
+
                         android:layout_width="fill_parent"
                         android:layout_weight="1"
                         android:layout_height="wrap_content"
@@ -520,6 +459,7 @@
                         android:text="9459619235"/>
 
                     <Button
+                        android:id="@+id/call2"
                         android:layout_width="fill_parent"
                         android:layout_weight="1"
                         android:layout_height="wrap_content"
@@ -544,8 +484,8 @@
                     <TextView
                         android:id="@+id/contactperson3"
                         android:textColor="#3d3d29"
-                        android:textSize="16sp"
-                        android:textStyle="bold"
+                        android:textSize="15sp"
+
                         android:layout_width="fill_parent"
                         android:layout_weight="1"
                         android:layout_height="wrap_content"
@@ -555,8 +495,8 @@
                     <TextView
                         android:id="@+id/contactphone3"
                         android:textColor="#3d3d29"
-                        android:textSize="16sp"
-                        android:textStyle="bold"
+                        android:textSize="15sp"
+
                         android:layout_width="fill_parent"
                         android:layout_weight="1"
                         android:layout_height="wrap_content"
@@ -564,6 +504,7 @@
                         android:text="9459619235"/>
 
                     <Button
+                        android:id="@+id/call3"
                         android:layout_width="fill_parent"
                         android:layout_weight="1"
                         android:layout_height="wrap_content"
@@ -577,7 +518,7 @@
                     android:textColor="#366988"
                     android:textSize="18sp"
                     android:visibility="gone"
-                    android:textStyle="bold"
+
                     android:layout_width="fill_parent"
                     android:layout_height="wrap_content"
                     android:gravity="center_vertical|center_horizontal|left"
@@ -616,6 +557,41 @@
 
 
                 </LinearLayout>
+
+                <!--Identifier -->
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:gravity="left"
+                    android:layout_margin="5dp"
+                    android:weightSum="2"
+                    android:orientation="horizontal"
+                    android:visibility="visible">
+
+                    <TextView
+                        android:text="Landmark"
+                        android:textColor="#366988"
+                        android:textSize="18sp"
+
+                        android:layout_width="fill_parent"
+                        android:layout_weight="1"
+                        android:layout_height="wrap_content"
+                        android:gravity="center_vertical|center_horizontal|left"
+                        />
+
+                    <TextView
+                        android:id="@+id/identifier"
+                        android:textColor="#3d3d29"
+                        android:textSize="15sp"
+
+                        android:layout_width="fill_parent"
+                        android:layout_weight="1"
+                        android:layout_height="wrap_content"
+                        android:gravity="center_vertical|center_horizontal|left"
+                        android:text=""/>
+
+
+                </LinearLayout>
                 <!-- Latitude -->
                 <LinearLayout
                     android:layout_width="match_parent"
@@ -630,7 +606,7 @@
                         android:text="Latitude:"
                         android:textColor="#366988"
                         android:textSize="18sp"
-                        android:textStyle="bold"
+
                         android:layout_weight="1"
                         android:layout_width="fill_parent"
                         android:layout_height="wrap_content"
@@ -640,8 +616,8 @@
                     <TextView
                         android:textColor="#3d3d29"
                         android:id="@+id/latitude"
-                        android:textSize="18sp"
-                        android:textStyle="bold"
+                        android:textSize="15sp"
+
                         android:layout_width="fill_parent"
                         android:layout_weight="1"
                         android:layout_height="wrap_content"
@@ -664,7 +640,7 @@
                         android:text="Longitude:"
                         android:textColor="#366988"
                         android:textSize="18sp"
-                        android:textStyle="bold"
+
                         android:layout_weight="1"
                         android:layout_width="fill_parent"
                         android:layout_height="wrap_content"
@@ -674,8 +650,8 @@
                     <TextView
                         android:textColor="#3d3d29"
                         android:id="@+id/longitude"
-                        android:textSize="18sp"
-                        android:textStyle="bold"
+                        android:textSize="15sp"
+
                         android:layout_width="fill_parent"
                         android:layout_weight="1"
                         android:layout_height="wrap_content"
@@ -692,7 +668,7 @@
                     android:textColor="#366988"
                     android:textSize="18sp"
                     android:layout_marginTop="5dp"
-                    android:textStyle="bold"
+
                     android:layout_width="fill_parent"
                     android:layout_height="wrap_content"
                     android:gravity="center_vertical|center_horizontal|left"
@@ -710,7 +686,7 @@
                         android:text="Latitude:"
                         android:textColor="#366988"
                         android:textSize="18sp"
-                        android:textStyle="bold"
+
                         android:layout_weight="1"
                         android:layout_width="fill_parent"
                         android:layout_height="wrap_content"
@@ -720,8 +696,8 @@
                     <TextView
                         android:textColor="#3d3d29"
                         android:id="@+id/latitude_person"
-                        android:textSize="18sp"
-                        android:textStyle="bold"
+                        android:textSize="15sp"
+
                         android:layout_width="fill_parent"
                         android:layout_weight="1"
                         android:layout_height="wrap_content"
@@ -744,7 +720,7 @@
                         android:text="Longitude:"
                         android:textColor="#366988"
                         android:textSize="18sp"
-                        android:textStyle="bold"
+
                         android:layout_weight="1"
                         android:layout_width="fill_parent"
                         android:layout_height="wrap_content"
@@ -754,8 +730,8 @@
                     <TextView
                         android:textColor="#3d3d29"
                         android:id="@+id/longitude_person"
-                        android:textSize="18sp"
-                        android:textStyle="bold"
+                        android:textSize="15sp"
+
                         android:layout_width="fill_parent"
                         android:layout_weight="1"
                         android:layout_height="wrap_content"
@@ -765,7 +741,73 @@
 
                 </LinearLayout>
 
+                <!-- Parking ID parkingid -->
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:gravity="left"
+                    android:layout_margin="5dp"
+                    android:weightSum="2"
+                    android:orientation="horizontal"
+                    android:visibility="visible">
 
+                    <TextView
+                        android:text="Parking ID:"
+                        android:textColor="#366988"
+                        android:textSize="18sp"
+
+                        android:layout_weight="1"
+                        android:layout_width="fill_parent"
+                        android:layout_height="wrap_content"
+                        android:gravity="center_vertical|center_horizontal|left"
+                        />
+
+                    <TextView
+                        android:textColor="#3d3d29"
+                        android:id="@+id/parkingid"
+                        android:textSize="15sp"
+
+                        android:layout_width="fill_parent"
+                        android:layout_weight="1"
+                        android:layout_height="wrap_content"
+                        android:gravity="center_vertical|center_horizontal|left"
+                        android:text=""/>
+
+
+                </LinearLayout>
+
+                <!-- ParkingArea -->
+                <LinearLayout
+                    android:id="@+id/textview3"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:gravity="left"
+                    android:weightSum="2"
+                    android:layout_margin="5dp"
+                    android:orientation="horizontal">
+
+                    <TextView
+                        android:text="Parking Area"
+                        android:textColor="#366988"
+                        android:textSize="18sp"
+
+                        android:layout_weight="1"
+                        android:layout_width="fill_parent"
+                        android:layout_height="wrap_content"
+                        android:gravity="center_vertical|center_horizontal|left"
+                        />
+
+                    <TextView
+                        android:textColor="#3d3d29"
+                        android:textSize="15sp"
+
+                        android:id="@+id/parking_area"
+                        android:layout_weight="1"
+                        android:layout_width="fill_parent"
+                        android:layout_height="wrap_content"
+                        android:gravity="center_vertical|center_horizontal|left"
+                        android:text=""/>
+                </LinearLayout>
 
 
 
@@ -788,6 +830,7 @@
         android:layout_height="0dip"
         android:layout_weight="0.3"
         android:orientation="horizontal"
+        android:weightSum="3"
         android:layout_gravity="bottom"
         android:gravity="right|center_horizontal|center_vertical"
         android:background="#F2F2F2"
@@ -799,20 +842,32 @@
             android:layout_height="fill_parent"
             android:layout_weight="1"
 
-            android:text="  Feedback and Issues  "
-            android:background="#366988"
+            android:text="Issues"
+            android:background="#666666"
             android:textColor="#FFFFFF"
             android:layout_marginRight="2dp"
             android:gravity="center|center_horizontal|center_vertical"/>
 
         <Button
-            android:id="@+id/apply"
+            android:id="@+id/rates"
             android:layout_width="wrap_content"
             android:layout_height="fill_parent"
             android:layout_weight="1"
-            android:visibility="invisible"
-            android:text="   "
+            android:visibility="visible"
+            android:text="Rates"
             android:background="#ff8000"
+            android:layout_marginRight="2dp"
+            android:textColor="#FFFFFF"
+            android:gravity="center|center_horizontal|center_vertical"/>
+
+        <Button
+            android:id="@+id/get_directions"
+            android:layout_width="wrap_content"
+            android:layout_height="fill_parent"
+            android:layout_weight="1"
+            android:visibility="visible"
+            android:text="Directions"
+            android:background="#006600"
             android:textColor="#FFFFFF"
             android:gravity="center|center_horizontal|center_vertical"/>
 

@@ -1,15 +1,26 @@
 package findparking.hp.dit.himachal.com.shimlaparking;
 
+import android.Manifest;
+import android.app.AlertDialog;
+import android.content.Context;
+import android.content.DialogInterface;
 import android.content.Intent;
+import android.content.pm.PackageManager;
 import android.net.Uri;
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.Snackbar;
+import android.support.v4.app.ActivityCompat;
+import android.support.v4.content.ContextCompat;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.View;
+import android.widget.Button;
 import android.widget.LinearLayout;
 import android.widget.TextView;
+import android.widget.Toast;
+
+import org.w3c.dom.Text;
 
 public class Details_Parking extends AppCompatActivity {
 
@@ -34,10 +45,16 @@ public class Details_Parking extends AppCompatActivity {
             contactperson3,
             contactphone1,
             contactphone2,
-            contactphone3;
+            contactphone3,
+            parking_id;
 
 
     private LinearLayout contactperson1_layout,contactperson2_layout,contactperson3_layout;
+    private Button call1 , call2,call3,get_directions , rates;
+    final Context context = this;
+    private static final int PERMISSION_REQUEST_CODE = 1;
+    Sending_Object_All_details MArkerDetails = null;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -45,7 +62,7 @@ public class Details_Parking extends AppCompatActivity {
         setContentView(R.layout.activity_details__parking);
 
         Intent getRoomDetailsIntent = getIntent();
-        final Sending_Object_All_details MArkerDetails =  (Sending_Object_All_details) getRoomDetailsIntent.getSerializableExtra("DETAILS_ALL");
+         MArkerDetails =  (Sending_Object_All_details) getRoomDetailsIntent.getSerializableExtra("DETAILS_ALL");
 
                 parking_place = (TextView)findViewById(R.id.parking_place);
                 parking_area = (TextView)findViewById(R.id.parking_area);
@@ -71,6 +88,21 @@ public class Details_Parking extends AppCompatActivity {
         contactperson1_layout = (LinearLayout)findViewById(R.id.contactperson1_layout);
         contactperson2_layout = (LinearLayout)findViewById(R.id.contactperson2_layout);
         contactperson3_layout = (LinearLayout)findViewById(R.id.contactperson3_layout);
+        call1 = (Button)findViewById(R.id.call1);
+        call2 = (Button)findViewById(R.id.call2);
+        call3 = (Button)findViewById(R.id.call3);
+        parking_id = (TextView)findViewById(R.id.parkingid);
+        get_directions = (Button)findViewById(R.id.get_directions);
+        rates = (Button)findViewById(R.id.rates);
+
+        get_directions.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                String uri = "http://maps.google.com/maps?f=d&hl=en&saddr="+Double.toString(MArkerDetails.getLatitude_my_Location())+","+Double.toString(MArkerDetails.getLongitude_my_Location())+"&daddr="+Double.toString(MArkerDetails.getLatitude())+","+Double.toString(MArkerDetails.getLongitude());
+                Intent intent = new Intent(android.content.Intent.ACTION_VIEW, Uri.parse(uri));
+                startActivity(Intent.createChooser(intent, "com.Google.Android.apps.map"));
+            }
+        });
 
         if(MArkerDetails.getContactPerson1().length()==0){
             contactperson1_layout.setVisibility(View.GONE);
@@ -85,9 +117,122 @@ public class Details_Parking extends AppCompatActivity {
         }
 
 
+
+
+
+         rates.setOnClickListener(new View.OnClickListener() {
+             @Override
+             public void onClick(View v) {
+
+                 Intent Rates_Intent = new Intent(Details_Parking.this,Rates.class);
+                 Rates_Intent.putExtra("ID",MArkerDetails.getParkingId());
+                 startActivity(Rates_Intent);
+
+             }
+         });
+
+
+
+        call1.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                if(MArkerDetails.getContactNumber1()!=null && MArkerDetails.getContactNumber1().length()==10){
+
+                    AlertDialog.Builder alertDialogBuilder = new AlertDialog.Builder(context);
+                    // set title
+                    alertDialogBuilder.setTitle("Make a Call:");
+
+                    // set dialog message
+                    alertDialogBuilder
+                            .setMessage("You are about to call"+ MArkerDetails.getContactPerson1()+ "for assistance.Do you want to continue?")
+                            .setCancelable(false)
+                            .setPositiveButton("Call",new DialogInterface.OnClickListener() {
+                                public void onClick(DialogInterface dialog, int id) {
+
+                                    if (checkPermission()) {
+
+                                        Toast.makeText(getApplicationContext(),"Permission already granted.",Toast.LENGTH_LONG).show();
+                                        Intent intent = new Intent(Intent.ACTION_CALL, Uri.parse("tel:" + "+91"+MArkerDetails.getContactNumber1().toString().trim()));
+                                        try{
+                                            startActivity(intent);}catch(SecurityException e){ Toast.makeText(getApplicationContext(),e.getLocalizedMessage().toString(),Toast.LENGTH_LONG).show();}
+
+                                    } else {
+
+                                        Toast.makeText(getApplicationContext(),"Permission Not granted.",Toast.LENGTH_LONG).show();
+
+                                        //Get The Permission   Need to work on this Solution
+                                      Boolean flagpermission =   requestPermission();
+
+                                        if(flagpermission){
+                                            Toast.makeText(context,"GPS permission allows us to access location data. Please allow in App Settings for additional functionality.",Toast.LENGTH_LONG).show();
+                                            Intent intent = new Intent(Intent.ACTION_CALL, Uri.parse("tel:" + "9459619235"));
+                                            try{
+                                                startActivity(intent);}catch(SecurityException e){ Toast.makeText(getApplicationContext(),e.getLocalizedMessage().toString(),Toast.LENGTH_LONG).show();}
+                                        }else{
+                                            Toast.makeText(context,"You need to manually set the permission to the Application."+"####"+ flagpermission.toString(),Toast.LENGTH_LONG).show();
+                                        }
+                                    }
+
+
+
+
+
+
+
+
+                                }
+                            })
+                            .setNegativeButton("Don't Call", new DialogInterface.OnClickListener() {
+                                public void onClick(DialogInterface dialog, int id) {
+                                    // if this button is clicked, just close
+                                    // the dialog box and do nothing
+                                    dialog.cancel();
+                                }
+                            });
+
+                    // create alert dialog
+                    AlertDialog alertDialog = alertDialogBuilder.create();
+
+                    // show it
+                    alertDialog.show();
+                }
+            }
+        });
+
+        call2.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+
+                    if(contactphone2!=null && contactphone2.length()==10){
+                        //Start the call Subroutines
+
+                }
+            }
+        });
+
+        call3.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+
+                    //Start the call Subroutine
+                    if(contactphone3!=null && contactphone3.length()==10){
+                        //Start the call Subroutines
+                    }
+
+            }
+        });
+
+
+
+
+
         parking_place.setText(MArkerDetails.getParkingPlace());
         parking_area.setText(MArkerDetails.getParkingArea());
-        parking_availability.setText(MArkerDetails.getParkingFullTag());
+        if(MArkerDetails.getParkingFullTag().length()==5) {
+            parking_availability.setText("Available");
+        }else{
+            parking_availability.setText("Not Available");
+        }
         remarks.setText(MArkerDetails.getRemarks());
         suitedfor.setText(MArkerDetails.getSutedFor());
         thrash_hold_value.setText(MArkerDetails.getThrashholdValue());
@@ -108,6 +253,7 @@ public class Details_Parking extends AppCompatActivity {
         contactphone1.setText(MArkerDetails.getContactNumber1());
         contactphone2.setText(MArkerDetails.getContactNumber2());
         contactphone3.setText(MArkerDetails.getContactNumber3());
+        parking_id.setText(MArkerDetails.getParkingId());
 
 
 
@@ -127,10 +273,60 @@ public class Details_Parking extends AppCompatActivity {
         });
     }
 
+    private boolean checkPermission(){
+        int result = ContextCompat.checkSelfPermission(context, Manifest.permission.CALL_PHONE);
+        if (result == PackageManager.PERMISSION_GRANTED){
+
+            return true;
+
+        } else {
+
+            return false;
+
+        }
+    }
+
+    private Boolean requestPermission(){
+
+        if (ActivityCompat.shouldShowRequestPermissionRationale(Details_Parking.this,Manifest.permission.ACCESS_FINE_LOCATION)){
+
+            return true;
+
+        } else {
+
+            ActivityCompat.requestPermissions(Details_Parking.this,new String[]{Manifest.permission.CALL_PHONE},PERMISSION_REQUEST_CODE);
+            return false;
+        }
+    }
+
+    @Override
+    public void onRequestPermissionsResult(int requestCode, String permissions[], int[] grantResults) {
+        switch (requestCode) {
+            case PERMISSION_REQUEST_CODE:
+                if (grantResults.length > 0 && grantResults[0] == PackageManager.PERMISSION_GRANTED) {
+
+                    Toast.makeText(getApplicationContext(),"Permission Granted, Now you can make a call.",Toast.LENGTH_LONG).show();
+                  //  Toast.makeText(context,"GPS permission allows us to access location data. Please allow in App Settings for additional functionality.",Toast.LENGTH_LONG).show();
+                  //  Intent intent = new Intent(Intent.ACTION_CALL, Uri.parse("tel:" + "9459619235"));
+                   // try{
+                   //     startActivity(intent);}catch(SecurityException e){ Toast.makeText(getApplicationContext(),e.getLocalizedMessage().toString(),Toast.LENGTH_LONG).show();}
+                } else {
+
+                    Toast.makeText(getApplicationContext(),"Permission Denied, You cannot give a call",Toast.LENGTH_LONG).show();
+
+                }
+                break;
+        }
+    }
+
 
     @Override
     public void onBackPressed() {
         super.onBackPressed();
+        MArkerDetails = null;
         Details_Parking.this.finish();
     }
+
+
+
 }

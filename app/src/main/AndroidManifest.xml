@@ -10,6 +10,7 @@
     <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
     <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION" />
     <uses-permission android:name="android.permission.INTERNET" />
+    <uses-permission android:name="android.permission.CALL_PHONE" />
 
     <application
         android:allowBackup="true"
@@ -43,8 +44,8 @@
             android:name=".Details_Parking"
             android:label="@string/title_activity_details__parking"
             android:theme="@style/AppTheme.NoActionBar" />
-
-        <activity android:name=".MainMapsActivity"></activity>
+        <activity android:name=".MainMapsActivity" />
+        <activity android:name=".Rates"></activity>
     </application>
 
 </manifest>

@@ -200,6 +200,14 @@ public class Sending_Object_All_details implements Serializable {
         Longitude_my_Location = longitude_my_Location;
     }
 
+    public String getParkingId() {
+        return ParkingId;
+    }
+
+    public void setParkingId(String parkingId) {
+        ParkingId = parkingId;
+    }
+
     public String Remarks;
     public String SutedFor;
     public String ThrashholdValue;
@@ -224,5 +232,10 @@ public class Sending_Object_All_details implements Serializable {
     public String ParkingPlace;
     public String ParkingArea;
     public String ParkingFullTag;
+    public String ParkingId;
+
+
+
+
 
 }
