@@ -33,9 +33,10 @@ public class Fee_JSON_Parse_Small {
             for (int i = 0; i < ar.length(); i++) {
                 JSONObject obj = ar.getJSONObject(i);
                 Rates_POJO pojo_rates = new Rates_POJO();
-                pojo_rates.setCarType(obj.getString("BigCar"));
-                pojo_rates.setDuration(obj.getString("SmallCar"));
-                pojo_rates.setFeeAmount(obj.getString("Duration"));
+                pojo_rates.setFeeAmount(obj.getString("Amount"));
+                System.out.println(obj.getString("Amount"));
+                pojo_rates.setDuration(obj.getString("Duration"));
+                System.out.println(obj.getString("Duration"));
 
                 AdmiCardList.add(pojo_rates);
             }

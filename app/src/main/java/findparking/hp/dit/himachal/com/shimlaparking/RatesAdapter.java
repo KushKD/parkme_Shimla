@@ -32,11 +32,10 @@ public class RatesAdapter extends ArrayAdapter<Rates_POJO>  {
         Rates_POJO RO = userlist.get(position);
         TextView tv1 = (TextView)view.findViewById(R.id.feetype);
         TextView tv2 = (TextView)view.findViewById(R.id.feeamount);
-        TextView tv3 = (TextView)view.findViewById(R.id.parkingid);
+
+
         tv2.setText(RO.getDuration());
-       tv1.setText(RO.getCarType());
-        tv2.setText(RO.getDuration());
-        tv3.setText(RO.getFeeAmount());
+        tv1.setText(RO.getFeeAmount());
 
         return view;
     }

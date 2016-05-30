@@ -8,8 +8,10 @@ import android.os.AsyncTask;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
+import android.widget.Button;
 import android.widget.ListView;
 import android.widget.ProgressBar;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import java.io.BufferedReader;
@@ -33,6 +35,9 @@ public class Rates extends Activity {
     List<Get_Rates_Data_Server> tasks;
     List<Rates_POJO> Rates_Server;
     RatesAdapter adapter;
+    TextView header;
+
+    Button smallcars , bigcars;
 
 
     @Override
@@ -43,6 +48,9 @@ public class Rates extends Activity {
         ID_Server = bundle.getString("ID");
 
         listv = (ListView) findViewById(R.id.list);
+        smallcars = (Button)findViewById(R.id.smallcars);
+        bigcars = (Button)findViewById(R.id.bigcars);
+        header = (TextView) findViewById(R.id.header);
 
         context = this;
         pb = (ProgressBar) findViewById(R.id.progressBar1);
@@ -52,7 +60,7 @@ public class Rates extends Activity {
         if (isOnline()) {
             try {
                 Get_Rates_Data_Server GPD = new Get_Rates_Data_Server();
-                GPD.execute(Econstants.URL_Rates);
+                GPD.execute(Econstants.URL_Rates_Small);
             }catch(Exception e){
                 Log.e("CAUGHT",e.getMessage().toString());
             }
@@ -61,6 +69,51 @@ public class Rates extends Activity {
             Toast.makeText(this,"Unable to Connect to Internet. Please check your Network connection.", Toast.LENGTH_LONG).show();
         }
 
+
+        smallcars.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+
+
+                if (isOnline()) {
+                    try {
+
+                        Get_Rates_Data_Server GPD = new Get_Rates_Data_Server();
+                        GPD.execute(Econstants.URL_Rates_Small);
+                        header.setText("Small Car");
+                    }catch(Exception e){
+                        Log.e("CAUGHT",e.getMessage().toString());
+                    }
+
+                } else {
+                    Toast.makeText(getApplicationContext(),"Unable to Connect to Internet. Please check your Network connection.", Toast.LENGTH_LONG).show();
+                }
+
+
+            }
+        });
+
+
+        bigcars.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+
+                header.setText("Big Car");
+                if (isOnline()) {
+                    try {
+                        Get_Rates_Data_Server GPD = new Get_Rates_Data_Server();
+                        GPD.execute(Econstants.URL_Rates_Big);
+                    }catch(Exception e){
+                        Log.e("CAUGHT",e.getMessage().toString());
+                    }
+
+                } else {
+                    Toast.makeText(getApplicationContext(),"Unable to Connect to Internet. Please check your Network connection.", Toast.LENGTH_LONG).show();
+                }
+
+
+            }
+        });
 
 
     }
@@ -110,7 +163,7 @@ public class Rates extends Activity {
             //http://192.168.0.171/HPParking/HPParking.svc/getParkingFeeParkingId_JSON/1  pass the Parking ID
             try {
 
-                url_ = new URL(params[0]+ID_Server);
+                url_ = new URL(params[0]+ID_Server+"/1");
                 conn_ = (HttpURLConnection)url_.openConnection();
                 conn_.setRequestMethod("GET");
                 conn_.setUseCaches(false);
