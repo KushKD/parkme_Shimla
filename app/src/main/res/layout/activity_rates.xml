@@ -1,11 +1,110 @@
-<?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context="findparking.hp.dit.himachal.com.shimlaparking.Rates">
+    android:background="#F2F2F2" >
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical">
+
+
+
+        <TextView
+            android:id="@+id/textView"
+            android:layout_width="fill_parent"
+            android:layout_height="50dp"
+            android:scrollbars="vertical"
+            android:gravity="center|center_horizontal|center_vertical"
+            android:textColor="#FFFFFF"
+            android:background="#ff545454"
+            android:textSize="20sp"
+            android:textStyle="bold"
+            android:text="Rate List" />
+
+
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:weightSum="2"
+            android:orientation="horizontal">
+
+            <Button
+                android:text="Small Car Rates"
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:id="@+id/smallcars"
+                android:layout_weight="1"/>
+
+            <Button
+                android:text="Big Car Rates"
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:id="@+id/bigcars"
+                android:layout_weight="1"/>
+
+        </LinearLayout>
+
+
+        <TextView
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:text="Small Car"
+            android:background="#000000"
+            android:gravity="center|center_vertical|center_horizontal"
+            android:textSize="18sp"
+            android:textColor="#FFFFFF"/>
+
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:weightSum="2">
+
+            <TextView
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:text="Duration"
+                android:gravity="center|center_vertical|center_horizontal"
+                android:background="#FF545454"
+                android:textSize="18sp"
+                android:textColor="#FFFFFF"
+                android:layout_weight="1"/>
+            <TextView
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:text="Rate in Rupees"
+                android:textSize="18sp"
+                android:gravity="center|center_vertical|center_horizontal"
+                android:background="#FF545454"
+                android:textColor="#FFFFFF"
+                android:layout_weight="1"/>
 
 
 
 
+        </LinearLayout>
+
+        <ListView
+            android:id="@+id/list"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content" >
+        </ListView>
+
+        <ProgressBar
+            android:id="@+id/progressBar1"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center|center_horizontal|center_vertical"
+            android:layout_centerHorizontal="true"
+            android:layout_centerVertical="true"
+            />
+
+
+
+
+    </LinearLayout>
 </LinearLayout>

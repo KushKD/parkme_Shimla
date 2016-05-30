@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="fill_parent"
+    android:layout_height="wrap_content"
+    android:background="#fafafa"
+    android:orientation="horizontal"
+    android:weightSum="3"
+    android:layout_margin="3dp"
+    android:padding="5dip" >
+
+
+
+    <TextView
+        android:id="@+id/feetype"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_weight="1"
+        android:gravity="left|center_horizontal|center_vertical"
+        android:text="Upto One Hour"/>
+
+    <TextView
+        android:id="@+id/feeamount"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:gravity="left|center_horizontal|center_vertical"
+        android:layout_weight="1"
+        android:text="Fee Amount"/>
+
+    <TextView
+        android:id="@+id/parkingid"
+        android:layout_width="wrap_content"
+        android:layout_weight="1"
+        android:visibility="visible"
+        android:gravity="left|center_horizontal|center_vertical"
+        android:layout_height="wrap_content"
+        android:text="Parking ID"/>
+
+</LinearLayout>

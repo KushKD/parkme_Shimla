@@ -370,6 +370,8 @@ try {
          Sending_Object_All_details SOAD = null;
 
 
+
+
         //  int id_ = Integer.parseInt(marker.getId())-1;
          // Toast.makeText(getApplicationContext(),mMyMarkersArray.size()+"$$$$$$"+marker.getId().toString(),Toast.LENGTH_LONG).show();
         String id_GetData = removeFirstCharacter(marker.getId().toString());

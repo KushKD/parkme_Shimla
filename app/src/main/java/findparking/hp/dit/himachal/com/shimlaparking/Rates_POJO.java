@@ -7,9 +7,36 @@ import java.io.Serializable;
  */
 public class Rates_POJO implements Serializable {
 
-      public static String fee_Type ;
-      public static String fee_Amount;
-      public static String parking_Id;
+
+
+    public String CarType ;
+
+    public String getFeeAmount() {
+        return FeeAmount;
+    }
+
+    public void setFeeAmount(String feeAmount) {
+        FeeAmount = feeAmount;
+    }
+
+    public String getDuration() {
+        return Duration;
+    }
+
+    public void setDuration(String duration) {
+        Duration = duration;
+    }
+
+    public String getCarType() {
+        return CarType;
+    }
+
+    public void setCarType(String carType) {
+        CarType = carType;
+    }
+
+    public String Duration;
+      public String FeeAmount;
 
 
 
