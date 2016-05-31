@@ -14,3 +14,4 @@ public class Econstants {
 // http://192.168.0.171/HPParking/HPParking.svc/getparkingLocation_JSON/10297
 //"http://10.241.9.72/HPParking/HPParking.svc/getparkingLocation_JSON/1"
 //http://aadhaar.hp.gov.in/hpparking
+// keytool -list -v -keystore /home/david/Desktop/Keys/key.jks -alias MyAlias -storepass paswword -keypass password
