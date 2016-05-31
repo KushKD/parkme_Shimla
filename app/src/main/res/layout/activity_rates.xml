@@ -62,7 +62,7 @@
                 android:id="@+id/header"
                 android:background="#000000"
                 android:gravity="center|center_vertical|center_horizontal"
-                android:textSize="17sp
+                android:textSize="18sp"
                 android:textColor="#FFFFFF"/>
 
 
@@ -78,14 +78,14 @@
                     android:text="Duration"
                     android:gravity="center|center_vertical|center_horizontal"
                     android:background="#FF545454"
-                    android:textSize="17sp
+                    android:textSize="18sp"
                     android:textColor="#FFFFFF"
                     android:layout_weight="1"/>
                 <TextView
                     android:layout_width="fill_parent"
                     android:layout_height="wrap_content"
                     android:text="Rate in Rupees"
-                    android:textSize="17sp
+                    android:textSize="18sp"
                     android:gravity="center|center_vertical|center_horizontal"
                     android:background="#FF545454"
                     android:textColor="#FFFFFF"

@@ -1,13 +1,10 @@
 package findparking.hp.dit.himachal.com.shimlaparking;
 
 import android.Manifest;
-import android.app.ProgressDialog;
 import android.content.Context;
 import android.content.Intent;
 import android.content.pm.PackageManager;
-import android.location.Criteria;
 import android.location.Location;
-import android.location.LocationManager;
 import android.net.ConnectivityManager;
 import android.net.NetworkInfo;
 import android.os.AsyncTask;
@@ -20,7 +17,6 @@ import android.support.v7.app.ActionBar;
 import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
 import android.view.View;
-import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.ProgressBar;
 import android.widget.TextView;
@@ -31,7 +27,6 @@ import com.google.android.gms.common.api.GoogleApiClient;
 import com.google.android.gms.location.LocationListener;
 import com.google.android.gms.location.LocationRequest;
 import com.google.android.gms.location.LocationServices;
-import com.google.android.gms.maps.CameraUpdate;
 import com.google.android.gms.maps.CameraUpdateFactory;
 import com.google.android.gms.maps.GoogleMap;
 import com.google.android.gms.maps.OnMapReadyCallback;
@@ -80,8 +75,8 @@ public class MainMapsActivity extends AppCompatActivity implements
     LatLng latLng;
     Marker currLocationMarker;
     private GoogleMap mMap;
-    private ArrayList<My_Marker> mMyMarkersArray = new ArrayList<My_Marker>();
-    private static HashMap<Marker, My_Marker> mMarkersHashMap;
+    private ArrayList<My_Marker> mMyMarkersArray = null;
+    private  HashMap<Marker, My_Marker> mMarkersHashMap = null;
     List<Get_Parking_Details> tasks;
     ProgressBar pb;
     URL url_;
@@ -92,25 +87,12 @@ public class MainMapsActivity extends AppCompatActivity implements
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        // setContentView(R.layout.activity_main_maps);`
+
         setContentView(R.layout.my_location_demo);
         tasks = new ArrayList<>();
 
-       /* // Initialize the HashMap for Markers and MyMarker object
-        mMarkersHashMap = new HashMap<>();
-
-        mMyMarkersArray.add(new MyMarker("Khalini", "ic_launcher", Double.parseDouble("31.089749"), Double.parseDouble("77.17067")));
-        mMyMarkersArray.add(new MyMarker("Bemloe", "ic_launcher", Double.parseDouble("31.09776"), Double.parseDouble("77.17455")));
-        mMyMarkersArray.add(new MyMarker("HHH", "ic_launcher", Double.parseDouble("31.099992"), Double.parseDouble("77.17446")));
-        mMyMarkersArray.add(new MyMarker("High Court", "ic_launcher", Double.parseDouble("31.099369"), Double.parseDouble("77.17575")));
-        mMyMarkersArray.add(new MyMarker("Sabji Mandi", "ic_launcher", Double.parseDouble("31.102719"), Double.parseDouble("77.17467")));
-        mMyMarkersArray.add(new MyMarker("Below Metro Poll", "ic_launcher", Double.parseDouble("31.100736"), Double.parseDouble("77.17529")));
-        mMyMarkersArray.add(new MyMarker("Olr Railway Staytion", "ic_launcher", Double.parseDouble("31.104103"), Double.parseDouble("77.16817")));
-        mMyMarkersArray.add(new MyMarker("Old Bus Stand", "ic_launcher", Double.parseDouble("31.101348"), Double.parseDouble("77.17098")));*/
-
         ActionBar actionBar = getSupportActionBar();
         actionBar.hide();
-        // setUpMap();
         SupportMapFragment mapFragment =
                 (SupportMapFragment) getSupportFragmentManager().findFragmentById(R.id.map);
         mapFragment.getMapAsync(this);
@@ -565,6 +547,7 @@ try {
                 }
                 JSONArray ar = new JSONArray(g_Table);
 
+                mMyMarkersArray = new ArrayList<>();
 
                 for (int i = 0; i < ar.length(); i++) {
                     JSONObject obj = ar.getJSONObject(i);

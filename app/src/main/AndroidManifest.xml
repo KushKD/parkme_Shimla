@@ -29,10 +29,10 @@
         -->
         <meta-data
             android:name="com.google.android.geo.API_KEY"
-            android:value="@string/google_maps_key" />
+            android:value="AIzaSyCkSC2Vk82KdtDEeXxdddD7tL9Q3a9_9-g" />
 
         <activity
-            android:name=".SplashScreen"
+            android:name="findparking.hp.dit.himachal.com.shimlaparking.SplashScreen"
             android:label="@string/title_activity_main_maps">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -41,11 +41,11 @@
             </intent-filter>
         </activity>
         <activity
-            android:name=".Details_Parking"
+            android:name="findparking.hp.dit.himachal.com.shimlaparking.Details_Parking"
             android:label="@string/title_activity_details__parking"
             android:theme="@style/AppTheme.NoActionBar" />
-        <activity android:name=".MainMapsActivity" />
-        <activity android:name=".Rates"></activity>
+        <activity android:name="findparking.hp.dit.himachal.com.shimlaparking.MainMapsActivity" />
+        <activity android:name="findparking.hp.dit.himachal.com.shimlaparking.Rates"></activity>
     </application>
 
 </manifest>
