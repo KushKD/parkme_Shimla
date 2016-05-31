@@ -37,6 +37,7 @@ public class Rates extends Activity {
     List<Rates_POJO> Rates_Server;
     RatesAdapter adapter;
     TextView header;
+    Button back;
 
     Button smallcars , bigcars;
 
@@ -52,6 +53,7 @@ public class Rates extends Activity {
         smallcars = (Button)findViewById(R.id.smallcars);
         bigcars = (Button)findViewById(R.id.bigcars);
         header = (TextView) findViewById(R.id.header);
+        back = (Button)findViewById(R.id.back);
 
         context = this;
         pb = (ProgressBar) findViewById(R.id.progressBar1);
@@ -91,6 +93,13 @@ public class Rates extends Activity {
                 }
 
 
+            }
+        });
+
+        back.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Rates.this.finish();
             }
         });
 

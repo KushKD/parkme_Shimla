@@ -35,7 +35,13 @@ public class RatesAdapter extends ArrayAdapter<Rates_POJO>  {
 
 
         tv2.setText(RO.getDuration());
-        tv1.setText(RO.getFeeAmount());
+
+        if(RO.getFeeAmount().equalsIgnoreCase("0")){
+            tv1.setText("NA");
+        }else{
+            tv1.setText(RO.getFeeAmount());
+        }
+
 
         return view;
     }
