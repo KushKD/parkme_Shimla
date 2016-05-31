@@ -6,6 +6,7 @@ import android.net.ConnectivityManager;
 import android.net.NetworkInfo;
 import android.os.AsyncTask;
 import android.os.Bundle;
+import android.provider.Telephony;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
@@ -27,7 +28,7 @@ public class Rates extends Activity {
 
     URL url_;
     HttpURLConnection conn_;
-    StringBuilder sb = new StringBuilder();
+    StringBuilder sb ;
     String ID_Server = null;
     ProgressBar pb;
     ListView listv;
@@ -60,7 +61,7 @@ public class Rates extends Activity {
         if (isOnline()) {
             try {
                 Get_Rates_Data_Server GPD = new Get_Rates_Data_Server();
-                GPD.execute(Econstants.URL_Rates_Small);
+                GPD.execute(Econstants.URL_Rates_Small , "Small Car");
             }catch(Exception e){
                 Log.e("CAUGHT",e.getMessage().toString());
             }
@@ -77,9 +78,9 @@ public class Rates extends Activity {
 
                 if (isOnline()) {
                     try {
-
+                            Rates_Server = null;
                         Get_Rates_Data_Server GPD = new Get_Rates_Data_Server();
-                        GPD.execute(Econstants.URL_Rates_Small);
+                        GPD.execute(Econstants.URL_Rates_Small , "Small Car");
                         header.setText("Small Car");
                     }catch(Exception e){
                         Log.e("CAUGHT",e.getMessage().toString());
@@ -101,8 +102,9 @@ public class Rates extends Activity {
                 header.setText("Big Car");
                 if (isOnline()) {
                     try {
+                        Rates_Server = null;
                         Get_Rates_Data_Server GPD = new Get_Rates_Data_Server();
-                        GPD.execute(Econstants.URL_Rates_Big);
+                        GPD.execute(Econstants.URL_Rates_Big , "Big Car");
                     }catch(Exception e){
                         Log.e("CAUGHT",e.getMessage().toString());
                     }
@@ -130,9 +132,21 @@ public class Rates extends Activity {
 
     protected void updateDisplay() {
 
-        adapter = new RatesAdapter(this, R.layout.item_rates_small, Rates_Server);
-        listv.setAdapter(adapter);
-        listv.setTextFilterEnabled(true);
+
+
+          if(Rates_Server.size()>0){
+             // adapter.clear();
+              adapter = new RatesAdapter(this, R.layout.item_rates_small, Rates_Server);
+              //adapter.notifyDataSetChanged();
+             // listv.invalidateViews();
+              listv.setAdapter(adapter);
+
+
+          }else{
+              adapter = new RatesAdapter(this, R.layout.item_rates_small, Rates_Server);
+              listv.setAdapter(adapter);
+          }
+
 
     }
 
@@ -160,10 +174,26 @@ public class Rates extends Activity {
         @Override
         protected String doInBackground(String... params) {
 
+            String ServiceType = null;
+            url_ = null;
             //http://192.168.0.171/HPParking/HPParking.svc/getParkingFeeParkingId_JSON/1  pass the Parking ID
             try {
 
-                url_ = new URL(params[0]+ID_Server+"/1");
+
+                ServiceType = params[1];
+
+                  if(ServiceType.equalsIgnoreCase("Small Car")){
+                      url_ = new URL(params[0]+ID_Server+"/1");
+                      System.out.print(url_);
+
+                  }
+                else{
+                    url_ = new URL(params[0]+ID_Server+"/2");
+                      System.out.print(url_);
+                }
+
+
+
                 conn_ = (HttpURLConnection)url_.openConnection();
                 conn_.setRequestMethod("GET");
                 conn_.setUseCaches(false);
@@ -175,7 +205,9 @@ public class Rates extends Activity {
                 if(HttpResult ==HttpURLConnection.HTTP_OK){
                     BufferedReader br = new BufferedReader(new InputStreamReader(conn_.getInputStream(),"utf-8"));
                     String line = null;
+                    sb = null;
                     while ((line = br.readLine()) != null) {
+                        sb = new StringBuilder();
                         sb.append(line + "\n");
                     }
                     br.close();
@@ -200,6 +232,7 @@ public class Rates extends Activity {
             super.onPostExecute(s);
             //Toast.makeText(getApplicationContext(),s,Toast.LENGTH_LONG).show();
              //JSON Parsing Here
+
             Rates_Server = Fee_JSON_Parse_Small.parseFeed(s);
             if(Rates_Server.isEmpty()){
                 Toast.makeText(getApplicationContext(),"List Empty",Toast.LENGTH_LONG).show();
