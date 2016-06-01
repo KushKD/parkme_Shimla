@@ -11,6 +11,7 @@
     <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION" />
     <uses-permission android:name="android.permission.INTERNET" />
     <uses-permission android:name="android.permission.CALL_PHONE" />
+    <uses-permission android:name="android.permission.READ_PHONE_STATE" />
 
     <application
         android:allowBackup="true"
@@ -29,10 +30,10 @@
         -->
         <meta-data
             android:name="com.google.android.geo.API_KEY"
-            android:value="AIzaSyCkSC2Vk82KdtDEeXxdddD7tL9Q3a9_9-g" />
+            android:value="AIzaSyCUaDGT6B2n2-JDVi9AvZ1cM7CMWY9QqZc" />
 
         <activity
-            android:name="findparking.hp.dit.himachal.com.shimlaparking.SplashScreen"
+            android:name=".SplashScreen"
             android:label="@string/title_activity_main_maps">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -41,11 +42,13 @@
             </intent-filter>
         </activity>
         <activity
-            android:name="findparking.hp.dit.himachal.com.shimlaparking.Details_Parking"
+            android:name=".Details_Parking"
             android:label="@string/title_activity_details__parking"
             android:theme="@style/AppTheme.NoActionBar" />
-        <activity android:name="findparking.hp.dit.himachal.com.shimlaparking.MainMapsActivity" />
-        <activity android:name="findparking.hp.dit.himachal.com.shimlaparking.Rates"></activity>
+        <activity android:name=".MainMapsActivity" />
+        <activity android:name=".Rates" />
+        <activity android:name=".Registration_Car_Owner" />
+        <activity android:name=".Issues_Feedback"></activity>
     </application>
 
 </manifest>

@@ -219,6 +219,10 @@ public class My_Marker implements Serializable {
     }
 
 
+    public My_Marker(){
+
+    }
+
 
     public My_Marker(String Capacity,
                      String ContactNumber1, String ContactNumber2, String ContactNumber3,

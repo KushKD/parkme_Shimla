@@ -46,7 +46,7 @@ public class Details_Parking extends AppCompatActivity {
 
 
     private LinearLayout contactperson1_layout,contactperson2_layout,contactperson3_layout;
-    private Button call1 , call2,call3,get_directions , rates;
+    private Button call1 , call2,call3,get_directions , rates , issues;
     final Context context = this;
     private static final int PERMISSION_REQUEST_CODE = 1;
     Sending_Object_All_details MArkerDetails = null;
@@ -56,6 +56,8 @@ public class Details_Parking extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_details__parking);
+
+        try{
 
         Intent getRoomDetailsIntent = getIntent();
          MArkerDetails =  (Sending_Object_All_details) getRoomDetailsIntent.getSerializableExtra("DETAILS_ALL");
@@ -90,6 +92,57 @@ public class Details_Parking extends AppCompatActivity {
         parking_id = (TextView)findViewById(R.id.parkingid);
         get_directions = (Button)findViewById(R.id.get_directions);
         rates = (Button)findViewById(R.id.rates);
+        issues = (Button)findViewById(R.id.issues);
+
+
+
+            if(MArkerDetails.getContactPerson1().length()==0){
+                contactperson1_layout.setVisibility(View.GONE);
+            }
+
+            if(MArkerDetails.getContactPerson2().length()==0){
+                contactperson2_layout.setVisibility(View.GONE);
+            }
+
+            if(MArkerDetails.getContactPerson3().length()==0){
+                contactperson3_layout.setVisibility(View.GONE);
+            }
+            remarks.setText(MArkerDetails.getRemarks());
+            suitedfor.setText(MArkerDetails.getSutedFor());
+            thrash_hold_value.setText(MArkerDetails.getThrashholdValue());
+            smallcarsfare.setText(MArkerDetails.getMinimumParkingFeeSmallCar());
+            bigcarsfare.setText(MArkerDetails.getMinimumParkingFeebigCar());
+            parking_time.setText(MArkerDetails.getMinimumParkingTime());
+            identifier.setText(MArkerDetails.getIdentifier());
+            latitude.setText(Double.toString(MArkerDetails.getLatitude()));
+            longitude.setText(Double.toString(MArkerDetails.getLongitude()));
+            capacity.setText(MArkerDetails.getCapacity());
+            latitude_person.setText(Double.toString(MArkerDetails.getLatitude_my_Location()));
+            longitude_person.setText(Double.toString(MArkerDetails.getLongitude_my_Location()));
+
+            contactperson1.setText(MArkerDetails.getContactPerson1());
+            contactperson2.setText(MArkerDetails.getContactPerson2());
+            contactperson3.setText(MArkerDetails.getContactPerson3());
+
+            contactphone1.setText("+91"+MArkerDetails.getContactNumber1());
+            contactphone2.setText("+91"+MArkerDetails.getContactNumber2());
+            contactphone3.setText("+91"+MArkerDetails.getContactNumber3());
+            parking_id.setText(MArkerDetails.getParkingId());
+
+
+
+        issues.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+
+             Intent i = new Intent(Details_Parking.this, Issues_Feedback.class);
+                i.putExtra("ID",MArkerDetails.getParkingId());
+                startActivity(i);
+
+
+            }
+        });
+
 
         get_directions.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -100,17 +153,7 @@ public class Details_Parking extends AppCompatActivity {
             }
         });
 
-        if(MArkerDetails.getContactPerson1().length()==0){
-            contactperson1_layout.setVisibility(View.GONE);
-        }
 
-        if(MArkerDetails.getContactPerson2().length()==0){
-            contactperson2_layout.setVisibility(View.GONE);
-        }
-
-        if(MArkerDetails.getContactPerson3().length()==0){
-            contactperson3_layout.setVisibility(View.GONE);
-        }
 
 
 
@@ -229,27 +272,6 @@ public class Details_Parking extends AppCompatActivity {
         }else{
             parking_availability.setText("Not Available");
         }
-        remarks.setText(MArkerDetails.getRemarks());
-        suitedfor.setText(MArkerDetails.getSutedFor());
-        thrash_hold_value.setText(MArkerDetails.getThrashholdValue());
-        smallcarsfare.setText(MArkerDetails.getMinimumParkingFeeSmallCar());
-        bigcarsfare.setText(MArkerDetails.getMinimumParkingFeebigCar());
-        parking_time.setText(MArkerDetails.getMinimumParkingTime());
-        identifier.setText(MArkerDetails.getIdentifier());
-        latitude.setText(Double.toString(MArkerDetails.getLatitude()));
-        longitude.setText(Double.toString(MArkerDetails.getLongitude()));
-        capacity.setText(MArkerDetails.getCapacity());
-        latitude_person.setText(Double.toString(MArkerDetails.getLatitude_my_Location()));
-        longitude_person.setText(Double.toString(MArkerDetails.getLongitude_my_Location()));
-
-        contactperson1.setText(MArkerDetails.getContactPerson1());
-        contactperson2.setText(MArkerDetails.getContactPerson2());
-        contactperson3.setText(MArkerDetails.getContactPerson3());
-
-        contactphone1.setText("+91"+MArkerDetails.getContactNumber1());
-        contactphone2.setText("+91"+MArkerDetails.getContactNumber2());
-        contactphone3.setText("+91"+MArkerDetails.getContactNumber3());
-        parking_id.setText(MArkerDetails.getParkingId());
 
 
 
@@ -267,6 +289,10 @@ public class Details_Parking extends AppCompatActivity {
                 startActivity(Intent.createChooser(intent, "com.Google.Android.apps.map"));
             }
         });
+
+        }catch(Exception e){
+            Toast.makeText(getApplicationContext(),e.getLocalizedMessage().toString(),Toast.LENGTH_LONG).show();
+        }
     }
 
     private boolean checkPermission(){

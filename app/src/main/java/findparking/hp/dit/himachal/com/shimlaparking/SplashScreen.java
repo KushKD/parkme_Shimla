@@ -2,6 +2,7 @@ package findparking.hp.dit.himachal.com.shimlaparking;
 
 import android.app.Activity;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Handler;
 import android.os.Bundle;
 
@@ -16,28 +17,21 @@ public class SplashScreen extends Activity {
             @Override
             public void run() {
 
-              /*  try {
-                  //  check_FileSystem FileCheck = new check_FileSystem();
-                 //   FileCheck.execute(Folder_name);
-                }catch(Exception ex){
-                    Log.e("Error","While Executing ASYNC Task");
-                }*/
-
-                //SharedPreferences settings = getSharedPreferences(EConstants.PREFS_NAME, 0);
+                SharedPreferences settings = getSharedPreferences(Econstants.PREFRANCE_NAME, 0);
                 //Get "hasLoggedIn" value. If the value doesn't exist yet false is returned
-              //  boolean hasLoggedIn = settings.getBoolean("hasLoggedIn", false);
+                boolean hasLoggedIn = settings.getBoolean("hasLoggedIn", false);
 
-              //  if(hasLoggedIn)
-              //  {
+                if(hasLoggedIn)
+                {
                     Intent mainIntent = new Intent(SplashScreen.this, MainMapsActivity.class);
                     SplashScreen.this.startActivity(mainIntent);
                     SplashScreen.this.finish();
-               // }else{
-              //      Intent loginIntent = new Intent(SplashScreen.this, LogInActivity.class);
-               //     SplashScreen.this.startActivity(loginIntent);
-               //     SplashScreen.this.finish();
+                }else{
+                    Intent loginIntent = new Intent(SplashScreen.this, Registration_Car_Owner.class);
+                    SplashScreen.this.startActivity(loginIntent);
+                    SplashScreen.this.finish();
 
-               // }
+                }
 
 
 

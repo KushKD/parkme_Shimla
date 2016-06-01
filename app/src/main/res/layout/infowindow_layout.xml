@@ -3,7 +3,6 @@
     android:id="@+id/marker_layout"
     android:orientation="vertical"
     android:layout_width="match_parent"
-    android:padding="5dp"
     android:layout_height="wrap_content">
 
     <LinearLayout
@@ -18,13 +17,37 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"/>
 
+        <!-- Marker ID -->
+        <LinearLayout
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
+
+            <TextView
+                android:id="@+id/markerid"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:gravity="center|center_horizontal|center_vertical"
+                />
+
+            <TextView
+                android:id="@+id/parkingid"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:gravity="center|center_horizontal|center_vertical"
+                />
+
+
+        </LinearLayout>
+        <!-- Parking ID -->
+
+
         <!--Parking Place-->
             <TextView
                 android:id="@+id/parking_place"
-
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:gravity="left"
+                android:gravity="center|center_horizontal|center_vertical"
                  />
 
        <!-- Identifier-->
@@ -46,7 +69,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="fhjufhrwu"
-                android:gravity="right"
+                android:gravity="left"
                 android:layout_weight="1"/>
 
 
@@ -85,12 +108,12 @@
             android:id="@+id/available"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:gravity="left"
+            android:gravity="center|center_horizontal|center_vertical"
              />
 
         <!-- Minimum Parking Time -->
         <LinearLayout
-            android:layout_width="fill_parent"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:orientation="horizontal"
             android:weightSum="2">
@@ -133,8 +156,8 @@
                 android:id="@+id/smallcarfare"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="fhjufhrwu"
-                android:gravity="left"
+                android:text=""
+                android:gravity="left|center_horizontal|center_vertical"
                 android:layout_weight="1"/>
 
 
@@ -161,7 +184,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="fhjufhrwu"
-                android:gravity="left"
+                android:gravity="left|center_horizontal|center_vertical"
                 android:layout_weight="1"/>
 
 
