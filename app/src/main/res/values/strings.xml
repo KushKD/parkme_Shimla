@@ -8,4 +8,24 @@
     <string name="permission_required_toast">Location permission is required.</string>
     <string name="title_activity_details__parking">Details</string>
 
+
+    <string-array name="Issue_Type">
+        <item>Feedback</item>
+        <item>Complaint</item>
+        <item>Notification</item>
+        <item>Request for Information</item>
+        <item>Request for any MC service</item>
+    </string-array>
+
+    <string-array name="Complaint_Type">
+        <item>Over Charging</item>
+        <item>Parking available but not allowed by parking person</item>
+        <item>Misbehaved by parking person</item>
+        <item>Damaged to parked vehicle</item>
+        <item>Theft inside vehicle</item>
+        <item>Parked vehicle stolen</item>
+        <item>Parked vehicle used by parking person</item>
+        <item>Others</item>
+    </string-array>
+
 </resources>
