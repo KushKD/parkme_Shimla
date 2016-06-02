@@ -315,7 +315,7 @@
                 android:layout_toLeftOf="@+id/imageView4"
                 android:background="@drawable/rounded_edittext"
                 android:hint="Enter Vehicle Number"
-                android:inputType="textEmailAddress"
+                android:inputType="textCapCharacters"
                 android:textColor="#366988"
                 android:textColorHint="#366988"
                 android:textSize="18dip" />

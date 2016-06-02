@@ -1,6 +1,7 @@
 package findparking.hp.dit.himachal.com.shimlaparking;
 
 import android.Manifest;
+import android.app.ProgressDialog;
 import android.content.Context;
 import android.content.Intent;
 import android.content.pm.PackageManager;
@@ -134,24 +135,6 @@ public class MainMapsActivity extends AppCompatActivity implements
         }
     }
 
-   /* private int manageMarkerIcon(String markerIcon) {
-        if (markerIcon.equals("ic_launcher"))
-            return R.drawable.ic_launcher;
-        else if (markerIcon.equals("ic_launcher"))
-            return R.drawable.ic_launcher;
-        else if (markerIcon.equals("ic_launcher"))
-            return R.drawable.ic_launcher;
-        else if (markerIcon.equals("ic_launcher"))
-            return R.drawable.ic_launcher;
-        else if (markerIcon.equals("ic_launcher"))
-            return R.drawable.ic_launcher;
-        else if (markerIcon.equals("ic_launcher"))
-            return R.drawable.ic_launcher;
-        else if (markerIcon.equals("ic_launcher"))
-            return R.drawable.ic_launcher;
-        else
-            return R.drawable.icondefault;
-    }*/
 
 
 
@@ -162,11 +145,11 @@ public class MainMapsActivity extends AppCompatActivity implements
 
         mMap.setOnMyLocationButtonClickListener(this);
         mMap.setOnInfoWindowClickListener(this);
-        mMap.setOnInfoWindowLongClickListener(this);
+       // mMap.setOnInfoWindowLongClickListener(this);
 try {
     mMap.setMyLocationEnabled(true);
 }catch(SecurityException s){
-    Toast.makeText(getApplicationContext(),"Not Good",Toast.LENGTH_SHORT).show();
+   // Toast.makeText(getApplicationContext(),"Not Good",Toast.LENGTH_SHORT).show();
 }
 
                 buildGoogleApiClient();
@@ -285,7 +268,8 @@ try {
         try {
              mLastLocation = LocationServices.FusedLocationApi.getLastLocation(mGoogleApiClient);
         }catch(SecurityException r){
-             Toast.makeText(getApplicationContext(),"There is a problem with the GPS device.",Toast.LENGTH_SHORT).show();
+           //
+            //  Toast.makeText(getApplicationContext(),"There is a problem with the GPS device.",Toast.LENGTH_SHORT).show();
         }
         if (mLastLocation != null) {
             //place marker at current position
@@ -304,7 +288,7 @@ try {
 try {
     LocationServices.FusedLocationApi.requestLocationUpdates(mGoogleApiClient, mLocationRequest, this);
 }catch(SecurityException s){
-    Toast.makeText(getApplicationContext(),"Something's not Good.",Toast.LENGTH_LONG).show();
+  //  Toast.makeText(getApplicationContext(),"Something's not Good.",Toast.LENGTH_LONG).show();
 }
         }
 
@@ -371,7 +355,7 @@ try {
     System.out.println("Hello"+ mMarkersHashMap.get(marker).getParkingArea().toString().trim()+"\n");*/
 
     SOAD.setParkingPlace(mMarkersHashMap.get(marker).getParkingPlace());
-    SOAD.setParkingArea(mMarkersHashMap.get(marker).getParkingFullTag());
+    SOAD.setParkingArea(mMarkersHashMap.get(marker).getParkingArea());
     SOAD.setRemarks(mMarkersHashMap.get(marker).getRemarks());
     SOAD.setSutedFor(mMarkersHashMap.get(marker).getSutedFor());
     SOAD.setThrashholdValue(mMarkersHashMap.get(marker).getThrashholdValue());
@@ -391,16 +375,27 @@ try {
     SOAD.setImage2(mMarkersHashMap.get(marker).getImage2());
     SOAD.setLatitude(mMarkersHashMap.get(marker).getLatitude());
     SOAD.setLongitude(mMarkersHashMap.get(marker).getLongitude());
-    SOAD.setLatitude_my_Location(latLng.latitude);
-    SOAD.setLongitude_my_Location(latLng.longitude);
     SOAD.setParkingId(mMarkersHashMap.get(marker).getParkingID());
+    SOAD.setParkingFullTag(mMarkersHashMap.get(marker).getParkingFullTag());
+
+    if(latLng.latitude!=0) {
+        SOAD.setLatitude_my_Location(latLng.latitude);
+    }else{
+        SOAD.setLatitude_my_Location(000.000);
+    }
+    if(latLng.longitude!=0) {
+        SOAD.setLongitude_my_Location(latLng.longitude);
+    }else{
+        SOAD.setLongitude_my_Location(000.000);
+    }
+
 
 }catch(Exception e){
     Log.d("Error",e.getLocalizedMessage().toString());
 }
 
 
-            System.out.println("\t Capacity: \t"+SOAD.getCapacity()+"\n");
+           /* System.out.println("\t Capacity: \t"+SOAD.getCapacity()+"\n");
             System.out.println("\t Contact Number1: \t"+SOAD.getContactNumber1()+"\n");
             System.out.println("\t Parking Area: \t"+SOAD.getParkingArea()+"\n");
             System.out.println("\t Parking Place: \t"+SOAD.getParkingPlace()+"\n");
@@ -424,7 +419,7 @@ try {
             System.out.println("\t Fee Small Car:-\t"+SOAD.getMinimumParkingFeeSmallCar()+"\n");
             System.out.println("\t Minimum Parking Time:-\t"+SOAD.getMinimumParkingTime()+"\n");
             System.out.println("\t Identifier:- \t"+SOAD.getIdentifier()+"\n");
-            System.out.println("\t Suited For:-\t"+SOAD.getSutedFor()+"\n");
+            System.out.println("\t Suited For:-\t"+SOAD.getSutedFor()+"\n");*/
 
             //Now Pass the Object
             Intent userSearch = new Intent();
@@ -447,13 +442,9 @@ try {
     }
 
 
-
-    public String removeFirstCharacter(String s){
-        return s.substring(1);
-    }
     @Override
     public void onInfoWindowLongClick(Marker marker) {
-        Toast.makeText(getApplicationContext(),"Please Work Long Press", Toast.LENGTH_LONG).show();
+       // Toast.makeText(getApplicationContext(),"Please Work Long Press", Toast.LENGTH_LONG).show();
     }
 
 
@@ -491,21 +482,13 @@ try {
             TextView more= (TextView) v.findViewById(R.id.more);
             TextView markerid = (TextView)v.findViewById(R.id.markerid);
             TextView parkingid = (TextView)v.findViewById(R.id.parkingid);
-
-
-
-           // markerIcon.setImageResource(manageMarkerIcon(myMarker.getmIcon()));
-
+            // markerIcon.setImageResource(manageMarkerIcon(myMarker.getmIcon()));
             parking_place.setText(myMarker.getParkingPlace());
             identifier.setText(myMarker.getIdentifier());
             capacity.setText(myMarker.getCapacity()+ " vehicles");
-
             markerid.setText(marker.getId());
             parkingid.setText(myMarker.getParkingID());
-
-
-            System.out.println(myMarker.getParkingFullTag());
-            System.out.println(myMarker.getParkingFullTag().toUpperCase());
+// System.out.println(myMarker.getParkingFullTag()); System.out.println(myMarker.getParkingFullTag().toUpperCase());
             if(myMarker.getParkingFullTag().length()==5){
                 available.setText("Parking Available");
             } else{
@@ -523,14 +506,15 @@ try {
     public class Get_Parking_Details extends AsyncTask<String,String,String>{
 
       //  ProgressDialog dialog;
-
+      private ProgressDialog dialog;
         @Override
         protected void onPreExecute() {
             super.onPreExecute();
 
-               // dialog.show();
-               // dialog.setMessage("Please wait as we are fetching the near by Parking places.");
-              //  dialog.setCancelable(false);
+            dialog = new ProgressDialog(MainMapsActivity.this);
+            this.dialog.setMessage("Please wait...");
+            this.dialog.show();
+            this.dialog.setCancelable(false);
 
         }
 
@@ -545,6 +529,7 @@ try {
             conn_.setReadTimeout(20000);
             conn_.connect();
 
+                try{
             int HttpResult =conn_.getResponseCode();
             if(HttpResult ==HttpURLConnection.HTTP_OK){
                 BufferedReader br = new BufferedReader(new InputStreamReader(conn_.getInputStream(),"utf-8"));
@@ -556,7 +541,10 @@ try {
                 System.out.print(sb.toString());
 
             }else{
-            }
+                return "Connection to Server Failed. Please try again";
+            }}catch(Exception e){
+                    return "Connection to Server Failed. Please try again";
+                }
 
         } catch (MalformedURLException e) {
             e.printStackTrace();
@@ -569,63 +557,69 @@ try {
         return sb.toString();
         }
 
+
+
         @Override
         protected void onPostExecute(String s) {
             super.onPostExecute(s);
 
-           // Log.d("PARAMS[0] result is:- ",s);
+            if(s.length()>200)
+            {
+                //Send String JSON FOr Parsing
+                try {
+                    String g_Table = null;
+                    Object json = new JSONTokener(s).nextValue();
+                    if (json instanceof JSONObject){
+                        JSONObject obj = new JSONObject(s);
+                        g_Table = obj.optString("getParking_JSONResult");
+                    }
+                    else if (json instanceof JSONArray){
+                    }
+                    JSONArray ar = new JSONArray(g_Table);
 
-            //Send String JSON FOr Parsing
-            try {
-                String g_Table = null;
-                Object json = new JSONTokener(s).nextValue();
-                if (json instanceof JSONObject){
-                    JSONObject obj = new JSONObject(s);
-                    g_Table = obj.optString("getParking_JSONResult");
+                    mMyMarkersArray = new ArrayList<>();
+
+                    for (int i = 0; i < ar.length(); i++) {
+                        JSONObject obj = ar.getJSONObject(i);
+                        // Initialize the HashMap for Markers and MyMarker object
+                        mMarkersHashMap = new HashMap<>();
+
+                        mMyMarkersArray.add(new My_Marker(obj.getString("Capacity"),
+                                obj.getString("ContactNumber1"),
+                                obj.getString("ContactNumber2"),
+                                obj.getString("ContactNumber3"),
+                                obj.getString("ContactPerson1"),
+                                obj.getString("ContactPerson2"),
+                                obj.getString("ContactPerson3"),
+                                obj.getString("Identifier"),
+                                obj.getString("Image"),
+                                obj.getString("Image1"),
+                                obj.getString("Image2"),
+                                obj.getDouble("Latitude"),
+                                obj.getDouble("Longitude"),
+                                obj.getString("ParkingArea"),
+                                obj.getString("ParkingFullTag").trim(),
+                                obj.getString("ParkingPlace"),
+                                obj.getString("Remarks"),
+                                obj.getString("SutedFor"),
+                                obj.getString("ThrashholdValue"),
+                                obj.getString("MinimumParkingFeeSmallCar"),
+                                obj.getString("MinimumParkingFeebigCar"),
+                                obj.getString("MinimumParkingTime"),
+                                obj.getString("ParkingId")));
+
+                    }
+
+                } catch (JSONException e) {
+                    e.printStackTrace();
+
                 }
-                else if (json instanceof JSONArray){
-                }
-                JSONArray ar = new JSONArray(g_Table);
-
-                mMyMarkersArray = new ArrayList<>();
-
-                for (int i = 0; i < ar.length(); i++) {
-                    JSONObject obj = ar.getJSONObject(i);
-                    // Initialize the HashMap for Markers and MyMarker object
-                    mMarkersHashMap = new HashMap<>();
-
-                    mMyMarkersArray.add(new My_Marker(obj.getString("Capacity"),
-                                                      obj.getString("ContactNumber1"),
-                                                      obj.getString("ContactNumber2"),
-                                                      obj.getString("ContactNumber3"),
-                                                      obj.getString("ContactPerson1"),
-                                                      obj.getString("ContactPerson2"),
-                                                      obj.getString("ContactPerson3"),
-                                                      obj.getString("Identifier"),
-                                                      obj.getString("Image"),
-                                                      obj.getString("Image1"),
-                                                      obj.getString("Image2"),
-                                                      obj.getDouble("Latitude"),
-                                                      obj.getDouble("Longitude"),
-                                                      obj.getString("ParkingArea"),
-                                                      obj.getString("ParkingFullTag").trim(),
-                                                      obj.getString("ParkingPlace"),
-                                                      obj.getString("Remarks"),
-                                                      obj.getString("SutedFor"),
-                                                      obj.getString("ThrashholdValue"),
-                                                      obj.getString("MinimumParkingFeeSmallCar"),
-                                                      obj.getString("MinimumParkingFeebigCar"),
-                                                      obj.getString("MinimumParkingTime"),
-                                                      obj.getString("ParkingId")));
-
-                 //   System.out.println(obj.getString("ParkingId"));
-
-                }
-
-            } catch (JSONException e) {
-                e.printStackTrace();
-
+            }else{
+                Toast.makeText(MainMapsActivity.this, "Connection to server failed.Please try again.", Toast.LENGTH_SHORT).show();
             }
+
+
+
 
             if(mMyMarkersArray.size() > 0) {
                 plotMarkers(mMyMarkersArray);
@@ -633,7 +627,7 @@ try {
                 Log.d("List is","Empty");
                 Toast.makeText(getApplicationContext(),"List Empty",Toast.LENGTH_LONG).show();
             }
-           // dialog.dismiss();
+            dialog.dismiss();
 
         }
     }

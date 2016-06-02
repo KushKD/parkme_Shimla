@@ -430,7 +430,7 @@
                     android:orientation="horizontal">
 
                     <TextView
-                        android:text="Parking Area"
+                        android:text="Parking Area (Sq. Ft.)"
                         android:textColor="#366988"
                         android:textSize="17sp"
 

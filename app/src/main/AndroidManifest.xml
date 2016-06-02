@@ -34,6 +34,7 @@
 
         <activity
             android:name=".SplashScreen"
+            android:screenOrientation="portrait"
             android:label="@string/title_activity_main_maps">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -44,11 +45,20 @@
         <activity
             android:name=".Details_Parking"
             android:label="@string/title_activity_details__parking"
+            android:screenOrientation="portrait"
             android:theme="@style/AppTheme.NoActionBar" />
+
         <activity android:name=".MainMapsActivity" />
-        <activity android:name=".Rates" />
-        <activity android:name=".Registration_Car_Owner" />
-        <activity android:name=".Issues_Feedback"></activity>
+
+        <activity android:name=".Rates"
+            android:screenOrientation="portrait"
+            />
+
+        <activity android:name=".Registration_Car_Owner"
+            android:screenOrientation="portrait"/>
+
+        <activity android:name=".Issues_Feedback"
+            android:screenOrientation="portrait"></activity>
     </application>
 
 </manifest>

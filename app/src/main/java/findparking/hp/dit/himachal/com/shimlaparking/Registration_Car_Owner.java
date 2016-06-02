@@ -80,11 +80,11 @@ public class Registration_Car_Owner extends Activity {
                 String Email_Service = et_Email.getText().toString().trim();
                 String Vehicle_Number = et_Vehicle_Number.getText().toString().trim();
 
-                if(emailValidator(Email_Service)){
+              /*  if(emailValidator(Email_Service)){
                     Toast.makeText(getApplicationContext(),"Email Address Valid.",Toast.LENGTH_LONG).show();
                 }else{
                     Toast.makeText(getApplicationContext(),"Please verify your email address.",Toast.LENGTH_LONG).show();
-                }
+                }*/
 
 
 
@@ -96,17 +96,17 @@ if(Name_Service.length()!= 0 && Name_Service!= null){
             Registration Register_me = new Registration();
             Register_me.execute(Name_Service,PhoneNumber_Service,Vehicle_Number,"000000000000",Email_Service);
         }else{
-            Toast.makeText(getApplicationContext(), "Please enter vehicle number", Toast.LENGTH_LONG).show();
+            Toast.makeText(getApplicationContext(), "Please enter vehicle number", Toast.LENGTH_SHORT).show();
         }
 
 
 
     } else {
-        Toast.makeText(getApplicationContext(), "Please enter a valid 10 digit Mobile number", Toast.LENGTH_LONG).show();
+        Toast.makeText(getApplicationContext(), "Please enter a valid 10 digit Mobile number", Toast.LENGTH_SHORT).show();
     }
 
 }else{
-    Toast.makeText(getApplicationContext(), "Please enter your Name.", Toast.LENGTH_LONG).show();
+    Toast.makeText(getApplicationContext(), "Please enter your Name.", Toast.LENGTH_SHORT).show();
 }
 
             }
@@ -183,7 +183,7 @@ if(Name_Service.length()!= 0 && Name_Service!= null){
                 out.write(userJson.toString());
                 out.close();
 
-
+try{
                 int HttpResult =conn_.getResponseCode();
                 if(HttpResult ==HttpURLConnection.HTTP_OK){
                     BufferedReader br = new BufferedReader(new InputStreamReader(conn_.getInputStream(),"utf-8"));
@@ -195,10 +195,15 @@ if(Name_Service.length()!= 0 && Name_Service!= null){
                     System.out.println(sb.toString());
 
                 }else{
-                    System.out.println(conn_.getResponseMessage());
+                    System.out.println("Server Connection failed.");
                 }
 
-            } catch (MalformedURLException e) {
+            } catch(Exception e){
+               return "Server Connection failed.";
+            }
+
+            }
+            catch (MalformedURLException e) {
                 e.printStackTrace();
             } catch (IOException e) {
                 e.printStackTrace();

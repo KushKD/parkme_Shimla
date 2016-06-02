@@ -8,6 +8,7 @@
     <LinearLayout
         android:id="@+id/station_info_layout"
         android:layout_width="250dp"
+        android:background="#FFFFFF"
         android:layout_height="wrap_content"
         android:orientation="vertical" >
 
@@ -25,6 +26,7 @@
 
             <TextView
                 android:id="@+id/markerid"
+                android:visibility="gone"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:gravity="center|center_horizontal|center_vertical"
@@ -32,6 +34,7 @@
 
             <TextView
                 android:id="@+id/parkingid"
+                android:visibility="gone"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:gravity="center|center_horizontal|center_vertical"
@@ -47,6 +50,9 @@
                 android:id="@+id/parking_place"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:textStyle="bold"
+                android:layout_marginBottom="5dp"
+                android:textColor="#366988"
                 android:gravity="center|center_horizontal|center_vertical"
                  />
 
@@ -62,6 +68,9 @@
                 android:layout_height="wrap_content"
                 android:gravity="left"
                 android:text="Landmark:"
+                android:textStyle="bold"
+                android:layout_marginBottom="5dp"
+                android:textColor="#366988"
                 android:layout_weight="1"/>
 
             <TextView
@@ -69,6 +78,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="fhjufhrwu"
+                android:textColor="#000000"
                 android:gravity="left"
                 android:layout_weight="1"/>
 
@@ -89,6 +99,9 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:gravity="left"
+                android:textStyle="bold"
+                android:layout_marginBottom="5dp"
+                android:textColor="#366988"
                 android:text="Capacity:"
                 android:layout_weight="1"/>
 
@@ -97,6 +110,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="fhjufhrwu"
+                android:textColor="#000000"
                 android:gravity="left"
                 android:layout_weight="1"/>
 
@@ -104,39 +118,19 @@
 
 
         </LinearLayout>
+
+        <!-- Availability -->
         <TextView
             android:id="@+id/available"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:textStyle="bold"
+            android:layout_marginBottom="5dp"
+            android:textColor="#366988"
             android:gravity="center|center_horizontal|center_vertical"
              />
 
-        <!-- Minimum Parking Time -->
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:orientation="horizontal"
-            android:weightSum="2">
 
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="Min Parking Time:"
-                android:gravity="left"
-                android:layout_weight="1"/>
-
-            <TextView
-                android:id="@+id/minparkingtime"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:gravity="left"
-                android:text="fhjufhrwu"
-                android:layout_weight="1"/>
-
-
-
-
-        </LinearLayout>
 
         <!-- Parking Fee Small Vahicle -->
         <LinearLayout
@@ -150,14 +144,17 @@
                 android:layout_height="wrap_content"
                 android:text="Small Car Fare:"
                 android:gravity="left"
+                android:textStyle="bold"
+                android:layout_marginBottom="5dp"
+                android:textColor="#366988"
                 android:layout_weight="1"/>
 
             <TextView
                 android:id="@+id/smallcarfare"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text=""
-                android:gravity="left|center_horizontal|center_vertical"
+                android:textColor="#000000"
+                android:gravity="center|center_horizontal|center_vertical"
                 android:layout_weight="1"/>
 
 
@@ -176,7 +173,10 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="Big Car Fare:"
-                android:gravity="left"
+                android:textStyle="bold"
+                android:layout_marginBottom="5dp"
+                android:textColor="#366988"
+                android:gravity="left|center_horizontal|center_vertical"
                 android:layout_weight="1"/>
 
             <TextView
@@ -184,7 +184,40 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="fhjufhrwu"
-                android:gravity="left|center_horizontal|center_vertical"
+                android:textColor="#000000"
+                android:gravity="center|center_horizontal|center_vertical"
+                android:layout_weight="1"/>
+
+
+
+
+        </LinearLayout>
+
+        <!-- Minimum Parking Time -->
+        <LinearLayout
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:weightSum="2">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Min Parking Time:"
+                android:gravity="left"
+                android:textStyle="bold"
+                android:layout_marginBottom="5dp"
+                android:textColor="#366988"
+                android:layout_weight="1"/>
+
+            <TextView
+                android:id="@+id/minparkingtime"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:gravity="left"
+                android:textColor="#000000"
+                android:layout_gravity="center|center_vertical|center_horizontal"
+                android:text=""
                 android:layout_weight="1"/>
 
 
@@ -197,7 +230,8 @@
             android:id="@+id/more"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:gravity="left"
+            android:gravity="center|center_horizontal|center_vertical"
+            android:textStyle="bold"
             android:textColor="#cc0000"
             android:text="Click to view more Details... "
              />
