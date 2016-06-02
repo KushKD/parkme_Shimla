@@ -239,6 +239,9 @@ try{
                SharedPreferences.Editor editor = settings.edit();
                //Set "hasLoggedIn" to true
                editor.putBoolean("hasLoggedIn", true);
+               editor.putString("Name",Name_Service);
+               editor.putString("phonenumber",Phone_Service);
+               editor.putString("VehicleNumber",Vehicle_Number_Service);
                // Commit the edits!
                 editor.commit();
                 Intent i = new Intent(Registration_Car_Owner.this,MainMapsActivity.class);

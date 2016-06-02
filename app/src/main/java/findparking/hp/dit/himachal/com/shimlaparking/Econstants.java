@@ -17,5 +17,5 @@ public class Econstants {
 //http://aadhaar.hp.gov.in/hpparking
 // keytool -list -v -keystore /home/david/Desktop/Keys/key.jks -alias MyAlias -storepass paswword -keypass password
 
-//Release Key: -AIzaSyCkSC2Vk82KdtDEeXxdddD7tL9Q3a9_9-g
+//Release Key: - AIzaSyCkSC2Vk82KdtDEeXxdddD7tL9Q3a9_9-g
 //Debug Key: - AIzaSyCUaDGT6B2n2-JDVi9AvZ1cM7CMWY9QqZc

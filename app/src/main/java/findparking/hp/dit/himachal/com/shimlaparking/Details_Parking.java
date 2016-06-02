@@ -168,6 +168,8 @@ public class Details_Parking extends AppCompatActivity {
                         if(latitude_person.getText().toString()!= null && longitude_person.getText().toString()!=null){
                             Intent i = new Intent(Details_Parking.this, Issues_Feedback.class);
                             i.putExtra("ID", MArkerDetails.getParkingId());
+                            i.putExtra("LATITUDE",latitude_person.getText().toString());
+                            i.putExtra("LONGITUDE",longitude_person.getText().toString());
                             startActivity(i);
                         }else{
                             AlertDialog.Builder alertDialog = new AlertDialog.Builder(Details_Parking.this);
