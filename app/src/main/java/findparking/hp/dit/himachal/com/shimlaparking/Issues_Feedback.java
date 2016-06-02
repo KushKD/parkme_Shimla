@@ -258,7 +258,7 @@ public class Issues_Feedback extends Activity {
 
 
 
-           if(finalResult.length()<100){
+           if(finalResult.length()>50){
                // clearData();
                dialog.dismiss();
                Toast.makeText(getApplicationContext(), finalResult, Toast.LENGTH_SHORT).show();
