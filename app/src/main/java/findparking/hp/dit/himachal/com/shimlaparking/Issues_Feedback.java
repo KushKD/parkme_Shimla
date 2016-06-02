@@ -5,6 +5,8 @@ import android.app.ProgressDialog;
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
+import android.net.ConnectivityManager;
+import android.net.NetworkInfo;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.preference.PreferenceManager;
@@ -122,12 +124,17 @@ public class Issues_Feedback extends Activity {
                         String Mobile = prfs.getString("phonenumber","");
                         System.out.println(name);
                         Complaint_Type_server ="";
-                        send_IssuesToServer SIS = new send_IssuesToServer();
-                        SIS.execute(Issue_Type_server,Complaint_Type_server,desc.getText().toString(),Parking_ID,Latitude,Longitude,name,Mobile);
-                        // Toast.makeText(getApplicationContext(),Issue_Type_server + Complaint_Type_server,Toast.LENGTH_LONG).show();
+                        if(isOnline()) {
+                            send_IssuesToServer SIS = new send_IssuesToServer();
+                            SIS.execute(Issue_Type_server, Complaint_Type_server, desc.getText().toString(), Parking_ID, Latitude, Longitude, name, Mobile);
+                        }else {
+                            Toast.makeText(getApplicationContext(),"Please connect to Internet.",Toast.LENGTH_LONG).show();
+                        }
+                            // Toast.makeText(getApplicationContext(),Issue_Type_server + Complaint_Type_server,Toast.LENGTH_LONG).show();
+
                     }
                 }else{
-                    Toast.makeText(getApplicationContext(),"Minimum 50 characters required." + Complaint_Type_server,Toast.LENGTH_LONG).show();
+                    Toast.makeText(getApplicationContext(),"Minimum 50 characters required.",Toast.LENGTH_LONG).show();
                 }
 
 
@@ -144,6 +151,16 @@ public class Issues_Feedback extends Activity {
 
 
 
+    }
+
+    protected boolean isOnline() {
+        ConnectivityManager cm = (ConnectivityManager) getSystemService(Context.CONNECTIVITY_SERVICE);
+        NetworkInfo netInfo = cm.getActiveNetworkInfo();
+        if (netInfo != null && netInfo.isConnectedOrConnecting()) {
+            return true;
+        } else {
+            return false;
+        }
     }
 
    private class send_IssuesToServer extends AsyncTask<String,String,String>{
@@ -182,7 +199,7 @@ public class Issues_Feedback extends Activity {
             Mobile = params[7];
 
            try {
-               url_ =new URL("http://192.168.0.171/HPParking/HPParking.svc/getIssueFeedback_JSON");
+               url_ =new URL(Econstants.URL_MAIN+"/getIssueFeedback_JSON");
                conn_ = (HttpURLConnection)url_.openConnection();
                conn_.setDoOutput(true);
                conn_.setRequestMethod("POST");
@@ -253,22 +270,32 @@ public class Issues_Feedback extends Activity {
        @Override
        protected void onPostExecute(String s) {
            super.onPostExecute(s);
-           JsonParser JP = new JsonParser();
-           String finalResult = JP.POST_ISSUE(s);
+           JsonParser JP;
+           String finalResult = null;
 
-
-
-           if(finalResult.length()>50){
-               // clearData();
+           if(s.equalsIgnoreCase("Server Connection failed.")){
                dialog.dismiss();
-               Toast.makeText(getApplicationContext(), finalResult, Toast.LENGTH_SHORT).show();
-               Issues_Feedback.this.finish();
-           }
-           else{
-               dialog.dismiss();
-               Toast.makeText(getApplicationContext(), finalResult, Toast.LENGTH_SHORT).show();
+               Toast.makeText(getApplicationContext(), "Server Connection failed.", Toast.LENGTH_SHORT).show();
+           }else{
+               JP = new JsonParser();
+               finalResult = JP.POST_ISSUE(s);
+               if(finalResult.length()>50){
+                   // clearData();
+                   dialog.dismiss();
+                   Toast.makeText(getApplicationContext(), finalResult, Toast.LENGTH_SHORT).show();
+                   Issues_Feedback.this.finish();
+               }
+               else{
+                   dialog.dismiss();
+                   Toast.makeText(getApplicationContext(), finalResult, Toast.LENGTH_SHORT).show();
+
+               }
 
            }
+
+
+
+
        }
    }
 }

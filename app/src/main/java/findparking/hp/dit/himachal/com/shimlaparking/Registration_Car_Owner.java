@@ -5,6 +5,8 @@ import android.app.ProgressDialog;
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
+import android.net.ConnectivityManager;
+import android.net.NetworkInfo;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.telephony.TelephonyManager;
@@ -93,8 +95,12 @@ if(Name_Service.length()!= 0 && Name_Service!= null){
     if (PhoneNumber_Service.length() == 10 && Integer.parseInt(PhoneNumber_Service.substring(0,1)) > 6) {
 
         if(Vehicle_Number.length()!=0 && Vehicle_Number!=null){
-            Registration Register_me = new Registration();
-            Register_me.execute(Name_Service,PhoneNumber_Service,Vehicle_Number,"000000000000",Email_Service);
+            if(isOnline()) {
+                Registration Register_me = new Registration();
+                Register_me.execute(Name_Service, PhoneNumber_Service, Vehicle_Number, "000000000000", Email_Service);
+            }else{
+                Toast.makeText(getApplicationContext(), "Please connect to Internet. ", Toast.LENGTH_SHORT).show();
+            }
         }else{
             Toast.makeText(getApplicationContext(), "Please enter vehicle number", Toast.LENGTH_SHORT).show();
         }
@@ -113,6 +119,16 @@ if(Name_Service.length()!= 0 && Name_Service!= null){
         });
 
 
+    }
+
+    protected boolean isOnline() {
+        ConnectivityManager cm = (ConnectivityManager) getSystemService(Context.CONNECTIVITY_SERVICE);
+        NetworkInfo netInfo = cm.getActiveNetworkInfo();
+        if (netInfo != null && netInfo.isConnectedOrConnecting()) {
+            return true;
+        } else {
+            return false;
+        }
     }
 
     public boolean emailValidator(String email)
@@ -155,7 +171,7 @@ if(Name_Service.length()!= 0 && Name_Service!= null){
             EMAIL_Service = params[4];
 
             try {
-                url_ =new URL("http://192.168.0.171/HPParking/HPParking.svc/getVehicleRegistration_JSON");
+                url_ =new URL(Econstants.URL_MAIN+"/getVehicleRegistration_JSON");
                 conn_ = (HttpURLConnection)url_.openConnection();
                 conn_.setDoOutput(true);
                 conn_.setRequestMethod("POST");
@@ -222,36 +238,46 @@ try{
         @Override
         protected void onPostExecute(String s) {
             super.onPostExecute(s);
+            String finalResult = null;
+            JsonParser JP;
+            if(s.equalsIgnoreCase("Server Connection failed.")){
 
-
-            JsonParser JP = new JsonParser();
-            String finalResult = JP.POST(s);
-
-
-
-           if(finalResult.equals("Registation completed")){
-               // clearData();
+                finalResult = s;
                 dialog.dismiss();
                 Toast.makeText(getApplicationContext(), finalResult, Toast.LENGTH_SHORT).show();
-              // User has successfully logged in, save this information
-              //  We need an Editor object to make preference changes.
-               SharedPreferences settings = getSharedPreferences(Econstants.PREFRANCE_NAME, 0); // 0 - for private mode
-               SharedPreferences.Editor editor = settings.edit();
-               //Set "hasLoggedIn" to true
-               editor.putBoolean("hasLoggedIn", true);
-               editor.putString("Name",Name_Service);
-               editor.putString("phonenumber",Phone_Service);
-               editor.putString("VehicleNumber",Vehicle_Number_Service);
-               // Commit the edits!
-                editor.commit();
-                Intent i = new Intent(Registration_Car_Owner.this,MainMapsActivity.class);
-                startActivity(i);
-                Registration_Car_Owner.this.finish();
+            }else{
+                JP = new JsonParser();
+                finalResult = JP.POST(s);
+                if(finalResult.equals("Registation completed")){
+                    // clearData();
+                    dialog.dismiss();
+                    Toast.makeText(getApplicationContext(), finalResult, Toast.LENGTH_SHORT).show();
+                    // User has successfully logged in, save this information
+                    //  We need an Editor object to make preference changes.
+                    SharedPreferences settings = getSharedPreferences(Econstants.PREFRANCE_NAME, 0); // 0 - for private mode
+                    SharedPreferences.Editor editor = settings.edit();
+                    //Set "hasLoggedIn" to true
+                    editor.putBoolean("hasLoggedIn", true);
+                    editor.putString("Name",Name_Service);
+                    editor.putString("phonenumber",Phone_Service);
+                    editor.putString("VehicleNumber",Vehicle_Number_Service);
+                    // Commit the edits!
+                    editor.commit();
+                    Intent i = new Intent(Registration_Car_Owner.this,MainMapsActivity.class);
+                    startActivity(i);
+                    Registration_Car_Owner.this.finish();
+                }
+                else{
+                    dialog.dismiss();
+                    Toast.makeText(getApplicationContext(), finalResult, Toast.LENGTH_SHORT).show();
+                }
             }
-            else{
-                dialog.dismiss();
-                Toast.makeText(getApplicationContext(), finalResult, Toast.LENGTH_SHORT).show();
-            }
+
+
+
+
+
+
 
 
         }

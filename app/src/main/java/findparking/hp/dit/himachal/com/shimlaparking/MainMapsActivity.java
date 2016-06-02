@@ -541,9 +541,9 @@ try {
                 System.out.print(sb.toString());
 
             }else{
-                return "Connection to Server Failed. Please try again";
+                return "Server Connection failed.";
             }}catch(Exception e){
-                    return "Connection to Server Failed. Please try again";
+                    return "Server Connection failed.";
                 }
 
         } catch (MalformedURLException e) {
@@ -563,71 +563,82 @@ try {
         protected void onPostExecute(String s) {
             super.onPostExecute(s);
 
-            if(s.length()>200)
-            {
-                //Send String JSON FOr Parsing
-                try {
-                    String g_Table = null;
-                    Object json = new JSONTokener(s).nextValue();
-                    if (json instanceof JSONObject){
-                        JSONObject obj = new JSONObject(s);
-                        g_Table = obj.optString("getParking_JSONResult");
+            if(s.equalsIgnoreCase("Server Connection failed.")){
+                dialog.dismiss();
+                Toast.makeText(getApplicationContext(),s,Toast.LENGTH_LONG).show();
+
+            }else{
+                if(s.length()>200)
+                {
+                    //Send String JSON FOr Parsing
+                    try {
+                        String g_Table = null;
+                        Object json = new JSONTokener(s).nextValue();
+                        if (json instanceof JSONObject){
+                            JSONObject obj = new JSONObject(s);
+                            g_Table = obj.optString("getParking_JSONResult");
+                        }
+                        else if (json instanceof JSONArray){
+                        }
+                        JSONArray ar = new JSONArray(g_Table);
+
+                        mMyMarkersArray = new ArrayList<>();
+
+                        for (int i = 0; i < ar.length(); i++) {
+                            JSONObject obj = ar.getJSONObject(i);
+                            // Initialize the HashMap for Markers and MyMarker object
+                            mMarkersHashMap = new HashMap<>();
+
+                            mMyMarkersArray.add(new My_Marker(obj.getString("Capacity"),
+                                    obj.getString("ContactNumber1"),
+                                    obj.getString("ContactNumber2"),
+                                    obj.getString("ContactNumber3"),
+                                    obj.getString("ContactPerson1"),
+                                    obj.getString("ContactPerson2"),
+                                    obj.getString("ContactPerson3"),
+                                    obj.getString("Identifier"),
+                                    obj.getString("Image"),
+                                    obj.getString("Image1"),
+                                    obj.getString("Image2"),
+                                    obj.getDouble("Latitude"),
+                                    obj.getDouble("Longitude"),
+                                    obj.getString("ParkingArea"),
+                                    obj.getString("ParkingFullTag").trim(),
+                                    obj.getString("ParkingPlace"),
+                                    obj.getString("Remarks"),
+                                    obj.getString("SutedFor"),
+                                    obj.getString("ThrashholdValue"),
+                                    obj.getString("MinimumParkingFeeSmallCar"),
+                                    obj.getString("MinimumParkingFeebigCar"),
+                                    obj.getString("MinimumParkingTime"),
+                                    obj.getString("ParkingId")));
+
+                        }
+
+                    } catch (JSONException e) {
+                        e.printStackTrace();
+
                     }
-                    else if (json instanceof JSONArray){
-                    }
-                    JSONArray ar = new JSONArray(g_Table);
+                }else{
 
-                    mMyMarkersArray = new ArrayList<>();
-
-                    for (int i = 0; i < ar.length(); i++) {
-                        JSONObject obj = ar.getJSONObject(i);
-                        // Initialize the HashMap for Markers and MyMarker object
-                        mMarkersHashMap = new HashMap<>();
-
-                        mMyMarkersArray.add(new My_Marker(obj.getString("Capacity"),
-                                obj.getString("ContactNumber1"),
-                                obj.getString("ContactNumber2"),
-                                obj.getString("ContactNumber3"),
-                                obj.getString("ContactPerson1"),
-                                obj.getString("ContactPerson2"),
-                                obj.getString("ContactPerson3"),
-                                obj.getString("Identifier"),
-                                obj.getString("Image"),
-                                obj.getString("Image1"),
-                                obj.getString("Image2"),
-                                obj.getDouble("Latitude"),
-                                obj.getDouble("Longitude"),
-                                obj.getString("ParkingArea"),
-                                obj.getString("ParkingFullTag").trim(),
-                                obj.getString("ParkingPlace"),
-                                obj.getString("Remarks"),
-                                obj.getString("SutedFor"),
-                                obj.getString("ThrashholdValue"),
-                                obj.getString("MinimumParkingFeeSmallCar"),
-                                obj.getString("MinimumParkingFeebigCar"),
-                                obj.getString("MinimumParkingTime"),
-                                obj.getString("ParkingId")));
-
-                    }
-
-                } catch (JSONException e) {
-                    e.printStackTrace();
-
+                    Toast.makeText(MainMapsActivity.this, "Connection to server failed.Please try again.", Toast.LENGTH_SHORT).show();
                 }
-            }else{
-                Toast.makeText(MainMapsActivity.this, "Connection to server failed.Please try again.", Toast.LENGTH_SHORT).show();
+
+                if(mMyMarkersArray.size() > 0) {
+                    plotMarkers(mMyMarkersArray);
+                }else{
+                    Log.d("List is","Empty");
+                    Toast.makeText(getApplicationContext(),"List Empty",Toast.LENGTH_LONG).show();
+                }
+                dialog.dismiss();
             }
 
 
 
 
-            if(mMyMarkersArray.size() > 0) {
-                plotMarkers(mMyMarkersArray);
-            }else{
-                Log.d("List is","Empty");
-                Toast.makeText(getApplicationContext(),"List Empty",Toast.LENGTH_LONG).show();
-            }
-            dialog.dismiss();
+
+
+
 
         }
     }

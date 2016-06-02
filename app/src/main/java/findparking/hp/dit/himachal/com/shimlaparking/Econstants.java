@@ -5,6 +5,7 @@ package findparking.hp.dit.himachal.com.shimlaparking;
  */
 public class Econstants {
 
+    public static final String URL_MAIN = "";
     public static final String URL_GENERIC = "";
     public static final String URL_Rates_Small = "";
     public static final String URL_Rates_Big = "";
