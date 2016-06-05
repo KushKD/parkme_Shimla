@@ -19,9 +19,9 @@
 
     <string-array name="Complaint_Type">
         <item>Over Charging</item>
-        <item>Parking available but not allowed by parking person</item>
-        <item>Misbehaved by parking person</item>
-        <item>Damaged to parked vehicle</item>
+        <item>Parking available but not allowed to park</item>
+        <item>Misbehave by parking person</item>
+        <item>Damage to parked vehicle</item>
         <item>Theft inside vehicle</item>
         <item>Parked vehicle stolen</item>
         <item>Parked vehicle used by parking person</item>

@@ -316,6 +316,7 @@
                 android:background="@drawable/rounded_edittext"
                 android:hint="Enter Vehicle Number"
                 android:inputType="textCapCharacters"
+                android:digits="ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789"
                 android:textColor="#366988"
                 android:textColorHint="#366988"
                 android:textSize="18dip" />

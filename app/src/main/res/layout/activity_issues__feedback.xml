@@ -41,6 +41,18 @@
         android:gravity="top|center_horizontal|center_vertical"
         android:orientation="vertical">
 
+        <ScrollView
+            android:id="@+id/mainScrollView"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
+        <LinearLayout
+            android:id="@+id/linearLayout1"
+            android:background="#e6e6e6"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="vertical">
+
 
         <TextView
             android:layout_width="match_parent"
@@ -283,103 +295,158 @@
 
         </RelativeLayout>
 
-    <!--    &lt;!&ndash; Vehicle Number &ndash;&gt;
-        <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
-            android:layout_width="fill_parent"
-            android:layout_height="wrap_content"
-            android:background="#40666666"
-            android:gravity="center|center_vertical|center_horizontal"
-            android:orientation="horizontal"
-            android:padding="15dip" >
-
-            &lt;!&ndash; ListRow Left sied Thumbnail image &ndash;&gt;
-
-            <LinearLayout
-                android:id="@+id/thumbnail4"
-                android:layout_width="wrap_content"
+   <!-- MC Contacts Header -->
+            <TextView
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_alignParentLeft="true"
-                android:layout_marginRight="3dip"
-                android:padding="3dip" >
+                android:background="#40666666"
+                android:layout_marginTop="10dp"
+                android:gravity="center|center_vertical|center_horizontal"
+                android:padding="10dip"
+                android:textStyle="bold"
+                android:text="City Administration Contacts"
+                android:textColor="#3d5229"/>
+
+            <!-- Contact one -->
+            <LinearLayout
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:weightSum="2">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Control Room"
+                    android:gravity="left"
+                    android:textStyle="bold"
+                    android:layout_marginBottom="5dp"
+                    android:textColor="#366988"
+                    android:layout_weight="1"/>
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:gravity="right"
+                    android:textColor="#000000"
+                    android:layout_gravity="left|center_vertical|center_horizontal"
+                    android:text="0177-1916"
+                    android:layout_weight="1"/>
 
 
-                <ImageView
-                    android:id="@+id/list_image4"
-                    android:layout_width="40dp"
-                    android:layout_height="40dp"
-                    android:layout_gravity="top"
-                    android:src="@drawable/carnumber"
-                    android:contentDescription="@string/app_name" />
 
-                &lt;!&ndash;  android:src="@drawable/mobilenumber"&ndash;&gt;
+
+            </LinearLayout>
+            <!-- Contact two -->
+            <LinearLayout
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:weightSum="2">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Superintendent Estate"
+                    android:gravity="left"
+                    android:textStyle="bold"
+                    android:layout_marginBottom="5dp"
+                    android:textColor="#366988"
+                    android:layout_weight="1"/>
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:gravity="right"
+                    android:textColor="#000000"
+                    android:layout_gravity="left|center_vertical|center_horizontal"
+                    android:text="L-0177-2802779 M-9816778551"
+                    android:layout_weight="1"/>
+
+
+
+
+            </LinearLayout>
+            <!-- Contact three -->
+            <LinearLayout
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:weightSum="2">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Asst. Commissioner"
+                    android:gravity="left"
+                    android:textStyle="bold"
+                    android:layout_marginBottom="5dp"
+                    android:textColor="#366988"
+                    android:layout_weight="1"/>
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:gravity="right"
+                    android:textColor="#000000"
+                    android:layout_gravity="left|center_vertical|center_horizontal"
+                    android:text="L-0177-2656576 M-9459153569"
+                    android:layout_weight="1"/>
+
+
+
+
+            </LinearLayout>
+            <!-- Contact Four -->
+            <LinearLayout
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:weightSum="2">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Commissioner"
+                    android:gravity="left"
+                    android:textStyle="bold"
+                    android:layout_marginBottom="5dp"
+                    android:textColor="#366988"
+                    android:layout_weight="1"/>
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:gravity="right"
+                    android:textColor="#000000"
+                    android:layout_gravity="left|center_vertical|center_horizontal"
+                    android:text="L-0177-2812899 M-9418039800"
+                    android:layout_weight="1"/>
+
+
+
 
             </LinearLayout>
 
-            &lt;!&ndash; Rightend Arrow &ndash;&gt;
-            <ImageButton
-                android:id="@+id/imageView4"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_alignParentRight="true"
-                android:layout_centerVertical="true"
-                android:visibility="gone"
+    </LinearLayout>
+        </ScrollView>
+        </LinearLayout>
 
-                android:contentDescription="@string/app_name"
-                />
+    <!-- Fotter -->
+    <LinearLayout
+        android:id="@+id/footer"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:gravity="center|center_horizontal|center_vertical"
+        android:layout_weight="3.0"
+        android:layout_margin="5dp"
 
-            &lt;!&ndash;   android:src="@drawable/speaker"
-               android:background="@drawable/circularbutton"&ndash;&gt;
-
-
-
-
-
-
-            <EditText
-                android:id="@+id/etvehiclenumber"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_centerVertical="true"
-                android:layout_marginLeft="50dip"
-                android:layout_marginRight="5dip"
-                android:layout_toLeftOf="@+id/imageView4"
-                android:background="@drawable/rounded_edittext"
-                android:hint="Enter Vehicle Number"
-                android:inputType="textEmailAddress"
-                android:textColor="#366988"
-                android:textColorHint="#366988"
-                android:textSize="18dip" />
-
-        </RelativeLayout>
-
-        <TextView
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:background="#40666666"
-            android:layout_marginTop="10dp"
-            android:gravity="left|center_vertical|center_horizontal"
-            android:padding="10dip"
-            android:text="**All fields are mandatory."
-            android:textColor="#FF545454"/>
-
-
-        <TextView
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:background="#40666666"
-            android:gravity="left|center_vertical|center_horizontal"
-            android:padding="10dip"
-            android:text="**Please input your valid 10 digit Mobile Number. We'll be pushing all our notifications to this number vis SMS facility."
-            android:textColor="#FF545454"/>
--->
-
-
+        android:orientation="vertical" >
 
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:orientation="horizontal"
-            android:gravity="top"
             android:weightSum="2">
 
 
@@ -413,7 +480,6 @@
 
         </LinearLayout>
 
-
-    </LinearLayout>
+        </LinearLayout>
 
 </LinearLayout>

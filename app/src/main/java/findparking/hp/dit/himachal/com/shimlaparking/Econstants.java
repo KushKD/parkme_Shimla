@@ -20,3 +20,5 @@ public class Econstants {
 
 //Release Key: - AIzaSyCkSC2Vk82KdtDEeXxdddD7tL9Q3a9_9-g
 //Debug Key: - AIzaSyCUaDGT6B2n2-JDVi9AvZ1cM7CMWY9QqZc
+
+//http://hpparking.hp.gov.in/HPParking.svc/getparkingLocation_JSON/10297

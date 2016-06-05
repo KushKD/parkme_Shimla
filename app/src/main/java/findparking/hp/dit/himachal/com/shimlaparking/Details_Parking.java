@@ -6,6 +6,7 @@ import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.pm.PackageManager;
+import android.graphics.Color;
 import android.location.Location;
 import android.location.LocationManager;
 import android.net.Uri;
@@ -20,6 +21,8 @@ import android.widget.Button;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.Toast;
+
+import com.google.android.gms.maps.model.BitmapDescriptorFactory;
 
 public class Details_Parking extends AppCompatActivity {
 
@@ -102,10 +105,21 @@ public class Details_Parking extends AppCompatActivity {
                 parking_place.setText(MArkerDetails.getParkingPlace());
                 parking_area.setText(MArkerDetails.getParkingArea());
 
-                if (MArkerDetails.getParkingFullTag().length() == 5) {
+               /* if (MArkerDetails.getParkingFullTag().length() == 5) {
                     parking_availability.setText("Available");
                 } else {
                     parking_availability.setText("Not Available");
+                }*/
+                if(MArkerDetails.getParkingFullTag().equalsIgnoreCase("1")){
+                    parking_availability.setText("Yes");
+                    parking_availability.setTextColor(Color.parseColor("#00ff00")); //green
+                }else if(MArkerDetails.getParkingFullTag().equalsIgnoreCase("0")){
+                    parking_availability.setText("No");
+                    parking_availability.setTextColor(Color.parseColor("#ff0000")); //red
+                }else{
+                    //Toast.makeText(getApplicationContext(),myMarker.getParkingFullTag().toString(),Toast.LENGTH_LONG).show();
+                    parking_availability.setText("Not known");  //
+                    parking_availability.setTextColor(Color.parseColor("#ffa500")); //orange
                 }
 
                 if(MArkerDetails.getLongitude_my_Location()!= null && MArkerDetails.getLatitude_my_Location()!=null){

@@ -115,15 +115,15 @@ public class MainMapsActivity extends AppCompatActivity implements
                 MarkerOptions markerOption = new MarkerOptions().position(new LatLng(myMarker.getLatitude(), myMarker.getLongitude()));
 
 
-               // System.out.println(myMarker.getParkingFullTag() + "###" +myMarker.getParkingFullTag().toUpperCase() +"###"+ myMarker.getParkingFullTag().length() );
-                 if(myMarker.getParkingFullTag().length()==5){
+                System.out.println(myMarker.getParkingFullTag() + "###" +myMarker.getParkingFullTag().toUpperCase() +"###"+ myMarker.getParkingFullTag().length() );
+                 if(myMarker.getParkingFullTag().equalsIgnoreCase("1")){
                      markerOption.icon(BitmapDescriptorFactory.fromResource(R.drawable.pavailable));
-                 }else{
+                 }else if(myMarker.getParkingFullTag().equalsIgnoreCase("0")){
                      markerOption.icon(BitmapDescriptorFactory.fromResource(R.drawable.pnotavailable));
-                 }/*else{
+                 }else{
                     //Toast.makeText(getApplicationContext(),myMarker.getParkingFullTag().toString(),Toast.LENGTH_LONG).show();
                     markerOption.icon(BitmapDescriptorFactory.fromResource(R.drawable.pp));
-                }*/
+                }
 
 
                 Marker currentMarker = mMap.addMarker(markerOption);
@@ -489,11 +489,14 @@ try {
             markerid.setText(marker.getId());
             parkingid.setText(myMarker.getParkingID());
 // System.out.println(myMarker.getParkingFullTag()); System.out.println(myMarker.getParkingFullTag().toUpperCase());
-            if(myMarker.getParkingFullTag().length()==5){
-                available.setText("Parking Available");
-            } else{
-                available.setText("Parking Full");
-            }
+            if(myMarker.getParkingFullTag()=="1"){
+                available.setText("Yes");
+            } else if(myMarker.getParkingFullTag()=="0"){
+                available.setText("No");
+            }else{
+                available.setText("Not known");
+
+        }
             minparkingtime.setText(myMarker.getMinimumParkingTime());
             smallcarfare.setText(myMarker.getMinimumParkingFeeSmallCar()+".00/-");
             bigcarfare.setText(myMarker.getMinimumParkingFeebigCar()+".00/-");
@@ -647,8 +650,8 @@ try {
     public void onBackPressed() {
         super.onBackPressed();
        // MArkerDetails = null;
-        mMarkersHashMap = null;
-        mMyMarkersArray = null;
+       // mMarkersHashMap = null;
+       // mMyMarkersArray = null;
        // My_Marker = null;
         MainMapsActivity.this.finish();
     }
