@@ -9,7 +9,7 @@ public class Econstants {
     public static final String URL_GENERIC = "";
     public static final String URL_Rates_Small = "";
     public static final String URL_Rates_Big = "";
-    public static final String PREFRANCE_NAME = "Maps_Registration";
+    public static final String PREFRANCE_NAME = "";
 }
 
 
