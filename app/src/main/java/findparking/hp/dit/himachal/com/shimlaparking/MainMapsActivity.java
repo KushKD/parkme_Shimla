@@ -5,6 +5,7 @@ import android.app.ProgressDialog;
 import android.content.Context;
 import android.content.Intent;
 import android.content.pm.PackageManager;
+import android.graphics.Color;
 import android.location.Location;
 import android.net.ConnectivityManager;
 import android.net.NetworkInfo;
@@ -161,7 +162,7 @@ try {
         if (isOnline()) {
             try {
                 Get_Parking_Details GPD = new Get_Parking_Details();
-                GPD.execute(Econstants.URL_GENERIC);
+                GPD.execute(Econstants.URL_TEsting);
             }catch(Exception e){
                 Log.e("CAUGHT",e.getMessage().toString());
             }
@@ -346,13 +347,7 @@ try {
 try {
     SOAD = new Sending_Object_All_details();
 
-   /* System.out.println("Hello"+ mMarkersHashMap.get(marker).getParkingPlace().toString().trim()+"\n");
-    System.out.println("Hello"+ mMarkersHashMap.get(marker).getIdentifier().toString().trim()+"\n");
-    System.out.println("Hello"+ mMarkersHashMap.get(marker).getParkingFullTag().toString().trim()+"\n");
-    System.out.println("Hello"+ mMarkersHashMap.get(marker).getContactNumber1().toString().trim()+"\n");
-    System.out.println("Hello"+ mMarkersHashMap.get(marker).getCapacity().toString().trim()+"\n");
-    System.out.println("Hello"+ mMarkersHashMap.get(marker).getThrashholdValue().toString().trim()+"\n");
-    System.out.println("Hello"+ mMarkersHashMap.get(marker).getParkingArea().toString().trim()+"\n");*/
+
 
     SOAD.setParkingPlace(mMarkersHashMap.get(marker).getParkingPlace());
     SOAD.setParkingArea(mMarkersHashMap.get(marker).getParkingArea());
@@ -376,6 +371,8 @@ try {
     SOAD.setLatitude(mMarkersHashMap.get(marker).getLatitude());
     SOAD.setLongitude(mMarkersHashMap.get(marker).getLongitude());
     SOAD.setParkingId(mMarkersHashMap.get(marker).getParkingID());
+    SOAD.setPercentage(mMarkersHashMap.get(marker).getPercentage());
+    SOAD.setAvailability(mMarkersHashMap.get(marker).getAvailability());
     SOAD.setParkingFullTag(mMarkersHashMap.get(marker).getParkingFullTag());
 
     if(latLng.latitude!=0) {
@@ -395,31 +392,6 @@ try {
 }
 
 
-           /* System.out.println("\t Capacity: \t"+SOAD.getCapacity()+"\n");
-            System.out.println("\t Contact Number1: \t"+SOAD.getContactNumber1()+"\n");
-            System.out.println("\t Parking Area: \t"+SOAD.getParkingArea()+"\n");
-            System.out.println("\t Parking Place: \t"+SOAD.getParkingPlace()+"\n");
-            System.out.println("\t Parking Full Tag:\t"+SOAD.getParkingFullTag()+"\n");
-            System.out.println("\t Thrashhold Value:\t"+SOAD.getThrashholdValue()+"\n");
-            System.out.println("\t Latitude: \t"+SOAD.getLatitude()+"\n");
-            System.out.println("\t Longitude: \t"+SOAD.getLongitude()+"\n");
-            System.out.println("\t Person1:- \t"+SOAD.getContactPerson1()+"\n");
-            System.out.println("\t Number2:- \t"+SOAD.getContactNumber2()+"\n");
-            System.out.println("\t Number3:- \t"+SOAD.getContactNumber3()+"\n");
-            System.out.println("\t Person3:- \t"+SOAD.getContactPerson3()+"\n");
-            System.out.println("\t Identifier:-\t"+SOAD.getIdentifier()+"\n");
-            System.out.println("\t Image:-  \t"+SOAD.getImage()+"\n");
-            System.out.println("\t Image:- \t"+SOAD.getImage1()+"\n");
-            System.out.println("\t Image:- \t"+SOAD.getImage2()+"\n");
-            System.out.println("\t My Latitude:- \t"+SOAD.getLatitude_my_Location()+"\n");
-            System.out.println("\t My Longitude:- \t"+SOAD.getLongitude_my_Location()+"\n");
-            System.out.println("\t Person2:-\t"+SOAD.getContactPerson2()+"\n");
-            System.out.println("\t Remarks:-\t"+SOAD.getRemarks()+"\n");
-            System.out.println("\t Fee Big Car:-\t"+SOAD.getMinimumParkingFeebigCar()+"\n");
-            System.out.println("\t Fee Small Car:-\t"+SOAD.getMinimumParkingFeeSmallCar()+"\n");
-            System.out.println("\t Minimum Parking Time:-\t"+SOAD.getMinimumParkingTime()+"\n");
-            System.out.println("\t Identifier:- \t"+SOAD.getIdentifier()+"\n");
-            System.out.println("\t Suited For:-\t"+SOAD.getSutedFor()+"\n");*/
 
             //Now Pass the Object
             Intent userSearch = new Intent();
@@ -488,15 +460,26 @@ try {
             capacity.setText(myMarker.getCapacity()+ " vehicles");
             markerid.setText(marker.getId());
             parkingid.setText(myMarker.getParkingID());
-// System.out.println(myMarker.getParkingFullTag()); System.out.println(myMarker.getParkingFullTag().toUpperCase());
-            if(myMarker.getParkingFullTag()=="1"){
-                available.setText("Yes");
-            } else if(myMarker.getParkingFullTag()=="0"){
-                available.setText("No");
+          //  available.setText(myMarker.getAvailability()+"("+myMarker.getPercentage()+"%)");
+            if(myMarker.getAvailability().equalsIgnoreCase("Not Known")){
+                available.setText(myMarker.getAvailability());
+                available.setTextColor(Color.parseColor("#0000b2")); //blue
             }else{
-                available.setText("Not known");
-
-        }
+                //Toast.makeText(getApplicationContext(),myMarker.getParkingFullTag().toString(),Toast.LENGTH_LONG).show();
+                available.setText(myMarker.getAvailability()+"("+myMarker.getPercentage()+"%)");  //
+                // parking_availability.setTextColor(Color.parseColor("#ffa500")); //orange
+                if(myMarker.getPercentage().equalsIgnoreCase("0")){
+                    available.setTextColor(Color.parseColor("#990000")); //red
+                }else if(Integer.parseInt(myMarker.getPercentage())>0 && Integer.parseInt(myMarker.getPercentage())<=25){
+                    available.setTextColor(Color.parseColor("#ec7046"));  //wheat
+                }else if(Integer.parseInt(myMarker.getPercentage())>25 && Integer.parseInt(myMarker.getPercentage())<=50){
+                    available.setTextColor(Color.parseColor("#e3ff00")); //parrot green
+                }else if(Integer.parseInt(myMarker.getPercentage())>50 && Integer.parseInt(myMarker.getPercentage())<=75){
+                    available.setTextColor(Color.parseColor("#7bd88b")); //Light green
+                }else{
+                    available.setTextColor(Color.parseColor("#11561d")); //Dark green
+                }
+            }
             minparkingtime.setText(myMarker.getMinimumParkingTime());
             smallcarfare.setText(myMarker.getMinimumParkingFeeSmallCar()+".00/-");
             bigcarfare.setText(myMarker.getMinimumParkingFeebigCar()+".00/-");
@@ -614,6 +597,8 @@ try {
                                     obj.getString("MinimumParkingFeeSmallCar"),
                                     obj.getString("MinimumParkingFeebigCar"),
                                     obj.getString("MinimumParkingTime"),
+                                    obj.getString("percentage"),
+                                    obj.getString("Availability"),
                                     obj.getString("ParkingId")));
 
                         }

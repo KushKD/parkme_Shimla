@@ -232,6 +232,25 @@ public class Sending_Object_All_details implements Serializable {
     public String ParkingPlace;
     public String ParkingArea;
     public String ParkingFullTag;
+
+    public String getAvailability() {
+        return Availability;
+    }
+
+    public void setAvailability(String availability) {
+        Availability = availability;
+    }
+
+    public String getPercentage() {
+        return percentage;
+    }
+
+    public void setPercentage(String percentage) {
+        this.percentage = percentage;
+    }
+
+    public String Availability;
+    public String percentage;
     public String ParkingId;
 
 

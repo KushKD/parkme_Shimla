@@ -5,11 +5,16 @@ package findparking.hp.dit.himachal.com.shimlaparking;
  */
 public class Econstants {
 
-    public static final String URL_MAIN = "";
-    public static final String URL_GENERIC = "";
-    public static final String URL_Rates_Small = "";
-    public static final String URL_Rates_Big = "";
-    public static final String PREFRANCE_NAME = "";
+    public static final String URL_MAIN = "http://www.hpparking.hp.gov.in/HPParking.svc";
+    public static final String URL_GENERIC = "http://hpparking.hp.gov.in/HPParking.svc/getparkingLocation_JSON/10297";
+    public static final String URL_Rates_Small = "http://hpparking.hp.gov.in/HPParking.svc/getParkingFeeParkingId_JSON/";
+    public static final String URL_Rates_Big = "http://hpparking.hp.gov.in/HPParking.svc/getParkingFeeParkingId_JSON/";
+    public static final String PREFRANCE_NAME = "Maps_Registration";
+
+    public static final String URL_TEsting = "http://192.168.0.171/HPParking/HPParking.svc/getparkingLocation_JSON/10297";
+    public static final String URL_MAIN_Testing = "http://192.168.0.171/HPParking/HPParking.svc";
+    public static final String URL_Rates_Small_Testing = "http://192.168.0.171/HPParking/HPParking.svc/getParkingFeeParkingId_JSON/";
+    public static final String URL_Rates_Big_Testing = "http://192.168.0.171/HPParking/HPParking.svc/getParkingFeeParkingId_JSON/";
 }
 
 

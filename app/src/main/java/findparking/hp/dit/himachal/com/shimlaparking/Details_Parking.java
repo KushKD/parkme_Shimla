@@ -24,6 +24,8 @@ import android.widget.Toast;
 
 import com.google.android.gms.maps.model.BitmapDescriptorFactory;
 
+import Helper.helper_Functions;
+
 public class Details_Parking extends AppCompatActivity {
 
     private TextView
@@ -48,14 +50,18 @@ public class Details_Parking extends AppCompatActivity {
             contactphone1,
             contactphone2,
             contactphone3,
-            parking_id;
+            parking_id,
+            distance;
+
+    private double _Distance = 0;
+    float[] result;
 
 
     private LinearLayout contactperson1_layout,contactperson2_layout,contactperson3_layout;
     private Button call1 , call2,call3,get_directions , rates , issues;
     final Context context = this;
     private static final int PERMISSION_REQUEST_CODE = 1;
-    Sending_Object_All_details MArkerDetails = null;
+   // MArkerDetails = null;
 
     Boolean FLAG_UI = false;
 
@@ -71,7 +77,7 @@ public class Details_Parking extends AppCompatActivity {
             try {
 
                 Intent getRoomDetailsIntent = getIntent();
-                MArkerDetails = (Sending_Object_All_details) getRoomDetailsIntent.getSerializableExtra("DETAILS_ALL");
+           final  Sending_Object_All_details   MArkerDetails = (Sending_Object_All_details) getRoomDetailsIntent.getSerializableExtra("DETAILS_ALL");
 
 
                 if (MArkerDetails.getContactPerson1().length() == 0) {
@@ -101,7 +107,7 @@ public class Details_Parking extends AppCompatActivity {
                 contactphone1.setText("+91" + MArkerDetails.getContactNumber1());
                 contactphone2.setText("+91" + MArkerDetails.getContactNumber2());
                 contactphone3.setText("+91" + MArkerDetails.getContactNumber3());
-                parking_id.setText(MArkerDetails.getParkingId());
+              //  parking_id.setText(MArkerDetails.getParkingId());
                 parking_place.setText(MArkerDetails.getParkingPlace());
                 parking_area.setText(MArkerDetails.getParkingArea());
 
@@ -110,17 +116,29 @@ public class Details_Parking extends AppCompatActivity {
                 } else {
                     parking_availability.setText("Not Available");
                 }*/
-                if(MArkerDetails.getParkingFullTag().equalsIgnoreCase("1")){
-                    parking_availability.setText("Yes");
-                    parking_availability.setTextColor(Color.parseColor("#00ff00")); //green
-                }else if(MArkerDetails.getParkingFullTag().equalsIgnoreCase("0")){
-                    parking_availability.setText("No");
-                    parking_availability.setTextColor(Color.parseColor("#ff0000")); //red
+                if(MArkerDetails.getAvailability().equalsIgnoreCase("Not Known")){
+                    parking_availability.setText(MArkerDetails.getAvailability());
+                    parking_availability.setTextColor(Color.parseColor("#0000b2")); //blue
                 }else{
                     //Toast.makeText(getApplicationContext(),myMarker.getParkingFullTag().toString(),Toast.LENGTH_LONG).show();
-                    parking_availability.setText("Not known");  //
-                    parking_availability.setTextColor(Color.parseColor("#ffa500")); //orange
+                    parking_availability.setText(MArkerDetails.getAvailability()+"("+MArkerDetails.getPercentage()+"%)");  //
+                   // parking_availability.setTextColor(Color.parseColor("#ffa500")); //orange
+                    if(MArkerDetails.getPercentage().equalsIgnoreCase("0")){
+                        parking_availability.setTextColor(Color.parseColor("#990000")); //red
+                    }else if(Integer.parseInt(MArkerDetails.getPercentage())>0 && Integer.parseInt(MArkerDetails.getPercentage())<=25){
+                        parking_availability.setTextColor(Color.parseColor("#ec7046"));  //wheat
+                    }else if(Integer.parseInt(MArkerDetails.getPercentage())>25 && Integer.parseInt(MArkerDetails.getPercentage())<=50){
+                        parking_availability.setTextColor(Color.parseColor("#e3ff00")); //parrot green
+                    }else if(Integer.parseInt(MArkerDetails.getPercentage())>50 && Integer.parseInt(MArkerDetails.getPercentage())<=75){
+                        parking_availability.setTextColor(Color.parseColor("#7bd88b")); //Light green
+                    }else{
+                        parking_availability.setTextColor(Color.parseColor("#11561d")); //Dark green
+                    }
                 }
+
+
+
+
 
                 if(MArkerDetails.getLongitude_my_Location()!= null && MArkerDetails.getLatitude_my_Location()!=null){
                     latitude_person.setText(Double.toString(MArkerDetails.getLatitude_my_Location()));
@@ -151,6 +169,8 @@ public class Details_Parking extends AppCompatActivity {
                             Location location= locationManager.getLastKnownLocation(LocationManager.GPS_PROVIDER);
                                 latitude_person.setText(Double.toString(location.getLatitude()));
                                 longitude_person.setText(Double.toString(location.getLongitude()));
+
+
                             }catch (SecurityException e){
                                 Log.e("ERROR",e.getLocalizedMessage().toString());
                             }
@@ -158,6 +178,8 @@ public class Details_Parking extends AppCompatActivity {
                            // nowDoSomethingWith(location.getLatitude(), location.getLongitude());
                         }
                     });
+
+
 
                     // Setting Negative "NO" Button
                     alertDialog.setNegativeButton("NO", new DialogInterface.OnClickListener() {
@@ -172,6 +194,21 @@ public class Details_Parking extends AppCompatActivity {
                     alertDialog.show();
                 }
 
+                if(MArkerDetails.getLongitude_my_Location()!= null && MArkerDetails.getLatitude_my_Location()!=null){
+
+                    // helper_Functions HF = new helper_Functions();
+                    Log.e("Are We","Here");
+                   /* Location.distanceBetween(
+                            MArkerDetails.getLatitude_my_Location(),
+                            MArkerDetails.getLongitude_my_Location(),
+                            MArkerDetails.getLatitude(),
+                            MArkerDetails.getLongitude(),result);*/
+
+
+                    distance.setText(Float.toString(result.length));
+                }else{
+                    Toast.makeText(getApplicationContext(),"User Location not known ",Toast.LENGTH_SHORT).show();
+                }
 
 
                 issues.setOnClickListener(new View.OnClickListener() {
@@ -438,10 +475,11 @@ public class Details_Parking extends AppCompatActivity {
             call1 = (Button)findViewById(R.id.call1);
             call2 = (Button)findViewById(R.id.call2);
             call3 = (Button)findViewById(R.id.call3);
-            parking_id = (TextView)findViewById(R.id.parkingid);
+          //  parking_id = (TextView)findViewById(R.id.parkingid);
             get_directions = (Button)findViewById(R.id.get_directions);
             rates = (Button)findViewById(R.id.rates);
             issues = (Button)findViewById(R.id.issues);
+            distance = (TextView)findViewById(R.id.distance);
 
             return true;
         }catch(Exception e){
@@ -499,7 +537,6 @@ public class Details_Parking extends AppCompatActivity {
     @Override
     public void onBackPressed() {
         super.onBackPressed();
-        MArkerDetails = null;
         Details_Parking.this.finish();
     }
 

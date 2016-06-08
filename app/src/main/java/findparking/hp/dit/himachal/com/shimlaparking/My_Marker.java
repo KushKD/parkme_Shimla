@@ -183,6 +183,8 @@ public class My_Marker implements Serializable {
     public String MinimumParkingFeebigCar;
     public String MinimumParkingTime;
     public String ParkingID;
+    public String Availability;
+    public String percentage;
 
     public String getParkingID() {
         return ParkingID;
@@ -192,7 +194,21 @@ public class My_Marker implements Serializable {
         ParkingID = parkingID;
     }
 
+    public String getAvailability() {
+        return Availability;
+    }
 
+    public void setAvailability(String availability) {
+        Availability = availability;
+    }
+
+    public String getPercentage() {
+        return percentage;
+    }
+
+    public void setPercentage(String percentage) {
+        this.percentage = percentage;
+    }
 
     public String getMinimumParkingTime() {
         return MinimumParkingTime;
@@ -233,6 +249,7 @@ public class My_Marker implements Serializable {
                      String ParkingArea, String ParkingFullTag,String ParkingPlace,
                      String Remarks, String SutedFor, String ThrashholdValue,
                      String MinimumParkingFeeSmallCar, String MinimumParkingFeebigCar, String MinimumParkingTime,
+                     String percentage,String Availability,
                      String ParkingID)
     {
         this.Capacity = Capacity;
@@ -257,6 +274,8 @@ public class My_Marker implements Serializable {
         this.MinimumParkingTime = MinimumParkingTime;
         this.MinimumParkingFeebigCar = MinimumParkingFeebigCar;
         this.MinimumParkingFeeSmallCar = MinimumParkingFeeSmallCar;
+        this.percentage = percentage;
+        this.Availability = Availability;
         this.ParkingID = ParkingID;
 
 

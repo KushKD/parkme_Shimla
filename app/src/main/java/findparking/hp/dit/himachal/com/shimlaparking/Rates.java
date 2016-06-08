@@ -81,7 +81,7 @@ public class Rates extends Activity {
                     try {
                             Rates_Server = null;
                         Get_Rates_Data_Server GPD = new Get_Rates_Data_Server();
-                        GPD.execute(Econstants.URL_Rates_Small , "Small Car");
+                        GPD.execute(Econstants.URL_Rates_Small_Testing , "Small Car");
                         header.setText("Small Car");
                     }catch(Exception e){
                         Log.e("CAUGHT",e.getMessage().toString());
@@ -112,7 +112,7 @@ public class Rates extends Activity {
                     try {
                         Rates_Server = null;
                         Get_Rates_Data_Server GPD = new Get_Rates_Data_Server();
-                        GPD.execute(Econstants.URL_Rates_Big , "Big Car");
+                        GPD.execute(Econstants.URL_Rates_Big_Testing , "Big Car");
                     }catch(Exception e){
                         Log.e("CAUGHT",e.getMessage().toString());
                     }

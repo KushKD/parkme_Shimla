@@ -137,13 +137,6 @@ public class Issues_Feedback extends Activity {
                     Toast.makeText(getApplicationContext(),"Minimum 50 characters required.",Toast.LENGTH_LONG).show();
                 }
 
-
-
-
-
-
-               // Toast.makeText(getApplicationContext(),"Your feedback/complaint have been submitted successfully.",Toast.LENGTH_LONG).show();
-               // Issues_Feedback.this.finish();
             }
         });
 
@@ -199,7 +192,7 @@ public class Issues_Feedback extends Activity {
             Mobile = params[7];
 
            try {
-               url_ =new URL(Econstants.URL_MAIN+"/getIssueFeedback_JSON");
+               url_ =new URL(Econstants.URL_MAIN_Testing+"/getIssueFeedback_JSON");
                conn_ = (HttpURLConnection)url_.openConnection();
                conn_.setDoOutput(true);
                conn_.setRequestMethod("POST");
