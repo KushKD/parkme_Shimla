@@ -2,14 +2,20 @@ package findparking.hp.dit.himachal.com.shimlaparking;
 
 import android.Manifest;
 import android.app.AlertDialog;
+import android.app.Dialog;
+import android.app.ProgressDialog;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.content.pm.PackageManager;
 import android.graphics.Color;
 import android.location.Location;
 import android.location.LocationManager;
+import android.net.ConnectivityManager;
+import android.net.NetworkInfo;
 import android.net.Uri;
+import android.os.AsyncTask;
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
 import android.support.v4.app.ActivityCompat;
@@ -17,14 +23,30 @@ import android.support.v4.content.ContextCompat;
 import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
 import android.view.View;
+import android.view.WindowManager;
 import android.widget.Button;
+import android.widget.EditText;
 import android.widget.LinearLayout;
+import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.Toast;
 
 import com.google.android.gms.maps.model.BitmapDescriptorFactory;
 
+import org.json.JSONException;
+import org.json.JSONStringer;
+
+import java.io.BufferedReader;
+import java.io.IOException;
+import java.io.InputStreamReader;
+import java.io.OutputStreamWriter;
+import java.net.HttpURLConnection;
+import java.net.MalformedURLException;
+import java.net.URL;
+
 import Helper.helper_Functions;
+import Http_Manager.Http_Manager;
+import Http_Manager.date_Time;
 
 public class Details_Parking extends AppCompatActivity {
 
@@ -55,15 +77,19 @@ public class Details_Parking extends AppCompatActivity {
 
     private double _Distance = 0;
     float[] result;
+      Sending_Object_All_details   MArkerDetails;
 
 
     private LinearLayout contactperson1_layout,contactperson2_layout,contactperson3_layout;
-    private Button call1 , call2,call3,get_directions , rates , issues;
+    private Button call1 , call2,call3,get_directions , rates , issues,parkme_bt;
     final Context context = this;
     private static final int PERMISSION_REQUEST_CODE = 1;
    // MArkerDetails = null;
 
     Boolean FLAG_UI = false;
+    StringBuilder SB = null;
+
+
 
 
     @Override
@@ -77,7 +103,7 @@ public class Details_Parking extends AppCompatActivity {
             try {
 
                 Intent getRoomDetailsIntent = getIntent();
-           final  Sending_Object_All_details   MArkerDetails = (Sending_Object_All_details) getRoomDetailsIntent.getSerializableExtra("DETAILS_ALL");
+                 MArkerDetails = (Sending_Object_All_details) getRoomDetailsIntent.getSerializableExtra("DETAILS_ALL");
 
 
                 if (MArkerDetails.getContactPerson1().length() == 0) {
@@ -194,21 +220,7 @@ public class Details_Parking extends AppCompatActivity {
                     alertDialog.show();
                 }
 
-                if(MArkerDetails.getLongitude_my_Location()!= null && MArkerDetails.getLatitude_my_Location()!=null){
 
-                    // helper_Functions HF = new helper_Functions();
-                    Log.e("Are We","Here");
-                   /* Location.distanceBetween(
-                            MArkerDetails.getLatitude_my_Location(),
-                            MArkerDetails.getLongitude_my_Location(),
-                            MArkerDetails.getLatitude(),
-                            MArkerDetails.getLongitude(),result);*/
-
-
-                    distance.setText(Float.toString(result.length));
-                }else{
-                    Toast.makeText(getApplicationContext(),"User Location not known ",Toast.LENGTH_SHORT).show();
-                }
 
 
                 issues.setOnClickListener(new View.OnClickListener() {
@@ -433,6 +445,47 @@ public class Details_Parking extends AppCompatActivity {
                 });
 
 
+                /**
+                 * Park Me
+                 */
+                parkme_bt.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+                        //// TODO: 6/9/2016
+
+                         //Show Alert Box
+                        ShowAlert("kush");
+
+                    }
+                });
+
+
+                if(MArkerDetails.getLongitude_my_Location()!= null && MArkerDetails.getLatitude_my_Location()!=null){
+
+                    distance.setText("Getting distance please wait..");
+                     if(isOnline()){
+
+                         SB = new StringBuilder();
+                         SB.append("http://maps.googleapis.com/maps/api/directions/json?origin=");
+                         SB.append(MArkerDetails.getLatitude_my_Location());
+                         SB.append(",");
+                         SB.append(MArkerDetails.getLongitude_my_Location());
+                         SB.append("&destination=");
+                         SB.append(MArkerDetails.getLatitude());
+                         SB.append(",");
+                         SB.append(MArkerDetails.getLongitude());
+                         SB.append("&mode=driving&sensor=false");
+                       ///  GetDistance get_Distance = new GetDistance();
+                        // get_Distance.execute(SB.toString());
+                     }else{
+                        distance.setText("Unable to get the distance.Please connect to Internet.");
+                    }
+
+                }else{
+                    Toast.makeText(getApplicationContext(),"User Location not known ",Toast.LENGTH_SHORT).show();
+                }
+
+
 
 
 
@@ -480,11 +533,77 @@ public class Details_Parking extends AppCompatActivity {
             rates = (Button)findViewById(R.id.rates);
             issues = (Button)findViewById(R.id.issues);
             distance = (TextView)findViewById(R.id.distance);
+            parkme_bt = (Button)findViewById(R.id.parkme);
 
             return true;
         }catch(Exception e){
             return false;
         }
+    }
+
+    private void ShowAlert(String s) {
+        final Dialog dialog = new Dialog(Details_Parking.this);
+        dialog.setContentView(R.layout.dialog_parkme);
+        dialog.setTitle("Park Me");
+        dialog.setCancelable(false);
+        dialog.getWindow().clearFlags(WindowManager.LayoutParams.FLAG_NOT_FOCUSABLE  | WindowManager.LayoutParams.FLAG_ALT_FOCUSABLE_IM);
+        dialog.getWindow().setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_STATE_VISIBLE);
+        dialog.show();
+       // TextView DialogInfo = (TextView)dialog.findViewById(R.id.dialog_info);
+       // DialogInfo.setText(s);
+
+
+        SharedPreferences prfs = getSharedPreferences(Econstants.PREFRANCE_NAME, Context.MODE_PRIVATE);
+
+      final String ParkingId_Server  = MArkerDetails.getParkingId();
+      String PhoneNumber_Server = prfs.getString("phonenumber","");
+      String VehicleNo_Server = prfs.getString("VehicleNumber","");
+
+        Log.e("Phone",PhoneNumber_Server);
+        Log.e("Vehicle No",VehicleNo_Server);
+
+
+
+        Button dialog_ok = (Button)dialog.findViewById(R.id.dialog_ok);
+        Button exit = (Button)dialog.findViewById(R.id.dialog_exit);
+       final  EditText carnumber_tv = (EditText)dialog.findViewById(R.id.carnumber);
+        carnumber_tv.setText(VehicleNo_Server);
+        final EditText phonenumber_tv  = (EditText)dialog.findViewById(R.id.phonenumber);
+        phonenumber_tv.setText(PhoneNumber_Server);
+       final Spinner typecar_sp = (Spinner)dialog.findViewById(R.id.typecar);
+       final Spinner estimatedtime_sp = (Spinner)dialog.findViewById(R.id.estimatedtime);
+
+        final String WSTS = Long.toString( estimatedtime_sp.getSelectedItemId());
+        exit.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+
+                dialog.dismiss();
+            }
+        });
+
+        dialog_ok.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                if(isOnline()) {
+                    String EstimatedTime_Server = null;
+                     EstimatedTime_Server  = Long.toString(estimatedtime_sp.getSelectedItemId());
+
+                    String VehicleType_Server = typecar_sp.getSelectedItem().toString().trim();
+                   Log.e("EstimatedTime_Server",WSTS);
+                    Log.e("VehicleType_Server",VehicleType_Server);
+                    Log.e("ParkingId_Server",ParkingId_Server);
+                    Log.e("Phone no",phonenumber_tv.getText().toString());
+                    Log.e("Car Number",carnumber_tv.getText().toString());
+
+                    Park_Me PM = new Park_Me();
+                    PM.execute(EstimatedTime_Server,ParkingId_Server,phonenumber_tv.getText().toString().trim(),carnumber_tv.getText().toString().trim(),VehicleType_Server);
+                     dialog.dismiss();
+                }else{
+                    Toast.makeText(getApplicationContext(), "Network not found" ,Toast.LENGTH_LONG).show();
+                }
+            }
+        });
     }
 
     private boolean checkPermission(){
@@ -541,5 +660,156 @@ public class Details_Parking extends AppCompatActivity {
     }
 
 
+    protected boolean isOnline() {
+        ConnectivityManager cm = (ConnectivityManager) getSystemService(Context.CONNECTIVITY_SERVICE);
+        NetworkInfo netInfo = cm.getActiveNetworkInfo();
+        if (netInfo != null && netInfo.isConnectedOrConnecting()) {
+            return true;
+        } else {
+            return false;
+        }
+    }
+
+
+
+
+    public class Park_Me extends AsyncTask<String,String,String>{
+
+        URL url_;
+        HttpURLConnection conn_;
+        StringBuilder sb_ = null;
+
+        private String EstimatedTime = null;
+        private String ParkingId = null;
+        private String PhoneNumber = null;
+        private String VehicleNo = null;
+        private String VehicleType = null;
+
+        JSONStringer userJson = null;
+
+        private ProgressDialog dialog;
+        String url = null;
+
+
+        @Override
+        protected void onPreExecute() {
+            super.onPreExecute();
+            dialog = new ProgressDialog(Details_Parking.this);
+            this.dialog.setMessage("Please wait ..");
+            this.dialog.show();
+            this.dialog.setCancelable(false);
+        }
+
+
+        @Override
+        protected String doInBackground(String... params) {
+            EstimatedTime = params[0];
+            ParkingId = params[1];
+            PhoneNumber = params[2];
+            VehicleNo = params[3];
+            VehicleType = params[4];
+
+            try {
+                url_ =new URL(Econstants.URL_MAIN_Testing+"/getParkMeRequest_JSON");
+                System.out.println(url_.toString());
+                conn_ = (HttpURLConnection)url_.openConnection();
+                conn_.setDoOutput(true);
+                conn_.setRequestMethod("POST");
+                conn_.setUseCaches(false);
+                conn_.setConnectTimeout(10000);
+                conn_.setReadTimeout(10000);
+                conn_.setRequestProperty("Content-Type", "application/json");
+                conn_.connect();
+
+                userJson = new JSONStringer()
+                        .object().key("ParkMeRequst")
+                        .object()
+                        .key("EstimatedTime").value(EstimatedTime)
+                        .key("InTime").value(date_Time.GetDateAndTime())
+                        .key("ParkingId").value(ParkingId)
+                        .key("PhoneNumber").value(PhoneNumber)
+                        .key("RegisterId").value("0")
+                        .key("RequestStatus").value("Pending")
+                        .key("RequestTime").value(date_Time.GetDateAndTime())
+                        .key("VehicleNo").value(VehicleNo)
+                        .key("VehicleType").value(VehicleType)
+                        .endObject()
+                        .endObject();
+
+
+                System.out.println(userJson.toString());
+                Log.e("Object",userJson.toString());
+                OutputStreamWriter out = new OutputStreamWriter(conn_.getOutputStream());
+                out.write(userJson.toString());
+                out.close();
+
+                try{
+                    int HttpResult =conn_.getResponseCode();
+                    if(HttpResult ==HttpURLConnection.HTTP_OK){
+                        BufferedReader br = new BufferedReader(new InputStreamReader(conn_.getInputStream(),"utf-8"));
+                        sb_ = new StringBuilder();
+                        String line = null;
+                        while ((line = br.readLine()) != null) {
+                            sb_.append(line + "\n");
+                        }
+                        br.close();
+                        System.out.println(sb_.toString());
+
+                    }else{
+                        System.out.println("Server Connection failed.");
+                    }
+
+                } catch(Exception e){
+                    return "Server Connection failed.";
+                }
+
+            }
+            catch (MalformedURLException e) {
+                e.printStackTrace();
+            } catch (IOException e) {
+                e.printStackTrace();
+            } catch (JSONException e) {
+                e.printStackTrace();
+            } finally{
+                if(conn_!=null)
+                    conn_.disconnect();
+            }
+            return sb_.toString();
+
+        }
+
+        @Override
+        protected void onPostExecute(String s) {
+            super.onPostExecute(s);
+
+                Toast.makeText(getApplicationContext(),s,Toast.LENGTH_LONG).show();
+                Log.e("Result",s);
+                dialog.dismiss();
+
+        }
+    }
+
+
+class GetDistance extends AsyncTask<String,String,String>{
+
+
+    @Override
+    protected void onPreExecute() {
+        super.onPreExecute();
+    }
+
+    @Override
+    protected String doInBackground(String... params) {
+        String content = Http_Manager.get_Data(params[0]);
+        return content;
+
+    }
+
+    @Override
+    protected void onPostExecute(String s) {
+        super.onPostExecute(s);
+        Log.e("GOOGLE Direction API",s);
+    }
+}
 
 }

@@ -1,0 +1,13 @@
+C:\Users\Accenture\Desktop\TestProjects\HP_Parking_WEB_API\HP_Parking_WEB_API\bin\HP_Parking_WEB_API.dll
+C:\Users\Accenture\Desktop\TestProjects\HP_Parking_WEB_API\HP_Parking_WEB_API\bin\HP_Parking_WEB_API.pdb
+C:\Users\Accenture\Desktop\TestProjects\HP_Parking_WEB_API\HP_Parking_WEB_API\obj\Debug\HP_Parking_WEB_API.dll
+C:\Users\Accenture\Desktop\TestProjects\HP_Parking_WEB_API\HP_Parking_WEB_API\obj\Debug\HP_Parking_WEB_API.pdb
+C:\HP_Parking_WEB_API\HP_Parking_WEB_API\bin\HP_Parking_WEB_API.dll
+C:\HP_Parking_WEB_API\HP_Parking_WEB_API\bin\HP_Parking_WEB_API.pdb
+C:\HP_Parking_WEB_API\HP_Parking_WEB_API\obj\Debug\HP_Parking_WEB_API.dll
+C:\HP_Parking_WEB_API\HP_Parking_WEB_API\obj\Debug\HP_Parking_WEB_API.pdb
+D:\HPParking_API\bin\HP_Parking_WEB_API.dll
+D:\HPParking_API\bin\HP_Parking_WEB_API.pdb
+D:\HPParking_API\obj\Debug\HP_Parking_WEB_API.dll
+D:\HPParking_API\obj\Debug\HP_Parking_WEB_API.pdb
+D:\HPParking_API\obj\Debug\HP_Parking_WEB_API.csprojResolveAssemblyReference.cache

@@ -11,8 +11,10 @@ import android.os.AsyncTask;
 import android.os.Bundle;
 import android.telephony.TelephonyManager;
 import android.view.View;
+import android.view.inputmethod.InputMethodManager;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.LinearLayout;
 import android.widget.ProgressBar;
 import android.widget.Toast;
 
@@ -35,13 +37,15 @@ public class Registration_Car_Owner extends Activity {
 
     Button register, back;
     EditText et_Mobile , et_Name , et_Vehicle_Number ,et_Email;
-   // Helper helper = null;
+   // Helper date_Time = null;
       private String IMEI = null;
 
     ProgressBar pb;
     URL url_;
     HttpURLConnection conn_;
     StringBuilder sb = new StringBuilder();
+
+    LinearLayout regdetails_ll;
 
 
     @Override
@@ -56,6 +60,15 @@ public class Registration_Car_Owner extends Activity {
         et_Mobile = (EditText) findViewById(R.id.etmobile);
         et_Email = (EditText) findViewById(R.id.etemail);
         et_Vehicle_Number = (EditText)findViewById(R.id.etvehiclenumber);
+        regdetails_ll = (LinearLayout)findViewById(R.id.rightLayout);
+
+        regdetails_ll.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                InputMethodManager imm = (InputMethodManager) getSystemService(INPUT_METHOD_SERVICE);
+                imm.hideSoftInputFromWindow(getCurrentFocus().getWindowToken(), 0);
+            }
+        });
 
 
 

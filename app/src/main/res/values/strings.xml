@@ -17,6 +17,27 @@
         <item>Request for any MC service</item>
     </string-array>
 
+    <string-array name="type_of_car">
+        <item>Small Car</item>
+        <item>Big Car</item>
+
+    </string-array>
+
+    <string-array name="estimatedtime">
+        <item>Upto 2 hours</item>
+        <item>Upto 3 hours</item>
+        <item>Upto 4 hours</item>
+        <item>Upto 6 hours</item>
+        <item>Upto 8 hours</item>
+        <item>Upto 10 hours</item>
+        <item>Upto 12 hours</item>
+        <item>Upto 24 hours</item>
+        <item>Upto 1 month</item>
+        <item>Upto 1 hours</item>
+
+    </string-array>
+
+
     <string-array name="Complaint_Type">
         <item>Over Charging</item>
         <item>Parking available but not allowed to park</item>
