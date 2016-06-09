@@ -47,6 +47,8 @@ import java.net.URL;
 import Helper.helper_Functions;
 import Http_Manager.Http_Manager;
 import Http_Manager.date_Time;
+import Parse.JSON_Manager;
+import Parse.Parse_JSON_Google;
 
 public class Details_Parking extends AppCompatActivity {
 
@@ -73,7 +75,10 @@ public class Details_Parking extends AppCompatActivity {
             contactphone2,
             contactphone3,
             parking_id,
-            distance;
+            distance,
+            duration;
+
+    String [] Distance_Time = null;
 
     private double _Distance = 0;
     float[] result;
@@ -463,6 +468,7 @@ public class Details_Parking extends AppCompatActivity {
                 if(MArkerDetails.getLongitude_my_Location()!= null && MArkerDetails.getLatitude_my_Location()!=null){
 
                     distance.setText("Getting distance please wait..");
+                    duration.setText("Getting Duration please wait..");
                      if(isOnline()){
 
                          SB = new StringBuilder();
@@ -475,8 +481,8 @@ public class Details_Parking extends AppCompatActivity {
                          SB.append(",");
                          SB.append(MArkerDetails.getLongitude());
                          SB.append("&mode=driving&sensor=false");
-                       ///  GetDistance get_Distance = new GetDistance();
-                        // get_Distance.execute(SB.toString());
+                         GetDistance get_Distance = new GetDistance();
+                         get_Distance.execute(SB.toString());
                      }else{
                         distance.setText("Unable to get the distance.Please connect to Internet.");
                     }
@@ -534,6 +540,7 @@ public class Details_Parking extends AppCompatActivity {
             issues = (Button)findViewById(R.id.issues);
             distance = (TextView)findViewById(R.id.distance);
             parkme_bt = (Button)findViewById(R.id.parkme);
+            duration = (TextView)findViewById(R.id.duration);
 
             return true;
         }catch(Exception e){
@@ -710,7 +717,7 @@ public class Details_Parking extends AppCompatActivity {
             VehicleType = params[4];
 
             try {
-                url_ =new URL(Econstants.URL_MAIN_Testing+"/getParkMeRequest_JSON");
+                url_ =new URL(Econstants.URL_MAIN+"/getParkMeRequest_JSON");
                 System.out.println(url_.toString());
                 conn_ = (HttpURLConnection)url_.openConnection();
                 conn_.setDoOutput(true);
@@ -782,11 +789,52 @@ public class Details_Parking extends AppCompatActivity {
         protected void onPostExecute(String s) {
             super.onPostExecute(s);
 
-                Toast.makeText(getApplicationContext(),s,Toast.LENGTH_LONG).show();
-                Log.e("Result",s);
+            try {
                 dialog.dismiss();
+                String result_to_Show = JSON_Manager.Parse_PArkME(s);
+                ShowAlertafter_ParkME(result_to_Show);
+
+
+            }catch(Exception e){
+                dialog.dismiss();
+                String result_to_Show  = "Something went wrong. Please try again later.";
+                ShowAlertafter_ParkME(result_to_Show);
+
+            }
+
+
 
         }
+    }
+
+
+    private void ShowAlertafter_ParkME(String s) {
+        final Dialog dialog = new Dialog(Details_Parking.this);
+        dialog.setContentView(R.layout.dialog_parkme_result);
+        dialog.setTitle("Alert");
+        dialog.setCancelable(false);
+
+        dialog.show();
+
+
+
+        Button dialog_ok = (Button)dialog.findViewById(R.id.dialog_ok);
+
+        TextView dialog_result_tv =  (TextView)dialog.findViewById(R.id.dialog_result);
+        dialog_result_tv.setText(s);
+
+
+        dialog_ok.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+
+                dialog.dismiss();
+            }
+        });
+
+
+
+
     }
 
 
@@ -809,6 +857,21 @@ class GetDistance extends AsyncTask<String,String,String>{
     protected void onPostExecute(String s) {
         super.onPostExecute(s);
         Log.e("GOOGLE Direction API",s);
+
+          //Google
+        try{
+        Distance_Time = new String[2];
+        Distance_Time = Parse_JSON_Google.parseGoogleJSON(s);
+        distance.setText(Distance_Time[0]);
+        duration.setText(Distance_Time[1]);
+        }catch(Exception e){
+
+            distance.setText("Unable to get distance.");
+            duration.setText("Unable to get duration");
+
+        }
+
+       // Log.e("GOOGLE Direction API",RR);
     }
 }
 

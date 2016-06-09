@@ -116,7 +116,7 @@ public class MainMapsActivity extends AppCompatActivity implements
                 MarkerOptions markerOption = new MarkerOptions().position(new LatLng(myMarker.getLatitude(), myMarker.getLongitude()));
 
 
-                System.out.println(myMarker.getParkingFullTag() + "###" +myMarker.getParkingFullTag().toUpperCase() +"###"+ myMarker.getParkingFullTag().length() );
+              /*  System.out.println(myMarker.getParkingFullTag() + "###" +myMarker.getParkingFullTag().toUpperCase() +"###"+ myMarker.getParkingFullTag().length() );
                  if(myMarker.getParkingFullTag().equalsIgnoreCase("1")){
                      markerOption.icon(BitmapDescriptorFactory.fromResource(R.drawable.pavailable));
                  }else if(myMarker.getParkingFullTag().equalsIgnoreCase("0")){
@@ -124,6 +124,20 @@ public class MainMapsActivity extends AppCompatActivity implements
                  }else{
                     //Toast.makeText(getApplicationContext(),myMarker.getParkingFullTag().toString(),Toast.LENGTH_LONG).show();
                     markerOption.icon(BitmapDescriptorFactory.fromResource(R.drawable.pp));
+                }*/
+
+                if(myMarker.getAvailability().equalsIgnoreCase("Not Known")){
+                    markerOption.icon(BitmapDescriptorFactory.fromResource(R.drawable.pp));
+                }else{
+                    //Toast.makeText(getApplicationContext(),myMarker.getParkingFullTag().toString(),Toast.LENGTH_LONG).show();
+                   // available.setText(myMarker.getAvailability()+"("+myMarker.getPercentage()+"%)");  //
+                    // parking_availability.setTextColor(Color.parseColor("#ffa500")); //orange
+                    if(myMarker.getPercentage().equalsIgnoreCase("0")){
+                        markerOption.icon(BitmapDescriptorFactory.fromResource(R.drawable.pnotavailable));
+                    }
+                    else{
+                    markerOption.icon(BitmapDescriptorFactory.fromResource(R.drawable.pavailable));
+                    }
                 }
 
 
@@ -162,7 +176,7 @@ try {
         if (isOnline()) {
             try {
                 Get_Parking_Details GPD = new Get_Parking_Details();
-                GPD.execute(Econstants.URL_TEsting);
+                GPD.execute(Econstants.URL_GENERIC);
             }catch(Exception e){
                 Log.e("CAUGHT",e.getMessage().toString());
             }

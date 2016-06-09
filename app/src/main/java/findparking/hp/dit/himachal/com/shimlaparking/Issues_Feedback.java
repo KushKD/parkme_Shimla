@@ -192,7 +192,7 @@ public class Issues_Feedback extends Activity {
             Mobile = params[7];
 
            try {
-               url_ =new URL(Econstants.URL_MAIN_Testing+"/getIssueFeedback_JSON");
+               url_ =new URL(Econstants.URL_MAIN+"/getIssueFeedback_JSON");
                conn_ = (HttpURLConnection)url_.openConnection();
                conn_.setDoOutput(true);
                conn_.setRequestMethod("POST");

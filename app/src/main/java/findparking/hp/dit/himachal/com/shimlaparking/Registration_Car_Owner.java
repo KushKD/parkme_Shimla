@@ -184,7 +184,7 @@ if(Name_Service.length()!= 0 && Name_Service!= null){
             EMAIL_Service = params[4];
 
             try {
-                url_ =new URL(Econstants.URL_MAIN_Testing+"/getVehicleRegistration_JSON");
+                url_ =new URL(Econstants.URL_MAIN+"/getVehicleRegistration_JSON");
                 conn_ = (HttpURLConnection)url_.openConnection();
                 conn_.setDoOutput(true);
                 conn_.setRequestMethod("POST");
