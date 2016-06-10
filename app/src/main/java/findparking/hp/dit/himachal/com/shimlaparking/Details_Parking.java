@@ -456,10 +456,48 @@ public class Details_Parking extends AppCompatActivity {
                 parkme_bt.setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View v) {
-                        //// TODO: 6/9/2016
 
-                         //Show Alert Box
-                        ShowAlert("kush");
+                        //Check the Distance
+                        //If the distance is more than 5000 metres The user is not allowed to park in
+                       try {
+                           float distance_for_car_parking = 0;
+                           Location CurrentLocation = null;
+
+
+                               //Get Location
+                               try{
+                                   LocationManager locationManager = (LocationManager) getSystemService(Context.LOCATION_SERVICE);
+                                   Location location= locationManager.getLastKnownLocation(LocationManager.GPS_PROVIDER);
+                                   CurrentLocation = new Location("Current Location");
+                                   CurrentLocation.setLatitude(location.getLatitude());
+                                   CurrentLocation.setLongitude(location.getLongitude());
+
+
+                               }catch (SecurityException e){
+                                   Log.e("ERROR",e.getLocalizedMessage().toString());
+                               }
+
+
+                           Location Parking_Location = new Location("Selected Parking");
+                           Parking_Location.setLatitude(MArkerDetails.getLatitude());
+                           Parking_Location.setLongitude(MArkerDetails.getLongitude());
+
+                           distance_for_car_parking = CurrentLocation.distanceTo(Parking_Location); // in meters
+
+                           Log.e("Distance",Float.toString(distance_for_car_parking));
+
+                           if(distance_for_car_parking <=500){
+                                 ShowAlert("Park Me");
+                           }else{
+                              String Message_NO_PARK = "You are currently "+Math.round(distance_for_car_parking)+" meters away from selected parking. Please reach closer (not more than 500 meters) and try again.";
+                               ShowAlertafter_ParkME(Message_NO_PARK);
+                           }
+
+
+
+                       }catch(Exception e){
+                           Toast.makeText(getApplicationContext(),"Don't have the precise location",Toast.LENGTH_LONG).show();
+                       }
 
                     }
                 });

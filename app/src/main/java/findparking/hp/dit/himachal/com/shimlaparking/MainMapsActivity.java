@@ -523,7 +523,7 @@ try {
           //  available.setText(myMarker.getAvailability()+"("+myMarker.getPercentage()+"%)");
             if(myMarker.getAvailability().equalsIgnoreCase("Not Known")){
                 available.setText(myMarker.getAvailability());
-                available.setTextColor(Color.parseColor("#0000b2")); //blue
+                available.setTextColor(Color.parseColor("#ffa500")); //orange
             }else{
                 //Toast.makeText(getApplicationContext(),myMarker.getParkingFullTag().toString(),Toast.LENGTH_LONG).show();
                 available.setText(myMarker.getAvailability()+"("+myMarker.getPercentage()+"%)");  //
@@ -533,11 +533,11 @@ try {
                 }else if(Integer.parseInt(myMarker.getPercentage())>0 && Integer.parseInt(myMarker.getPercentage())<=25){
                     available.setTextColor(Color.parseColor("#ec7046"));  //wheat
                 }else if(Integer.parseInt(myMarker.getPercentage())>25 && Integer.parseInt(myMarker.getPercentage())<=50){
-                    available.setTextColor(Color.parseColor("#e3ff00")); //parrot green
+                    available.setTextColor(Color.parseColor("#0000b2")); //blue
                 }else if(Integer.parseInt(myMarker.getPercentage())>50 && Integer.parseInt(myMarker.getPercentage())<=75){
-                    available.setTextColor(Color.parseColor("#7bd88b")); //Light green
+                    available.setTextColor(Color.parseColor("#006600")); //Light green
                 }else{
-                    available.setTextColor(Color.parseColor("#11561d")); //Dark green
+                    available.setTextColor(Color.parseColor("#004c00")); //Dark green
                 }
             }
             minparkingtime.setText(myMarker.getMinimumParkingTime());
