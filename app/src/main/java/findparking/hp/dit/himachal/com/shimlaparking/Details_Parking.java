@@ -31,6 +31,7 @@ import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.google.android.gms.maps.LocationSource;
 import com.google.android.gms.maps.model.BitmapDescriptorFactory;
 
 import org.json.JSONException;
@@ -50,7 +51,7 @@ import Http_Manager.date_Time;
 import Parse.JSON_Manager;
 import Parse.Parse_JSON_Google;
 
-public class Details_Parking extends AppCompatActivity {
+public class Details_Parking extends AppCompatActivity implements LocationSource.OnLocationChangedListener {
 
     private TextView
             parking_place,
@@ -715,7 +716,10 @@ public class Details_Parking extends AppCompatActivity {
         }
     }
 
+    @Override
+    public void onLocationChanged(Location location) {
 
+    }
 
 
     public class Park_Me extends AsyncTask<String,String,String>{
