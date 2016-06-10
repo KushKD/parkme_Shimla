@@ -54,6 +54,8 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 
+import Helper.helper_Functions;
+
 public class MainMapsActivity extends AppCompatActivity implements
 
         GoogleMap.OnMyLocationButtonClickListener,
@@ -71,10 +73,12 @@ public class MainMapsActivity extends AppCompatActivity implements
     private static final int LOCATION_PERMISSION_REQUEST_CODE = 1;
 
     private boolean mPermissionDenied = false;
-
+private int Zoom_Value_Camera = 13;
+    private float Straight_Distance = 0;
     LocationRequest mLocationRequest;
     GoogleApiClient mGoogleApiClient;
     LatLng latLng;
+    LatLng Shimla_latLng;
     Marker currLocationMarker;
     private GoogleMap mMap;
     private ArrayList<My_Marker> mMyMarkersArray = null;
@@ -84,6 +88,7 @@ public class MainMapsActivity extends AppCompatActivity implements
     URL url_;
     HttpURLConnection conn_;
     StringBuilder sb = new StringBuilder();
+    float distance =0;
 
 
     @Override
@@ -98,6 +103,7 @@ public class MainMapsActivity extends AppCompatActivity implements
         SupportMapFragment mapFragment =
                 (SupportMapFragment) getSupportFragmentManager().findFragmentById(R.id.map);
         mapFragment.getMapAsync(this);
+
 
 
     }
@@ -330,9 +336,49 @@ try {
 
        // Toast.makeText(this,"Location Changed",Toast.LENGTH_SHORT).show();
 
+        //Get Distance Grom Delhi
+        float Distance_From_Delhi = helper_Functions.distFromDelhi((float)28.6457559,(float)76.8105573,(float)31.0699863,(float)77.1867547);
+        Log.e("Distance from Delhi",Float.toString(Distance_From_Delhi/40));
+        //Get Distance from Changigarh
+        float Distance_From_Changigarh = helper_Functions.distFromChandigarh((float)30.726525,(float)76.6963736,(float)31.0699863,(float)77.1867547);
+        Log.e("Distance from Chandi",Float.toString(Distance_From_Changigarh/40));
+
+
+
+
+        //Straight_Distance
+        Straight_Distance = helper_Functions.distGeneric((float)31.099992,(float)71.174456,(float)latLng.latitude,(float)latLng.longitude);
+        Log.e("Distance from ChotaS",Float.toString(Straight_Distance));
+
+      //  Zoom_Value_Camera = Math.round((600+Straight_Distance)/Straight_Distance);
+      //  Log.e("Zoom Value",Integer.toString(Zoom_Value_Camera));
+
+        Location CurrentLocation = new Location("Current Location");
+        CurrentLocation.setLatitude(latLng.latitude);
+        CurrentLocation.setLongitude(latLng.longitude);
+
+        Location Shimla_Location = new Location("Shimla Location");
+        Shimla_Location.setLatitude(31.0782882);
+        Shimla_Location.setLongitude(77.1240016);
+
+        distance = CurrentLocation.distanceTo(Shimla_Location) / 1000; // in km
+
+        Log.e("DistanceKM",Float.toString(distance));
+
+        if(distance<=15){
+            Zoom_Value_Camera = 12;
+        }else if(distance >15 && distance <=60){
+            Zoom_Value_Camera =9;
+        }else if(distance>60 && distance<=300){
+            Zoom_Value_Camera = 5;
+        }else{
+            Zoom_Value_Camera=1;
+        }
+
+
         //zoom to current position:
         CameraPosition cameraPosition = new CameraPosition.Builder()
-                .target(latLng).zoom(13).build();  //default was 14
+                .target(latLng).zoom(Zoom_Value_Camera).build();  //default was 14
 
         mMap.animateCamera(CameraUpdateFactory
                 .newCameraPosition(cameraPosition));

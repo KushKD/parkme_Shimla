@@ -149,21 +149,21 @@ public class Details_Parking extends AppCompatActivity {
                 }*/
                 if(MArkerDetails.getAvailability().equalsIgnoreCase("Not Known")){
                     parking_availability.setText(MArkerDetails.getAvailability());
-                    parking_availability.setTextColor(Color.parseColor("#0000b2")); //blue
+                    parking_availability.setTextColor(Color.parseColor("#ffa500")); //orange
                 }else{
                     //Toast.makeText(getApplicationContext(),myMarker.getParkingFullTag().toString(),Toast.LENGTH_LONG).show();
                     parking_availability.setText(MArkerDetails.getAvailability()+"("+MArkerDetails.getPercentage()+"%)");  //
-                   // parking_availability.setTextColor(Color.parseColor("#ffa500")); //orange
-                    if(MArkerDetails.getPercentage().equalsIgnoreCase("0")){
+                   // parking_availability.setTextColor(Color.parseColor("#e3ff0")); //parrot green
+                    if(Integer.parseInt(MArkerDetails.getPercentage())<=0){
                         parking_availability.setTextColor(Color.parseColor("#990000")); //red
                     }else if(Integer.parseInt(MArkerDetails.getPercentage())>0 && Integer.parseInt(MArkerDetails.getPercentage())<=25){
                         parking_availability.setTextColor(Color.parseColor("#ec7046"));  //wheat
                     }else if(Integer.parseInt(MArkerDetails.getPercentage())>25 && Integer.parseInt(MArkerDetails.getPercentage())<=50){
-                        parking_availability.setTextColor(Color.parseColor("#e3ff00")); //parrot green
+                        parking_availability.setTextColor(Color.parseColor("#0000b2")); //blue
                     }else if(Integer.parseInt(MArkerDetails.getPercentage())>50 && Integer.parseInt(MArkerDetails.getPercentage())<=75){
-                        parking_availability.setTextColor(Color.parseColor("#7bd88b")); //Light green
+                        parking_availability.setTextColor(Color.parseColor("#006600")); //Light green
                     }else{
-                        parking_availability.setTextColor(Color.parseColor("#11561d")); //Dark green
+                        parking_availability.setTextColor(Color.parseColor("#004c00")); //Dark green
                     }
                 }
 
