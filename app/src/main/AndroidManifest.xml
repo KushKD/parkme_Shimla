@@ -36,7 +36,7 @@
             android:value="AIzaSyCkSC2Vk82KdtDEeXxdddD7tL9Q3a9_9-g" />
 
         <activity
-            android:name=".SplashScreen"
+            android:name=".SplashScreen_Activity"
             android:screenOrientation="portrait"
             android:label="@string/title_activity_main_maps">
             <intent-filter>
@@ -46,21 +46,21 @@
             </intent-filter>
         </activity>
         <activity
-            android:name=".Details_Parking"
+            android:name=".ParkingDetails_Activity"
             android:label="@string/title_activity_details__parking"
             android:screenOrientation="portrait"
             android:theme="@style/AppTheme.NoActionBar" />
 
-        <activity android:name=".MainMapsActivity" />
+        <activity android:name=".Main_Activity" />
 
-        <activity android:name=".Rates"
+        <activity android:name=".Rates_Activity"
             android:screenOrientation="portrait"
             />
 
-        <activity android:name=".Registration_Car_Owner"
+        <activity android:name=".Registration_Activity"
             android:screenOrientation="portrait"/>
 
-        <activity android:name=".Issues_Feedback"
+        <activity android:name=".IssuesFeedback_Activity"
             android:screenOrientation="portrait"></activity>
     </application>
 

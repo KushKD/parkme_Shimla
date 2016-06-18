@@ -9,7 +9,6 @@ import android.net.ConnectivityManager;
 import android.net.NetworkInfo;
 import android.os.AsyncTask;
 import android.os.Bundle;
-import android.telephony.TelephonyManager;
 import android.view.View;
 import android.view.inputmethod.InputMethodManager;
 import android.widget.Button;
@@ -19,9 +18,7 @@ import android.widget.ProgressBar;
 import android.widget.Toast;
 
 import org.json.JSONException;
-import org.json.JSONObject;
 import org.json.JSONStringer;
-import org.json.JSONTokener;
 
 import java.io.BufferedReader;
 import java.io.IOException;
@@ -33,7 +30,10 @@ import java.net.URL;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
-public class Registration_Car_Owner extends Activity {
+import Parse.JsonParser;
+import Utilities.Econstants;
+
+public class Registration_Activity extends Activity {
 
     Button register, back;
     EditText et_Mobile , et_Name , et_Vehicle_Number ,et_Email;
@@ -79,7 +79,7 @@ public class Registration_Car_Owner extends Activity {
         back.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Registration_Car_Owner.this.finish();
+                Registration_Activity.this.finish();
             }
         });
 
@@ -168,7 +168,7 @@ if(Name_Service.length()!= 0 && Name_Service!= null){
         @Override
         protected void onPreExecute() {
             super.onPreExecute();
-            dialog = new ProgressDialog(Registration_Car_Owner.this);
+            dialog = new ProgressDialog(Registration_Activity.this);
             this.dialog.setMessage("Please wait ..");
             this.dialog.show();
             this.dialog.setCancelable(false);
@@ -276,9 +276,9 @@ try{
                     editor.putString("VehicleNumber",Vehicle_Number_Service);
                     // Commit the edits!
                     editor.commit();
-                    Intent i = new Intent(Registration_Car_Owner.this,MainMapsActivity.class);
+                    Intent i = new Intent(Registration_Activity.this,Main_Activity.class);
                     startActivity(i);
-                    Registration_Car_Owner.this.finish();
+                    Registration_Activity.this.finish();
                 }
                 else{
                     dialog.dismiss();

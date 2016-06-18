@@ -1,11 +1,11 @@
-package findparking.hp.dit.himachal.com.shimlaparking;
+package Model;
 
 import java.io.Serializable;
 
 /**
  * Created by kuush on 5/27/2016.
  */
-public class My_Marker implements Serializable {
+public class My_Marker_Pojo implements Serializable {
 
 
     public String getThrashholdValue() {
@@ -235,22 +235,22 @@ public class My_Marker implements Serializable {
     }
 
 
-    public My_Marker(){
+    public My_Marker_Pojo(){
 
     }
 
 
-    public My_Marker(String Capacity,
-                     String ContactNumber1, String ContactNumber2, String ContactNumber3,
-                     String ContactPerson1, String ContactPerson2, String ContactPerson3,
-                     String Identifier,
-                     String Image, String Image1, String Image2,
-                     Double Latitude, Double Longitude,
-                     String ParkingArea, String ParkingFullTag,String ParkingPlace,
-                     String Remarks, String SutedFor, String ThrashholdValue,
-                     String MinimumParkingFeeSmallCar, String MinimumParkingFeebigCar, String MinimumParkingTime,
-                     String percentage,String Availability,
-                     String ParkingID)
+    public My_Marker_Pojo(String Capacity,
+                          String ContactNumber1, String ContactNumber2, String ContactNumber3,
+                          String ContactPerson1, String ContactPerson2, String ContactPerson3,
+                          String Identifier,
+                          String Image, String Image1, String Image2,
+                          Double Latitude, Double Longitude,
+                          String ParkingArea, String ParkingFullTag, String ParkingPlace,
+                          String Remarks, String SutedFor, String ThrashholdValue,
+                          String MinimumParkingFeeSmallCar, String MinimumParkingFeebigCar, String MinimumParkingTime,
+                          String percentage, String Availability,
+                          String ParkingID)
     {
         this.Capacity = Capacity;
         this.ContactNumber1 = ContactNumber1;

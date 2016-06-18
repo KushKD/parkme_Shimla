@@ -54,9 +54,13 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 
-import Helper.helper_Functions;
+import Abstract.PermissionUtils;
+import Utilities.helper_Functions;
+import Model.My_Marker_Pojo;
+import Model.Sending_Object_All_details_Pojo;
+import Utilities.Econstants;
 
-public class MainMapsActivity extends AppCompatActivity implements
+public class Main_Activity extends AppCompatActivity implements
 
         GoogleMap.OnMyLocationButtonClickListener,
         OnMapReadyCallback,
@@ -81,8 +85,8 @@ private int Zoom_Value_Camera = 13;
     LatLng Shimla_latLng;
     Marker currLocationMarker;
     private GoogleMap mMap;
-    private ArrayList<My_Marker> mMyMarkersArray = null;
-    private  HashMap<Marker, My_Marker> mMarkersHashMap = null;
+    private ArrayList<My_Marker_Pojo> mMyMarkersArray = null;
+    private  HashMap<Marker, My_Marker_Pojo> mMarkersHashMap = null;
     List<Get_Parking_Details> tasks;
     ProgressBar pb;
     URL url_;
@@ -110,9 +114,9 @@ private int Zoom_Value_Camera = 13;
 
 
 
-    private void plotMarkers(ArrayList<My_Marker> markers) {
+    private void plotMarkers(ArrayList<My_Marker_Pojo> markers) {
         if (markers.size() > 0) {
-            for (My_Marker myMarker : markers) {
+            for (My_Marker_Pojo myMarker : markers) {
 
 
                // System.out.println(markers.size() );
@@ -149,7 +153,7 @@ private int Zoom_Value_Camera = 13;
 
                 Marker currentMarker = mMap.addMarker(markerOption);
                 mMarkersHashMap.put(currentMarker, myMarker);
-                System.out.println("Current MarkerID:-  "+currentMarker.getId().toString()+"    ########    "+"MyMarker:-  "+myMarker.getParkingID() );
+                System.out.println("Current MarkerID:-  "+currentMarker.getId().toString()+"    ########    "+"MyMarker_Pojo:-  "+myMarker.getParkingID() );
 
                 mMap.setInfoWindowAdapter(new MarkerInfoWindowAdapter());
             }
@@ -398,14 +402,14 @@ try {
 
 
         //Declare Object
-         Sending_Object_All_details SOAD = null;
+         Sending_Object_All_details_Pojo SOAD = null;
 
 
 
         if (mMyMarkersArray.size() > 0) {
 
 try {
-    SOAD = new Sending_Object_All_details();
+    SOAD = new Sending_Object_All_details_Pojo();
 
 
 
@@ -456,7 +460,7 @@ try {
             //Now Pass the Object
             Intent userSearch = new Intent();
             userSearch.putExtra("DETAILS_ALL", SOAD);
-            userSearch.setClass(MainMapsActivity.this, Details_Parking.class);
+            userSearch.setClass(Main_Activity.this, ParkingDetails_Activity.class);
 
             startActivity(userSearch);
 
@@ -500,7 +504,7 @@ try {
         {
             View v  = getLayoutInflater().inflate(R.layout.infowindow_layout, null);
 
-            final My_Marker myMarker = mMarkersHashMap.get(marker);
+            final My_Marker_Pojo myMarker = mMarkersHashMap.get(marker);
 
             ImageView markerIcon = (ImageView)v.findViewById(R.id.marker_icon);
 
@@ -557,7 +561,7 @@ try {
         protected void onPreExecute() {
             super.onPreExecute();
 
-            dialog = new ProgressDialog(MainMapsActivity.this);
+            dialog = new ProgressDialog(Main_Activity.this);
             this.dialog.setMessage("Please wait...");
             this.dialog.show();
             this.dialog.setCancelable(false);
@@ -632,10 +636,10 @@ try {
 
                         for (int i = 0; i < ar.length(); i++) {
                             JSONObject obj = ar.getJSONObject(i);
-                            // Initialize the HashMap for Markers and MyMarker object
+                            // Initialize the HashMap for Markers and MyMarker_Pojo object
                             mMarkersHashMap = new HashMap<>();
 
-                            mMyMarkersArray.add(new My_Marker(obj.getString("Capacity"),
+                            mMyMarkersArray.add(new My_Marker_Pojo(obj.getString("Capacity"),
                                     obj.getString("ContactNumber1"),
                                     obj.getString("ContactNumber2"),
                                     obj.getString("ContactNumber3"),
@@ -669,7 +673,7 @@ try {
                     }
                 }else{
 
-                    Toast.makeText(MainMapsActivity.this, "Connection to server failed.Please try again.", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(Main_Activity.this, "Connection to server failed.Please try again.", Toast.LENGTH_SHORT).show();
                 }
 
                 if(mMyMarkersArray.size() > 0) {
@@ -697,7 +701,7 @@ try {
        // MArkerDetails = null;
        // mMarkersHashMap = null;
        // mMyMarkersArray = null;
-       // My_Marker = null;
-        MainMapsActivity.this.finish();
+       // My_Marker_Pojo = null;
+        Main_Activity.this.finish();
     }
 }

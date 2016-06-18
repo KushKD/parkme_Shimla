@@ -1,16 +1,16 @@
-package findparking.hp.dit.himachal.com.shimlaparking;
+package Model;
 
 /**
  * Created by kuush on 5/26/2016.
  */
-public class MyMarker
+public class MyMarker_Pojo
 {
     private String mLabel;
     private String mIcon;
     private Double mLatitude;
     private Double mLongitude;
 
-    public MyMarker(String label, String icon, Double latitude, Double longitude)
+    public MyMarker_Pojo(String label, String icon, Double latitude, Double longitude)
     {
         this.mLabel = label;
         this.mLatitude = latitude;

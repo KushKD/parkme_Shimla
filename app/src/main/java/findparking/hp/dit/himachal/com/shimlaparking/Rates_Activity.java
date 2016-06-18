@@ -23,7 +23,12 @@ import java.net.URL;
 import java.util.ArrayList;
 import java.util.List;
 
-public class Rates extends Activity {
+import Adapters.RatesAdapter;
+import Model.Rates_Pojo;
+import Parse.Fee_Parse_Json;
+import Utilities.Econstants;
+
+public class Rates_Activity extends Activity {
 
     URL url_;
     HttpURLConnection conn_;
@@ -33,7 +38,7 @@ public class Rates extends Activity {
     ListView listv;
     Context context;
     List<Get_Rates_Data_Server> tasks;
-    List<Rates_POJO> Rates_Server;
+    List<Rates_Pojo> Rates_Server;
     RatesAdapter adapter;
     TextView header;
     Button back;
@@ -98,7 +103,7 @@ public class Rates extends Activity {
         back.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Rates.this.finish();
+                Rates_Activity.this.finish();
             }
         });
 
@@ -161,7 +166,7 @@ public class Rates extends Activity {
     @Override
     public void onBackPressed() {
         super.onBackPressed();
-        Rates.this.finish();
+        Rates_Activity.this.finish();
 
     }
 
@@ -241,7 +246,7 @@ public class Rates extends Activity {
             //Toast.makeText(getApplicationContext(),s,Toast.LENGTH_LONG).show();
              //JSON Parsing Here
 
-            Rates_Server = Fee_JSON_Parse_Small.parseFeed(s);
+            Rates_Server = Fee_Parse_Json.parseFeed(s);
             if(Rates_Server.isEmpty()){
                 Toast.makeText(getApplicationContext(),"List Empty",Toast.LENGTH_LONG).show();
             }else

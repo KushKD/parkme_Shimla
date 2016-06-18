@@ -5,17 +5,11 @@ import android.util.Log;
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
-import org.json.JSONTokener;
-
-import java.util.ArrayList;
-import java.util.List;
-
-import findparking.hp.dit.himachal.com.shimlaparking.Rates_POJO;
 
 /**
  * Created by kuush on 6/9/2016.
  */
-public class Parse_JSON_Google {
+public class Parse_Google_API_Json {
 
     public static String[] parseGoogleJSON(String content) {
 

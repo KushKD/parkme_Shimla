@@ -6,7 +6,9 @@ import android.content.SharedPreferences;
 import android.os.Handler;
 import android.os.Bundle;
 
-public class SplashScreen extends Activity {
+import Utilities.Econstants;
+
+public class SplashScreen_Activity extends Activity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -23,13 +25,13 @@ public class SplashScreen extends Activity {
 
                 if(hasLoggedIn)
                 {
-                    Intent mainIntent = new Intent(SplashScreen.this, MainMapsActivity.class);
-                    SplashScreen.this.startActivity(mainIntent);
-                    SplashScreen.this.finish();
+                    Intent mainIntent = new Intent(SplashScreen_Activity.this, Main_Activity.class);
+                    SplashScreen_Activity.this.startActivity(mainIntent);
+                    SplashScreen_Activity.this.finish();
                 }else{
-                    Intent loginIntent = new Intent(SplashScreen.this, Registration_Car_Owner.class);
-                    SplashScreen.this.startActivity(loginIntent);
-                    SplashScreen.this.finish();
+                    Intent loginIntent = new Intent(SplashScreen_Activity.this, Registration_Activity.class);
+                    SplashScreen_Activity.this.startActivity(loginIntent);
+                    SplashScreen_Activity.this.finish();
 
                 }
 

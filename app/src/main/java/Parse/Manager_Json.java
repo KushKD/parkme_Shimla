@@ -7,7 +7,7 @@ import org.json.JSONTokener;
 /**
  * Created by kuush on 6/9/2016.
  */
-public class JSON_Manager {
+public class Manager_Json {
 
     public static String Parse_PArkME(String content) {
 
@@ -17,7 +17,7 @@ public class JSON_Manager {
             //  JSONObject sys  = reader.getJSONObject("sys");
             //  country = sys.getString("country");
             JSONObject json= (JSONObject) new JSONTokener(content).nextValue();
-            g_Table = (String) json.get("getParkMeRequest_JSONResult");
+            g_Table = (String) json.get("getParkMeRequest_JSONResult5");
 
             return g_Table;
 

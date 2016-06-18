@@ -3,13 +3,11 @@ package findparking.hp.dit.himachal.com.shimlaparking;
 import android.app.Activity;
 import android.app.ProgressDialog;
 import android.content.Context;
-import android.content.Intent;
 import android.content.SharedPreferences;
 import android.net.ConnectivityManager;
 import android.net.NetworkInfo;
 import android.os.AsyncTask;
 import android.os.Bundle;
-import android.preference.PreferenceManager;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.Button;
@@ -29,7 +27,10 @@ import java.net.HttpURLConnection;
 import java.net.MalformedURLException;
 import java.net.URL;
 
-public class Issues_Feedback extends Activity {
+import Parse.JsonParser;
+import Utilities.Econstants;
+
+public class IssuesFeedback_Activity extends Activity {
 
    public String Parking_ID = null;
     public String Latitude = null;
@@ -69,7 +70,7 @@ public class Issues_Feedback extends Activity {
         cancel.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Issues_Feedback.this.finish();
+                IssuesFeedback_Activity.this.finish();
             }
         });
 
@@ -173,7 +174,7 @@ public class Issues_Feedback extends Activity {
        @Override
        protected void onPreExecute() {
            super.onPreExecute();
-           dialog = new ProgressDialog(Issues_Feedback.this);
+           dialog = new ProgressDialog(IssuesFeedback_Activity.this);
            this.dialog.setMessage("Please wait ..");
            this.dialog.show();
            this.dialog.setCancelable(false);
@@ -203,7 +204,7 @@ public class Issues_Feedback extends Activity {
                conn_.connect();
 
                JSONStringer userJson = new JSONStringer()
-                       .object().key("IssuesFeedback")
+                       .object().key("IssuesFeedback_Activity")
                        .object()
                        .key("NatureofComplaint").value(Issue_Type)
                        .key("TypeofComplaint").value(Complaint_Type)
@@ -276,7 +277,7 @@ public class Issues_Feedback extends Activity {
                    // clearData();
                    dialog.dismiss();
                    Toast.makeText(getApplicationContext(), finalResult, Toast.LENGTH_SHORT).show();
-                   Issues_Feedback.this.finish();
+                   IssuesFeedback_Activity.this.finish();
                }
                else{
                    dialog.dismiss();

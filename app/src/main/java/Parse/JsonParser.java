@@ -1,4 +1,4 @@
-package findparking.hp.dit.himachal.com.shimlaparking;
+package Parse;
 
 import org.json.JSONException;
 import org.json.JSONObject;
@@ -65,21 +65,5 @@ public String POST_ISSUE(String s) {
         return null;
     }
 }
-   /* public String ParseStringOTP(String s) {
 
-        String g_Table = null;
-        try {
-            Object json = new JSONTokener(s).nextValue();
-            if (json instanceof JSONObject) {
-                JSONObject obj = new JSONObject(s);
-                g_Table = obj.optString(Constants.JSON_OTP);
-                return g_Table;
-            } else {
-                return null;
-            }
-        } catch (JSONException e) {
-            e.printStackTrace();
-            return null;
-        }
-    }*/
 }

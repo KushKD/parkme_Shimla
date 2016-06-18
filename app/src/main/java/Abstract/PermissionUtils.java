@@ -1,4 +1,4 @@
-package findparking.hp.dit.himachal.com.shimlaparking;
+package Abstract;
 
 
 import android.Manifest;
@@ -11,6 +11,8 @@ import android.support.v4.app.ActivityCompat;
 import android.support.v4.app.DialogFragment;
 import android.support.v7.app.AppCompatActivity;
 import android.widget.Toast;
+
+import findparking.hp.dit.himachal.com.shimlaparking.R;
 
 /**
  * Created by kuush on 5/26/2016.

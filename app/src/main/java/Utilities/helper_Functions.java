@@ -1,4 +1,4 @@
-package Helper;
+package Utilities;
 
 /**
  * Created by kuush on 6/8/2016.

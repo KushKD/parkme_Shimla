@@ -17,7 +17,6 @@ import android.net.NetworkInfo;
 import android.net.Uri;
 import android.os.AsyncTask;
 import android.os.Bundle;
-import android.support.design.widget.FloatingActionButton;
 import android.support.v4.app.ActivityCompat;
 import android.support.v4.content.ContextCompat;
 import android.support.v7.app.AppCompatActivity;
@@ -31,10 +30,6 @@ import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import com.google.android.gms.location.LocationListener;
-import com.google.android.gms.maps.LocationSource;
-import com.google.android.gms.maps.model.BitmapDescriptorFactory;
-
 import org.json.JSONException;
 import org.json.JSONStringer;
 
@@ -46,13 +41,14 @@ import java.net.HttpURLConnection;
 import java.net.MalformedURLException;
 import java.net.URL;
 
-import Helper.helper_Functions;
 import Http_Manager.Http_Manager;
 import Http_Manager.date_Time;
-import Parse.JSON_Manager;
-import Parse.Parse_JSON_Google;
+import Model.Sending_Object_All_details_Pojo;
+import Parse.Manager_Json;
+import Parse.Parse_Google_API_Json;
+import Utilities.Econstants;
 
-public class Details_Parking extends AppCompatActivity  {
+public class ParkingDetails_Activity extends AppCompatActivity  {
 
     private TextView
             parking_place,
@@ -84,7 +80,7 @@ public class Details_Parking extends AppCompatActivity  {
 
     private double _Distance = 0;
     float[] result;
-      Sending_Object_All_details   MArkerDetails;
+      Sending_Object_All_details_Pojo MArkerDetails;
 
 
     private LinearLayout contactperson1_layout,contactperson2_layout,contactperson3_layout;
@@ -115,7 +111,7 @@ public class Details_Parking extends AppCompatActivity  {
             try {
 
                 Intent getRoomDetailsIntent = getIntent();
-                 MArkerDetails = (Sending_Object_All_details) getRoomDetailsIntent.getSerializableExtra("DETAILS_ALL");
+                 MArkerDetails = (Sending_Object_All_details_Pojo) getRoomDetailsIntent.getSerializableExtra("DETAILS_ALL");
 
 
                 if (MArkerDetails.getContactPerson1().length() == 0) {
@@ -182,8 +178,8 @@ public class Details_Parking extends AppCompatActivity  {
                     latitude_person.setText(Double.toString(MArkerDetails.getLatitude_my_Location()));
                     longitude_person.setText(Double.toString(MArkerDetails.getLongitude_my_Location()));
                 }else{
-                  //  Toast.makeText(Details_Parking.this, "We don't have your precise Location to start the navigation.", Toast.LENGTH_SHORT).show();
-                    AlertDialog.Builder alertDialog = new AlertDialog.Builder(Details_Parking.this);
+                  //  Toast.makeText(ParkingDetails_Activity.this, "We don't have your precise Location to start the navigation.", Toast.LENGTH_SHORT).show();
+                    AlertDialog.Builder alertDialog = new AlertDialog.Builder(ParkingDetails_Activity.this);
 
                     // Setting Dialog Title
                     alertDialog.setTitle("Alert");
@@ -241,13 +237,13 @@ public class Details_Parking extends AppCompatActivity  {
 
 
                         if(latitude_person.getText().toString()!= null && longitude_person.getText().toString()!=null){
-                            Intent i = new Intent(Details_Parking.this, Issues_Feedback.class);
+                            Intent i = new Intent(ParkingDetails_Activity.this, IssuesFeedback_Activity.class);
                             i.putExtra("ID", MArkerDetails.getParkingId());
                             i.putExtra("LATITUDE",latitude_person.getText().toString());
                             i.putExtra("LONGITUDE",longitude_person.getText().toString());
                             startActivity(i);
                         }else{
-                            AlertDialog.Builder alertDialog = new AlertDialog.Builder(Details_Parking.this);
+                            AlertDialog.Builder alertDialog = new AlertDialog.Builder(ParkingDetails_Activity.this);
 
                             // Setting Dialog Title
                             alertDialog.setTitle("Alert");
@@ -306,7 +302,7 @@ public class Details_Parking extends AppCompatActivity  {
                             Intent intent = new Intent(android.content.Intent.ACTION_VIEW, Uri.parse(uri));
                             startActivity(Intent.createChooser(intent, "com.Google.Android.apps.map"));
                         }else{
-                            AlertDialog.Builder alertDialog = new AlertDialog.Builder(Details_Parking.this);
+                            AlertDialog.Builder alertDialog = new AlertDialog.Builder(ParkingDetails_Activity.this);
 
                             // Setting Dialog Title
                             alertDialog.setTitle("Alert");
@@ -359,7 +355,7 @@ public class Details_Parking extends AppCompatActivity  {
                     @Override
                     public void onClick(View v) {
 
-                        Intent Rates_Intent = new Intent(Details_Parking.this, Rates.class);
+                        Intent Rates_Intent = new Intent(ParkingDetails_Activity.this, Rates_Activity.class);
                         Rates_Intent.putExtra("ID", MArkerDetails.getParkingId());
                         startActivity(Rates_Intent);
 
@@ -600,7 +596,7 @@ public class Details_Parking extends AppCompatActivity  {
     }
 
     private void ShowAlert(String s) {
-        final Dialog dialog = new Dialog(Details_Parking.this);
+        final Dialog dialog = new Dialog(ParkingDetails_Activity.this);
         dialog.setContentView(R.layout.dialog_parkme);
         dialog.setTitle("Park Me");
         dialog.setCancelable(false);
@@ -679,13 +675,13 @@ public class Details_Parking extends AppCompatActivity  {
 
     private Boolean requestPermission(){
 
-        if (ActivityCompat.shouldShowRequestPermissionRationale(Details_Parking.this,Manifest.permission.ACCESS_FINE_LOCATION)){
+        if (ActivityCompat.shouldShowRequestPermissionRationale(ParkingDetails_Activity.this,Manifest.permission.ACCESS_FINE_LOCATION)){
 
             return true;
 
         } else {
 
-            ActivityCompat.requestPermissions(Details_Parking.this,new String[]{Manifest.permission.CALL_PHONE},PERMISSION_REQUEST_CODE);
+            ActivityCompat.requestPermissions(ParkingDetails_Activity.this,new String[]{Manifest.permission.CALL_PHONE},PERMISSION_REQUEST_CODE);
             return false;
         }
     }
@@ -714,7 +710,7 @@ public class Details_Parking extends AppCompatActivity  {
     @Override
     public void onBackPressed() {
         super.onBackPressed();
-        Details_Parking.this.finish();
+        ParkingDetails_Activity.this.finish();
     }
 
 
@@ -751,7 +747,7 @@ public class Details_Parking extends AppCompatActivity  {
         @Override
         protected void onPreExecute() {
             super.onPreExecute();
-            dialog = new ProgressDialog(Details_Parking.this);
+            dialog = new ProgressDialog(ParkingDetails_Activity.this);
             this.dialog.setMessage("Please wait ..");
             this.dialog.show();
             this.dialog.setCancelable(false);
@@ -841,7 +837,7 @@ public class Details_Parking extends AppCompatActivity  {
 
             try {
                 dialog.dismiss();
-                String result_to_Show = JSON_Manager.Parse_PArkME(s);
+                String result_to_Show = Manager_Json.Parse_PArkME(s);
                 ShowAlertafter_ParkME(result_to_Show);
 
 
@@ -859,7 +855,7 @@ public class Details_Parking extends AppCompatActivity  {
 
 
     private void ShowAlertafter_ParkME(String s) {
-        final Dialog dialog = new Dialog(Details_Parking.this);
+        final Dialog dialog = new Dialog(ParkingDetails_Activity.this);
         dialog.setContentView(R.layout.dialog_parkme_result);
         dialog.setTitle("Alert");
         dialog.setCancelable(false);
@@ -911,7 +907,7 @@ class GetDistance extends AsyncTask<String,String,String>{
           //Google
         try{
         Distance_Time = new String[2];
-        Distance_Time = Parse_JSON_Google.parseGoogleJSON(s);
+        Distance_Time = Parse_Google_API_Json.parseGoogleJSON(s);
         distance.setText(Distance_Time[0]);
         duration.setText(Distance_Time[1]);
         }catch(Exception e){

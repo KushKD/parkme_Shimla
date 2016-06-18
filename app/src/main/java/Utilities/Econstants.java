@@ -1,4 +1,4 @@
-package findparking.hp.dit.himachal.com.shimlaparking;
+package Utilities;
 
 /**
  * Created by kuush on 5/27/2016.

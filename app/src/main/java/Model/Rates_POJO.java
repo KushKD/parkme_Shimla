@@ -1,11 +1,11 @@
-package findparking.hp.dit.himachal.com.shimlaparking;
+package Model;
 
 import java.io.Serializable;
 
 /**
  * Created by kuush on 5/30/2016.
  */
-public class Rates_POJO implements Serializable {
+public class Rates_Pojo implements Serializable {
 
 
 

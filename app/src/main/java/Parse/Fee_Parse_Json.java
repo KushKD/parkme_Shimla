@@ -1,4 +1,4 @@
-package findparking.hp.dit.himachal.com.shimlaparking;
+package Parse;
 
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -8,12 +8,14 @@ import org.json.JSONTokener;
 import java.util.ArrayList;
 import java.util.List;
 
+import Model.Rates_Pojo;
+
 /**
  * Created by kuush on 5/30/2016.
  */
-public class Fee_JSON_Parse_Small {
+public class Fee_Parse_Json {
 
-    public static List<Rates_POJO> parseFeed(String content) {
+    public static List<Rates_Pojo> parseFeed(String content) {
 
         try {
 
@@ -28,11 +30,11 @@ public class Fee_JSON_Parse_Small {
             }
 
             JSONArray ar = new JSONArray(g_Table);
-            List<Rates_POJO>AdmiCardList = new ArrayList<>();
+            List<Rates_Pojo>AdmiCardList = new ArrayList<>();
 
             for (int i = 0; i < ar.length(); i++) {
                 JSONObject obj = ar.getJSONObject(i);
-                Rates_POJO pojo_rates = new Rates_POJO();
+                Rates_Pojo pojo_rates = new Rates_Pojo();
                 pojo_rates.setFeeAmount(obj.getString("Amount"));
                 System.out.println(obj.getString("Amount"));
                 pojo_rates.setDuration(obj.getString("Duration"));
