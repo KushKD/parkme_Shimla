@@ -29,10 +29,8 @@ import android.widget.LinearLayout;
 import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.Toast;
-
 import org.json.JSONException;
 import org.json.JSONStringer;
-
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
@@ -40,13 +38,12 @@ import java.io.OutputStreamWriter;
 import java.net.HttpURLConnection;
 import java.net.MalformedURLException;
 import java.net.URL;
-
-import Http_Manager.Http_Manager;
-import Http_Manager.date_Time;
+import HTTP.DateTime;
 import Model.Sending_Object_All_details_Pojo;
 import Parse.Manager_Json;
 import Parse.Parse_Google_API_Json;
 import Utilities.Econstants;
+import HTTP.Http_Manager;
 
 public class ParkingDetails_Activity extends AppCompatActivity  {
 
@@ -778,12 +775,12 @@ public class ParkingDetails_Activity extends AppCompatActivity  {
                         .object().key("ParkMeRequst")
                         .object()
                         .key("EstimatedTime").value(EstimatedTime)
-                        .key("InTime").value(date_Time.GetDateAndTime())
+                        .key("InTime").value(DateTime.GetDateAndTime())
                         .key("ParkingId").value(ParkingId)
                         .key("PhoneNumber").value(PhoneNumber)
                         .key("RegisterId").value("0")
                         .key("RequestStatus").value("Pending")
-                        .key("RequestTime").value(date_Time.GetDateAndTime())
+                        .key("RequestTime").value(DateTime.GetDateAndTime())
                         .key("VehicleNo").value(VehicleNo)
                         .key("VehicleType").value(VehicleType)
                         .endObject()

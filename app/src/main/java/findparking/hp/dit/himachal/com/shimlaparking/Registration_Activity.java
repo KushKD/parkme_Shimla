@@ -37,7 +37,7 @@ public class Registration_Activity extends Activity {
 
     Button register, back;
     EditText et_Mobile , et_Name , et_Vehicle_Number ,et_Email;
-   // Helper date_Time = null;
+   // Helper DateTime = null;
       private String IMEI = null;
 
     ProgressBar pb;
