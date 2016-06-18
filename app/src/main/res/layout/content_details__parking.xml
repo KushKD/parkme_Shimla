@@ -51,22 +51,7 @@
             />
             </LinearLayout>
 
-        <LinearLayout
-            android:layout_width="wrap_content"
-            android:layout_height="fill_parent"
-            android:layout_margin="5dp"
-            android:layout_weight="1">
 
-        <Button
-            android:id="@+id/parkme"
-            android:layout_gravity="right"
-
-            android:layout_width="fill_parent"
-            android:layout_height="fill_parent"
-            android:background="#FF545454"
-            android:textColor="#FFFFFF"
-            android:text="Park Me"/>
-            </LinearLayout>
     </LinearLayout>
 
 
@@ -767,6 +752,7 @@
                 android:layout_height="wrap_content"
                 android:background="#FFFFFF"
                 android:layout_margin="5dp"
+                android:visibility="gone"
                 android:orientation="vertical"
                 >
                 <TextView
@@ -849,7 +835,95 @@
                 </LinearLayout>
                 </LinearLayout>
 
+      <!-- Park Me , Park Out , Rating -->
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:background="#FFFFFF"
+                    android:layout_margin="5dp"
+                    android:orientation="vertical"
+                    >
+                    <TextView
+                        android:text="Park In / Park Out / Rating"
+                        android:textColor="#366988"
+                        android:textSize="17sp"
+                        android:visibility="gone"
+                        android:textStyle="bold"
+                        android:layout_marginTop="5dp"
+                        android:layout_width="fill_parent"
+                        android:layout_height="wrap_content"
+                        android:gravity="center_vertical|center_horizontal|center"
+                        />
+                    <!-- Latitude -->
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:gravity="left"
+                        android:layout_margin="5dp"
+                        android:weightSum="3"
+                        android:orientation="horizontal"
+                        android:visibility="visible">
 
+                        <LinearLayout
+                            android:layout_width="wrap_content"
+                            android:layout_height="fill_parent"
+                            android:layout_margin="5dp"
+                            android:layout_weight="1">
+
+                            <Button
+                                android:id="@+id/parkme"
+                                android:layout_gravity="right"
+
+                                android:layout_width="fill_parent"
+                                android:layout_height="fill_parent"
+                                android:background="#FF545454"
+                                android:textColor="#FFFFFF"
+                                android:text="Park Me"/>
+                        </LinearLayout>
+
+                        <LinearLayout
+                            android:layout_width="wrap_content"
+                            android:layout_height="fill_parent"
+                            android:layout_margin="5dp"
+                            android:layout_weight="1">
+
+                            <Button
+                                android:id="@+id/parkout"
+                                android:layout_gravity="right"
+                                android:layout_width="fill_parent"
+                                android:layout_height="fill_parent"
+                                android:background="#3a9fbf"
+                                android:textColor="#FFFFFF"
+                                android:text="Check Out"/>
+
+                        </LinearLayout>
+
+                        <LinearLayout
+                            android:layout_width="wrap_content"
+                            android:layout_height="fill_parent"
+                            android:layout_margin="5dp"
+                            android:layout_weight="1">
+
+                            <Button
+                                android:id="@+id/rating"
+                                android:layout_gravity="right"
+                                android:layout_width="fill_parent"
+                                android:alpha="0.5"
+                                android:layout_height="fill_parent"
+                                android:background="#bf5b3a"
+                                android:textColor="#FFFFFF"
+                                android:text="Rate It"/>
+                        </LinearLayout>
+
+
+
+
+
+                    </LinearLayout>
+
+
+
+                </LinearLayout>
                 <!-- User Location -->
 
                 <!-- Your Latitude -->

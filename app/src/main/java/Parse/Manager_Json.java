@@ -17,7 +17,27 @@ public class Manager_Json {
             //  JSONObject sys  = reader.getJSONObject("sys");
             //  country = sys.getString("country");
             JSONObject json= (JSONObject) new JSONTokener(content).nextValue();
-            g_Table = (String) json.get("getParkMeRequest_JSONResult5");
+            g_Table = (String) json.get("getParkMeRequest_JSONResult");
+
+            return g_Table;
+
+
+        } catch (JSONException e) {
+            e.printStackTrace();
+            return null;
+        }
+
+    }
+
+    public static String Parse_ParkOut(String content) {
+
+        try {
+
+            String g_Table = null;
+            //  JSONObject sys  = reader.getJSONObject("sys");
+            //  country = sys.getString("country");
+            JSONObject json= (JSONObject) new JSONTokener(content).nextValue();
+            g_Table = (String) json.get("getParkOutRequest_JSONResult");
 
             return g_Table;
 
