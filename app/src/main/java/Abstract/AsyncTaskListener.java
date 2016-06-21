@@ -8,7 +8,7 @@ import Enum.TaskType;
  */
 public interface AsyncTaskListener {
 
-    public void onTaskCompleted(String result, TaskType taskType);
+     void onTaskCompleted(String result, TaskType taskType);
 
-    public void onTaskCompleted(Activity activity, String result, TaskType taskType);
+     void onTaskCompleted(Activity activity, String result, TaskType taskType);
 }
