@@ -459,7 +459,6 @@ public class ParkingDetails_Activity extends AppCompatActivity  {
             parkout_bt.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
-                  //  ShowAlertParkOut("Check Out");
                     SharedPreferences prfs = getSharedPreferences(Econstants.PREFRANCE_NAME, Context.MODE_PRIVATE);
                     final String ParkingId_Server  = MArkerDetails.getParkingId();
                     String PhoneNumber_Server = prfs.getString("phonenumber","");
@@ -489,8 +488,6 @@ public class ParkingDetails_Activity extends AppCompatActivity  {
                     Log.e("Parking ID",ParkingId_Server);
 
     Custom_Dialog RM = new Custom_Dialog();
-    Log.e("Error","We are Here");
-                  //  RM.showDialog(ParkingDetails_Activity.this,"HI");
       RM.show_Rating(ParkingDetails_Activity.this, "Rate Me", PhoneNumber_Server, ParkingId_Server);
 
 }
