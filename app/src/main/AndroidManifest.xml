@@ -9,6 +9,7 @@
     -->
     <uses-permission-23-sdk android:name="android.permission.ACCESS_FINE_LOCATION" />
     <uses-permission-23-sdk android:name="android.permission.ACCESS_COARSE_LOCATION" />
+
     <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
     <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION" />
     <uses-permission android:name="android.permission.INTERNET" />
@@ -33,12 +34,12 @@
         -->
         <meta-data
             android:name="com.google.android.geo.API_KEY"
-            android:value="AIzaSyCkSC2Vk82KdtDEeXxdddD7tL9Q3a9_9-g" />
+            android:value="AIzaSyCUaDGT6B2n2-JDVi9AvZ1cM7CMWY9QqZc" />
 
         <activity
             android:name=".SplashScreen_Activity"
-            android:screenOrientation="portrait"
-            android:label="@string/title_activity_main_maps">
+            android:label="@string/title_activity_main_maps"
+            android:screenOrientation="portrait">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
@@ -50,18 +51,16 @@
             android:label="@string/title_activity_details__parking"
             android:screenOrientation="portrait"
             android:theme="@style/AppTheme.NoActionBar" />
-
         <activity android:name=".Main_Activity" />
-
-        <activity android:name=".Rates_Activity"
-            android:screenOrientation="portrait"
-            />
-
-        <activity android:name=".Registration_Activity"
-            android:screenOrientation="portrait"/>
-
-        <activity android:name=".IssuesFeedback_Activity"
-            android:screenOrientation="portrait"></activity>
+        <activity
+            android:name=".Rates_Activity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".Registration_Activity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".IssuesFeedback_Activity"
+            android:screenOrientation="portrait" />
     </application>
 
 </manifest>

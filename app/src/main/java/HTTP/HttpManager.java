@@ -1,5 +1,7 @@
 package HTTP;
 
+import android.util.Log;
+
 import org.json.JSONException;
 import org.json.JSONStringer;
 
@@ -84,32 +86,29 @@ public class HttpManager {
         }
     }
 
-    public String PostData_Vehicle_IN(String... params){
+    public String PostData_Rating(String... params){
 
         URL url_ = null;
         HttpURLConnection conn_ = null;
         StringBuilder sb = null;
         JSONStringer userJson = null;
 
+
+        String PhoneNumber = null;
+        String Parking_Id = null;
+        String Rating = null;
+        String Comments = null;
+        String Result_to_Show = null;
         String URL = null;
-        String Parking_ID = null;
-        String Car_Type = null;
-        String Car_Number = null;
-        String Driver_Name = null;
-        String Phone_Number = null;
-        String ES_Parking_Time = null;
-        String time = null;
 
         try {
 
             URL = params[1];
-            Parking_ID = params[2];
-            Car_Type = params[3];
-            Car_Number = params[4];
-            Driver_Name = params[5];
-            Phone_Number = params[6];
-            ES_Parking_Time = params[7];
-            time = params[8];
+            PhoneNumber = params[2];
+            Parking_Id = params[3];
+            Rating = params[4];
+            Comments = params[5];
+           // OUT_Time = params[6];
 
 
             url_ =new URL(URL);
@@ -123,18 +122,12 @@ public class HttpManager {
             conn_.connect();
 
             userJson = new JSONStringer()
-                    .object().key("ParkTrans")
+                    .object().key("getRating")
                     .object()
-                    .key("ParkingId").value(Parking_ID)
-                    .key("TypeofCar").value(Car_Type)
-                    .key("VehicleNo").value(Car_Number)
-                    .key("DriverName").value("")
-                    .key("PhoneNumber").value(Phone_Number)
-                    .key("EstimatedParkingtime").value(ES_Parking_Time)
-                    .key("EstimatedFee").value("")
-                    .key("InTime").value(time)
-                    .key("OutTime").value("")
-                    .key("ActualFee").value("")
+                    .key("RegId").value(PhoneNumber)
+                    .key("ParkingId").value(Parking_Id)
+                    .key("Stars").value(Rating)
+                    .key("Remarks").value(Comments)
                     .endObject()
                     .endObject();
 
@@ -179,29 +172,30 @@ public class HttpManager {
         return sb.toString();
     }
 
-    public String PostData_Vehicle_OUT(String... params){
+    public String PostData_Park_Me(String... params){
 
         URL url_ = null;
         HttpURLConnection conn_ = null;
         StringBuilder sb = null;
         JSONStringer userJson = null;
 
-        String Parking_Id = null;
-        String Driver_Name = null;
-        String Phone_number = null;
-        String Vehicle_NO = null;
-        String OUT_Time = null;
-        String Result_to_Show = null;
+
+         String EstimatedTime = null;
+         String ParkingId = null;
+         String PhoneNumber = null;
+         String VehicleNo = null;
+         String VehicleType = null;
+
         String URL = null;
 
         try {
 
             URL = params[1];
-            Parking_Id = params[2];
-            Driver_Name = params[3];
-            Phone_number = params[4];
-            Vehicle_NO = params[5];
-            OUT_Time = params[6];
+            EstimatedTime = params[2];
+            ParkingId = params[3];
+            PhoneNumber = params[4];
+            VehicleNo = params[5];
+            VehicleType = params[6];
 
 
             url_ =new URL(URL);
@@ -215,19 +209,23 @@ public class HttpManager {
             conn_.connect();
 
             userJson = new JSONStringer()
-                    .object().key("VehicleOuts")
+                    .object().key("ParkMeRequst")
                     .object()
-                    .key("VehicleNo").value(Vehicle_NO)
-                    .key("ParkingId").value(Parking_Id)
-                    .key("DriverName").value(Driver_Name)
-                    .key("PhoneNumber").value(Phone_number)
-                    .key("OutTime").value(OUT_Time)
+                    .key("EstimatedTime").value(EstimatedTime)
+                    .key("InTime").value(DateTime.GetDateAndTime())
+                    .key("ParkingId").value(ParkingId)
+                    .key("PhoneNumber").value(PhoneNumber)
+                    .key("RegisterId").value("0")
+                    .key("RequestStatus").value("Pending")
+                    .key("RequestTime").value(DateTime.GetDateAndTime())
+                    .key("VehicleNo").value(VehicleNo)
+                    .key("VehicleType").value(VehicleType)
                     .endObject()
                     .endObject();
 
 
             //  System.out.println(userJson.toString());
-            //  Log.e("Object",userJson.toString());
+              Log.e("Object",userJson.toString());
             OutputStreamWriter out = new OutputStreamWriter(conn_.getOutputStream());
             out.write(userJson.toString());
             out.close();
@@ -266,29 +264,31 @@ public class HttpManager {
         return sb.toString();
     }
 
-    public String PostData_Vehicle_OUT_Confirm(String... params){
+
+    public String PostData_Park_OUT(String... params){
 
         URL url_ = null;
         HttpURLConnection conn_ = null;
         StringBuilder sb = null;
         JSONStringer userJson = null;
 
-        String Parking_Id = null;
-        String Driver_Name = null;
-        String Phone_number = null;
-        String Vehicle_NO = null;
-        String OUT_Time = null;
-        String Result_to_Show = null;
+
+        String EstimatedTime = null;
+        String ParkingId = null;
+        String PhoneNumber = null;
+        String VehicleNo = null;
+        String VehicleType = null;
+
         String URL = null;
 
         try {
 
             URL = params[1];
-            Parking_Id = params[2];
-            Driver_Name = params[3];
-            Phone_number = params[4];
-            Vehicle_NO = params[5];
-            OUT_Time = params[6];
+            EstimatedTime = params[2];
+            ParkingId = params[3];
+            PhoneNumber = params[4];
+            VehicleNo = params[5];
+            VehicleType = params[6];
 
 
             url_ =new URL(URL);
@@ -302,19 +302,23 @@ public class HttpManager {
             conn_.connect();
 
             userJson = new JSONStringer()
-                    .object().key("VehicleOuts")
+                    .object().key("ParkOutRequst")
                     .object()
-                    .key("VehicleNo").value(Vehicle_NO)
-                    .key("ParkingId").value(Parking_Id)
-                    .key("DriverName").value(Driver_Name)
-                    .key("PhoneNumber").value(Phone_number)
-                    .key("OutTime").value(OUT_Time)
+                    .key("EstimatedTime").value(EstimatedTime)
+                    .key("InTime").value(DateTime.GetDateAndTime())
+                    .key("ParkingId").value(ParkingId)
+                    .key("PhoneNumber").value(PhoneNumber)
+                    .key("RegisterId").value("0")
+                    .key("RequestStatus").value("Pending")
+                    .key("RequestTime").value(DateTime.GetDateAndTime())
+                    .key("VehicleNo").value(VehicleNo)
+                    .key("VehicleType").value(VehicleType)
                     .endObject()
                     .endObject();
 
 
             //  System.out.println(userJson.toString());
-            //  Log.e("Object",userJson.toString());
+            Log.e("Object",userJson.toString());
             OutputStreamWriter out = new OutputStreamWriter(conn_.getOutputStream());
             out.write(userJson.toString());
             out.close();

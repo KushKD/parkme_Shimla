@@ -9,12 +9,14 @@ public class Econstants {
     public static final String URL_GENERIC = "http://hpparking.hp.gov.in/HPParking.svc/getparkingLocation_JSON/10297";
     public static final String URL_Rates_Small = "http://hpparking.hp.gov.in/HPParking.svc/getParkingFeeParkingId_JSON/";
     public static final String URL_Rates_Big = "http://hpparking.hp.gov.in/HPParking.svc/getParkingFeeParkingId_JSON/";
+
+
     public static final String PREFRANCE_NAME = "Maps_Registration";
 
-   /* public static final String URL_MAIN = "http://192.168.43.28/HPParking/HPParking.svc/getparkingLocation_JSON/10297";
-    public static final String URL_GENERIC = "http://192.168.43.28/HPParking/HPParking.svc";
-    public static final String URL_Rates_Small = "http://192.168.43.28/HPParking/HPParking.svc/getParkingFeeParkingId_JSON/";
-    public static final String URL_Rates_Big = "http://192.168.43.28/HPParking/HPParking.svc/getParkingFeeParkingId_JSON/";*/
+  /*  public static final String URL_GENERIC = "http://192.168.0.171/HPParking/HPParking.svc/getparkingLocation_JSON/10297";
+    public static final String  URL_MAIN = "http://192.168.0.171/HPParking/HPParking.svc";
+    public static final String URL_Rates_Small = "http://192.168.0.171/HPParking/HPParking.svc/getParkingFeeParkingId_JSON/";
+    public static final String URL_Rates_Big = "http://192.168.0.171/HPParking/HPParking.svc/getParkingFeeParkingId_JSON/";*/
 
    // 192.168.43.28
 }

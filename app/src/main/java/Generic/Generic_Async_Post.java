@@ -4,9 +4,12 @@ package Generic;
  * Created by kuush on 6/17/2016.
  */
 
+import android.app.Activity;
 import android.app.ProgressDialog;
 import android.content.Context;
 import android.os.AsyncTask;
+import android.provider.ContactsContract;
+
 import Enum.TaskType;
 import Abstract.AsyncTaskListener;
 import HTTP.HttpManager;
@@ -39,20 +42,17 @@ public class Generic_Async_Post extends AsyncTask<String,Void ,String> {
         HttpManager http_manager = null;
         try{
             http_manager = new HttpManager();
-            if(params[0].equalsIgnoreCase("getParkingTransaction_JSON")){
-                Data_From_Server = http_manager.PostData_Vehicle_IN(params);
+            if(params[0].equalsIgnoreCase("getRating_JSON")){
+                Data_From_Server = http_manager.PostData_Rating(params);
                 return Data_From_Server;
-            }else if(params[0].equalsIgnoreCase("getParkingOut_JSON")){
-                Data_From_Server = http_manager.PostData_Vehicle_OUT(params);
+            }else if(params[0].equalsIgnoreCase("getParkMeRequest_JSON"))
+            {
+                Data_From_Server = http_manager.PostData_Park_Me(params);
                 return Data_From_Server;
-            }else if(params[0].equalsIgnoreCase("getConfirmPayment_JSON")){
-                Data_From_Server = http_manager.PostData_Vehicle_OUT_Confirm(params);
-                return Data_From_Server;
-            }else if(params[0].equalsIgnoreCase("getConfirmParkinStatus_JSON")){
-                Data_From_Server = http_manager.PostData_Vehicle_OUT_Confirm(params);
+            }else if(params[0].equalsIgnoreCase("getParkOutRequest_JSON")){
+                Data_From_Server = http_manager.PostData_Park_OUT(params);
                 return Data_From_Server;
             }
-
             else{
                 return "Error";
             }
@@ -66,7 +66,7 @@ public class Generic_Async_Post extends AsyncTask<String,Void ,String> {
     @Override
     protected void onPostExecute(String result) {
         super.onPostExecute(result);
-        taskListener.onTaskCompleted(result, taskType);
+        taskListener.onTaskCompleted((Activity) context,result, taskType);
         dialog.dismiss();
     }
 

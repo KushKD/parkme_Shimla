@@ -38,10 +38,13 @@ import java.io.OutputStreamWriter;
 import java.net.HttpURLConnection;
 import java.net.MalformedURLException;
 import java.net.URL;
+
+import Generic.Custom_Dialog;
 import HTTP.DateTime;
 import Model.Sending_Object_All_details_Pojo;
 import Parse.Manager_Json;
 import Parse.Parse_Google_API_Json;
+import Utilities.AppStatus;
 import Utilities.Econstants;
 import HTTP.HttpManager;
 
@@ -456,7 +459,16 @@ public class ParkingDetails_Activity extends AppCompatActivity  {
             parkout_bt.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
-                    ShowAlertParkOut("Check Out");
+                  //  ShowAlertParkOut("Check Out");
+                    SharedPreferences prfs = getSharedPreferences(Econstants.PREFRANCE_NAME, Context.MODE_PRIVATE);
+                    final String ParkingId_Server  = MArkerDetails.getParkingId();
+                    String PhoneNumber_Server = prfs.getString("phonenumber","");
+                    String VehicleNo_Server = prfs.getString("VehicleNumber","");
+                    Log.e("Phone",PhoneNumber_Server);
+                    Log.e("Vehicle No",VehicleNo_Server);
+
+                    Custom_Dialog DC = new Custom_Dialog();
+                    DC.Show_Park_OUT(ParkingDetails_Activity.this,"Park Out",PhoneNumber_Server,VehicleNo_Server,ParkingId_Server);
                 }
             });
 
@@ -467,8 +479,21 @@ public class ParkingDetails_Activity extends AppCompatActivity  {
             rating_bt.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
-                    ShowAlertafter_ParkME("Will be available soon.");
-                }
+
+                    SharedPreferences x = getSharedPreferences(Econstants.PREFRANCE_NAME, Context.MODE_PRIVATE);
+
+                    final String ParkingId_Server  = MArkerDetails.getParkingId();
+                    String PhoneNumber_Server = x.getString("phonenumber","");
+
+                    Log.e("Phone",PhoneNumber_Server);
+                    Log.e("Parking ID",ParkingId_Server);
+
+    Custom_Dialog RM = new Custom_Dialog();
+    Log.e("Error","We are Here");
+                  //  RM.showDialog(ParkingDetails_Activity.this,"HI");
+      RM.show_Rating(ParkingDetails_Activity.this, "Rate Me", PhoneNumber_Server, ParkingId_Server);
+
+}
             });
 
 
@@ -481,7 +506,20 @@ public class ParkingDetails_Activity extends AppCompatActivity  {
 
 
                         if (Integer.parseInt(MArkerDetails.getParkingId()) == 19) {
-                            ShowAlert("Park Me");
+                            SharedPreferences prfs = getSharedPreferences(Econstants.PREFRANCE_NAME, Context.MODE_PRIVATE);
+
+                            final String ParkingId_Server  = MArkerDetails.getParkingId();
+                            String PhoneNumber_Server = prfs.getString("phonenumber","");
+                            String VehicleNo_Server = prfs.getString("VehicleNumber","");
+
+                            Log.e("Phone",PhoneNumber_Server);
+                            Log.e("Vehicle No",VehicleNo_Server);
+                            if(AppStatus.getInstance(ParkingDetails_Activity.this).isOnline()) {
+                                Custom_Dialog DC = new Custom_Dialog();
+                                DC.Show_Park_ME(ParkingDetails_Activity.this, "Park Me", PhoneNumber_Server, VehicleNo_Server, ParkingId_Server);
+                            }else{
+                                Toast.makeText(getApplicationContext(),"Please connect to Internet.",Toast.LENGTH_LONG).show();
+                            }
                         } else {
 
 
@@ -515,10 +553,19 @@ public class ParkingDetails_Activity extends AppCompatActivity  {
                                 Log.e("Distance", Float.toString(distance_for_car_parking));
 
                                 if (distance_for_car_parking <= 500) {
-                                    ShowAlert("Park Me");
+                                    SharedPreferences prfs = getSharedPreferences(Econstants.PREFRANCE_NAME, Context.MODE_PRIVATE);
+                                    final String ParkingId_Server  = MArkerDetails.getParkingId();
+                                    String PhoneNumber_Server = prfs.getString("phonenumber","");
+                                    String VehicleNo_Server = prfs.getString("VehicleNumber","");
+                                    Log.e("Phone",PhoneNumber_Server);
+                                    Log.e("Vehicle No",VehicleNo_Server);
+
+                                    Custom_Dialog DC = new Custom_Dialog();
+                                    DC.Show_Park_ME(ParkingDetails_Activity.this,"Park Me",PhoneNumber_Server,VehicleNo_Server,ParkingId_Server);
                                 } else {
                                     String Message_NO_PARK = "You are currently " + Math.round(distance_for_car_parking) + " meters away from selected parking. Please reach closer (within 500 meters) and try again.";
-                                    ShowAlertafter_ParkME(Message_NO_PARK);
+                                  Custom_Dialog D_C = new Custom_Dialog();
+                                    D_C.showDialog(ParkingDetails_Activity.this,Message_NO_PARK);
                                 }
 
 
@@ -617,135 +664,9 @@ public class ParkingDetails_Activity extends AppCompatActivity  {
         }
     }
 
-    private void ShowAlert(String s) {
-        final Dialog dialog = new Dialog(ParkingDetails_Activity.this);
-        dialog.setContentView(R.layout.dialog_parkme);
-        dialog.setTitle("Park Me");
-        dialog.setCancelable(false);
-        dialog.getWindow().clearFlags(WindowManager.LayoutParams.FLAG_NOT_FOCUSABLE  | WindowManager.LayoutParams.FLAG_ALT_FOCUSABLE_IM);
-        dialog.getWindow().setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_STATE_VISIBLE);
-        dialog.show();
-       // TextView DialogInfo = (TextView)dialog.findViewById(R.id.dialog_info);
-       // DialogInfo.setText(s);
-
-
-        SharedPreferences prfs = getSharedPreferences(Econstants.PREFRANCE_NAME, Context.MODE_PRIVATE);
-
-      final String ParkingId_Server  = MArkerDetails.getParkingId();
-      String PhoneNumber_Server = prfs.getString("phonenumber","");
-      String VehicleNo_Server = prfs.getString("VehicleNumber","");
-
-        Log.e("Phone",PhoneNumber_Server);
-        Log.e("Vehicle No",VehicleNo_Server);
 
 
 
-        Button dialog_ok = (Button)dialog.findViewById(R.id.dialog_ok);
-        Button exit = (Button)dialog.findViewById(R.id.dialog_exit);
-       final  EditText carnumber_tv = (EditText)dialog.findViewById(R.id.carnumber);
-        carnumber_tv.setText(VehicleNo_Server);
-        final EditText phonenumber_tv  = (EditText)dialog.findViewById(R.id.phonenumber);
-        phonenumber_tv.setText(PhoneNumber_Server);
-       final Spinner typecar_sp = (Spinner)dialog.findViewById(R.id.typecar);
-       final Spinner estimatedtime_sp = (Spinner)dialog.findViewById(R.id.estimatedtime);
-
-        final String WSTS = Long.toString( estimatedtime_sp.getSelectedItemId());
-        exit.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-
-                dialog.dismiss();
-            }
-        });
-
-        dialog_ok.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                if(isOnline()) {
-                    String EstimatedTime_Server = null;
-                     EstimatedTime_Server  = Long.toString(estimatedtime_sp.getSelectedItemId());
-
-                    String VehicleType_Server = typecar_sp.getSelectedItem().toString().trim();
-                   Log.e("EstimatedTime_Server",WSTS);
-                    Log.e("VehicleType_Server",VehicleType_Server);
-                    Log.e("ParkingId_Server",ParkingId_Server);
-                    Log.e("Phone no",phonenumber_tv.getText().toString());
-                    Log.e("Car Number",carnumber_tv.getText().toString());
-
-                    Park_Me PM = new Park_Me();
-                    PM.execute(EstimatedTime_Server,ParkingId_Server,phonenumber_tv.getText().toString().trim(),carnumber_tv.getText().toString().trim(),VehicleType_Server);
-                     dialog.dismiss();
-                }else{
-                    Toast.makeText(getApplicationContext(), "Network not found" ,Toast.LENGTH_LONG).show();
-                }
-            }
-        });
-    }
-
-    private void ShowAlertParkOut(String s) {
-        final Dialog dialog = new Dialog(ParkingDetails_Activity.this);
-        dialog.setContentView(R.layout.dialog_parkme);
-        dialog.setTitle("Park Me");
-        dialog.setCancelable(false);
-        dialog.getWindow().clearFlags(WindowManager.LayoutParams.FLAG_NOT_FOCUSABLE  | WindowManager.LayoutParams.FLAG_ALT_FOCUSABLE_IM);
-        dialog.getWindow().setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_STATE_VISIBLE);
-        dialog.show();
-        // TextView DialogInfo = (TextView)dialog.findViewById(R.id.dialog_info);
-        // DialogInfo.setText(s);
-
-
-        SharedPreferences prfs = getSharedPreferences(Econstants.PREFRANCE_NAME, Context.MODE_PRIVATE);
-
-        final String ParkingId_Server  = MArkerDetails.getParkingId();
-        String PhoneNumber_Server = prfs.getString("phonenumber","");
-        String VehicleNo_Server = prfs.getString("VehicleNumber","");
-
-        Log.e("Phone",PhoneNumber_Server);
-        Log.e("Vehicle No",VehicleNo_Server);
-
-
-
-        Button dialog_ok = (Button)dialog.findViewById(R.id.dialog_ok);
-        Button exit = (Button)dialog.findViewById(R.id.dialog_exit);
-        final  EditText carnumber_tv = (EditText)dialog.findViewById(R.id.carnumber);
-        carnumber_tv.setText(VehicleNo_Server);
-        final EditText phonenumber_tv  = (EditText)dialog.findViewById(R.id.phonenumber);
-        phonenumber_tv.setText(PhoneNumber_Server);
-        final Spinner typecar_sp = (Spinner)dialog.findViewById(R.id.typecar);
-        final Spinner estimatedtime_sp = (Spinner)dialog.findViewById(R.id.estimatedtime);
-
-        final String WSTS = Long.toString( estimatedtime_sp.getSelectedItemId());
-        exit.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-
-                dialog.dismiss();
-            }
-        });
-
-        dialog_ok.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                if(isOnline()) {
-                    String EstimatedTime_Server = null;
-                    EstimatedTime_Server  = Long.toString(estimatedtime_sp.getSelectedItemId());
-
-                    String VehicleType_Server = typecar_sp.getSelectedItem().toString().trim();
-                    Log.e("EstimatedTime_Server",WSTS);
-                    Log.e("VehicleType_Server",VehicleType_Server);
-                    Log.e("ParkingId_Server",ParkingId_Server);
-                    Log.e("Phone no",phonenumber_tv.getText().toString());
-                    Log.e("Car Number",carnumber_tv.getText().toString());
-
-                    Park_Out PM = new Park_Out();
-                    PM.execute(EstimatedTime_Server,ParkingId_Server,phonenumber_tv.getText().toString().trim(),carnumber_tv.getText().toString().trim(),VehicleType_Server);
-                    dialog.dismiss();
-                }else{
-                    Toast.makeText(getApplicationContext(), "Network not found" ,Toast.LENGTH_LONG).show();
-                }
-            }
-        });
-    }
 
     private boolean checkPermission(){
         int result = ContextCompat.checkSelfPermission(context, Manifest.permission.CALL_PHONE);
@@ -813,289 +734,9 @@ public class ParkingDetails_Activity extends AppCompatActivity  {
 
 
 
-    public class Park_Me extends AsyncTask<String,String,String>{
 
-        URL url_;
-        HttpURLConnection conn_;
-        StringBuilder sb_ = null;
 
-        private String EstimatedTime = null;
-        private String ParkingId = null;
-        private String PhoneNumber = null;
-        private String VehicleNo = null;
-        private String VehicleType = null;
 
-        JSONStringer userJson = null;
-
-        private ProgressDialog dialog;
-        String url = null;
-
-
-        @Override
-        protected void onPreExecute() {
-            super.onPreExecute();
-            dialog = new ProgressDialog(ParkingDetails_Activity.this);
-            this.dialog.setMessage("Please wait ..");
-            this.dialog.show();
-            this.dialog.setCancelable(false);
-        }
-
-
-        @Override
-        protected String doInBackground(String... params) {
-            EstimatedTime = params[0];
-            ParkingId = params[1];
-            PhoneNumber = params[2];
-            VehicleNo = params[3];
-            VehicleType = params[4];
-
-            try {
-                url_ =new URL(Econstants.URL_MAIN+"/getParkMeRequest_JSON");
-                System.out.println(url_.toString());
-                conn_ = (HttpURLConnection)url_.openConnection();
-                conn_.setDoOutput(true);
-                conn_.setRequestMethod("POST");
-                conn_.setUseCaches(false);
-                conn_.setConnectTimeout(10000);
-                conn_.setReadTimeout(10000);
-                conn_.setRequestProperty("Content-Type", "application/json");
-                conn_.connect();
-
-                userJson = new JSONStringer()
-                        .object().key("ParkMeRequst")
-                        .object()
-                        .key("EstimatedTime").value(EstimatedTime)
-                        .key("InTime").value(DateTime.GetDateAndTime())
-                        .key("ParkingId").value(ParkingId)
-                        .key("PhoneNumber").value(PhoneNumber)
-                        .key("RegisterId").value("0")
-                        .key("RequestStatus").value("Pending")
-                        .key("RequestTime").value(DateTime.GetDateAndTime())
-                        .key("VehicleNo").value(VehicleNo)
-                        .key("VehicleType").value(VehicleType)
-                        .endObject()
-                        .endObject();
-
-
-                System.out.println(userJson.toString());
-                Log.e("Object",userJson.toString());
-                OutputStreamWriter out = new OutputStreamWriter(conn_.getOutputStream());
-                out.write(userJson.toString());
-                out.close();
-
-                try{
-                    int HttpResult =conn_.getResponseCode();
-                    if(HttpResult ==HttpURLConnection.HTTP_OK){
-                        BufferedReader br = new BufferedReader(new InputStreamReader(conn_.getInputStream(),"utf-8"));
-                        sb_ = new StringBuilder();
-                        String line = null;
-                        while ((line = br.readLine()) != null) {
-                            sb_.append(line + "\n");
-                        }
-                        br.close();
-                        System.out.println(sb_.toString());
-
-                    }else{
-                        System.out.println("Server Connection failed.");
-                    }
-
-                } catch(Exception e){
-                    return "Server Connection failed.";
-                }
-
-            }
-            catch (MalformedURLException e) {
-                e.printStackTrace();
-            } catch (IOException e) {
-                e.printStackTrace();
-            } catch (JSONException e) {
-                e.printStackTrace();
-            } finally{
-                if(conn_!=null)
-                    conn_.disconnect();
-            }
-            return sb_.toString();
-
-        }
-
-        @Override
-        protected void onPostExecute(String s) {
-            super.onPostExecute(s);
-
-            try {
-                dialog.dismiss();
-                String result_to_Show = Manager_Json.Parse_PArkME(s);
-                ShowAlertafter_ParkME(result_to_Show);
-
-
-            }catch(Exception e){
-                dialog.dismiss();
-                String result_to_Show  = "Something went wrong. Please try again later.";
-                ShowAlertafter_ParkME(result_to_Show);
-
-            }
-
-
-
-        }
-    }
-
-    public class Park_Out extends AsyncTask<String,String,String>{
-
-        URL url_;
-        HttpURLConnection conn_;
-        StringBuilder sb_ = null;
-
-        private String EstimatedTime = null;
-        private String ParkingId = null;
-        private String PhoneNumber = null;
-        private String VehicleNo = null;
-        private String VehicleType = null;
-
-        JSONStringer userJson = null;
-
-        private ProgressDialog dialog;
-        String url = null;
-
-
-        @Override
-        protected void onPreExecute() {
-            super.onPreExecute();
-            dialog = new ProgressDialog(ParkingDetails_Activity.this);
-            this.dialog.setMessage("Please wait ..");
-            this.dialog.show();
-            this.dialog.setCancelable(false);
-        }
-
-
-        @Override
-        protected String doInBackground(String... params) {
-            EstimatedTime = params[0];
-            ParkingId = params[1];
-            PhoneNumber = params[2];
-            VehicleNo = params[3];
-            VehicleType = params[4];
-
-            try {
-                url_ =new URL(Econstants.URL_MAIN+"/getParkOutRequest_JSON");
-                System.out.println(url_.toString());
-                conn_ = (HttpURLConnection)url_.openConnection();
-                conn_.setDoOutput(true);
-                conn_.setRequestMethod("POST");
-                conn_.setUseCaches(false);
-                conn_.setConnectTimeout(10000);
-                conn_.setReadTimeout(10000);
-                conn_.setRequestProperty("Content-Type", "application/json");
-                conn_.connect();
-
-                userJson = new JSONStringer()
-                        .object().key("ParkOutRequst")
-                        .object()
-                        .key("EstimatedTime").value(EstimatedTime)
-                        .key("InTime").value(DateTime.GetDateAndTime())
-                        .key("ParkingId").value(ParkingId)
-                        .key("PhoneNumber").value(PhoneNumber)
-                        .key("RegisterId").value("0")
-                        .key("RequestStatus").value("Pending")
-                        .key("RequestTime").value(DateTime.GetDateAndTime())
-                        .key("VehicleNo").value(VehicleNo)
-                        .key("VehicleType").value(VehicleType)
-                        .endObject()
-                        .endObject();
-
-
-                System.out.println(userJson.toString());
-                Log.e("Object",userJson.toString());
-                OutputStreamWriter out = new OutputStreamWriter(conn_.getOutputStream());
-                out.write(userJson.toString());
-                out.close();
-
-                try{
-                    int HttpResult =conn_.getResponseCode();
-                    if(HttpResult ==HttpURLConnection.HTTP_OK){
-                        BufferedReader br = new BufferedReader(new InputStreamReader(conn_.getInputStream(),"utf-8"));
-                        sb_ = new StringBuilder();
-                        String line = null;
-                        while ((line = br.readLine()) != null) {
-                            sb_.append(line + "\n");
-                        }
-                        br.close();
-                        System.out.println(sb_.toString());
-
-                    }else{
-                        System.out.println("Server Connection failed.");
-                    }
-
-                } catch(Exception e){
-                    return "Server Connection failed.";
-                }
-
-            }
-            catch (MalformedURLException e) {
-                e.printStackTrace();
-            } catch (IOException e) {
-                e.printStackTrace();
-            } catch (JSONException e) {
-                e.printStackTrace();
-            } finally{
-                if(conn_!=null)
-                    conn_.disconnect();
-            }
-            return sb_.toString();
-
-        }
-
-        @Override
-        protected void onPostExecute(String s) {
-            super.onPostExecute(s);
-
-            try {
-                dialog.dismiss();
-                String result_to_Show = Manager_Json.Parse_ParkOut(s);
-                ShowAlertafter_ParkME(result_to_Show);
-
-
-            }catch(Exception e){
-                dialog.dismiss();
-                String result_to_Show  = "Something went wrong. Please try again later.";
-                ShowAlertafter_ParkME(result_to_Show);
-
-            }
-
-
-
-        }
-    }
-
-
-    private void ShowAlertafter_ParkME(String s) {
-        final Dialog dialog = new Dialog(ParkingDetails_Activity.this);
-        dialog.setContentView(R.layout.dialog_parkme_result);
-        dialog.setTitle("Alert");
-        dialog.setCancelable(false);
-
-        dialog.show();
-
-
-
-        Button dialog_ok = (Button)dialog.findViewById(R.id.dialog_ok);
-
-        TextView dialog_result_tv =  (TextView)dialog.findViewById(R.id.dialog_result);
-        dialog_result_tv.setText(s);
-
-
-        dialog_ok.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-
-                dialog.dismiss();
-            }
-        });
-
-
-
-
-    }
 
 
 class GetDistance extends AsyncTask<String,String,String>{
@@ -1131,7 +772,6 @@ class GetDistance extends AsyncTask<String,String,String>{
 
         }
 
-       // Log.e("GOOGLE Direction API",RR);
     }
 }
 

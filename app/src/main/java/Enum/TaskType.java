@@ -5,7 +5,9 @@ package Enum;
  */
 public enum TaskType {
 
-    USER_LOGIN_GETOTP(1), USER_LOGIN_VALIDATE_OTP_AADHAAR(2), VEHICLE_IN(3), VEHICLE_CHECK_OUT(4), VEHICLE_CHECK_OUT_CONFIRM(5);
+    USER_RATING(1),
+    PARK_USER(2),
+    PARK_OUT_USER(3);
     int value; private TaskType(int value) { this.value = value; }
 
 
