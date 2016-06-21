@@ -560,7 +560,7 @@ public class ParkingDetails_Activity extends AppCompatActivity  {
                                     Custom_Dialog DC = new Custom_Dialog();
                                     DC.Show_Park_ME(ParkingDetails_Activity.this,"Park Me",PhoneNumber_Server,VehicleNo_Server,ParkingId_Server);
                                 } else {
-                                    String Message_NO_PARK = "You are currently " + Math.round(distance_for_car_parking) + " meters away from selected parking. Please reach closer (within 500 meters) and try again.";
+                                    String Message_NO_PARK = "You are currently " + Math.round(distance_for_car_parking) + " meters (aerial distance) away from selected parking . Please reach closer (within 500 meters) and try again.";
                                   Custom_Dialog D_C = new Custom_Dialog();
                                     D_C.showDialog(ParkingDetails_Activity.this,Message_NO_PARK);
                                 }
