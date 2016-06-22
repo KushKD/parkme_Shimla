@@ -1,0 +1,42 @@
+{
+  "project_info": {
+    "project_number": "146157616197",
+    "firebase_url": "https://parking-ed481.firebaseio.com",
+    "project_id": "parking-ed481",
+    "storage_bucket": "parking-ed481.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:146157616197:android:836c0f9234f7914d",
+        "android_client_info": {
+          "package_name": "findparking.hp.dit.himachal.com.shimlaparking"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "146157616197-8eiftiucu2k8rqhh5n34ha6r7nb71vgh.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBmotnNrA5pAQ88rJNCY5hcxO4mAlxoVvE"
+        }
+      ],
+      "services": {
+        "analytics_service": {
+          "status": 1
+        },
+        "appinvite_service": {
+          "status": 1,
+          "other_platform_oauth_client": []
+        },
+        "ads_service": {
+          "status": 2
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
