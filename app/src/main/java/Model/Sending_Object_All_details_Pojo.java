@@ -253,6 +253,16 @@ public class Sending_Object_All_details_Pojo implements Serializable {
     public String percentage;
     public String ParkingId;
 
+    public String getRating() {
+        return Rating;
+    }
+
+    public void setRating(String rating) {
+        Rating = rating;
+    }
+
+    public String Rating;
+
 
 
 

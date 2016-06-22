@@ -186,6 +186,16 @@ public class My_Marker_Pojo implements Serializable {
     public String Availability;
     public String percentage;
 
+    public String getRating() {
+        return Rating;
+    }
+
+    public void setRating(String rating) {
+        Rating = rating;
+    }
+
+    public String Rating;
+
     public String getParkingID() {
         return ParkingID;
     }
@@ -250,7 +260,7 @@ public class My_Marker_Pojo implements Serializable {
                           String Remarks, String SutedFor, String ThrashholdValue,
                           String MinimumParkingFeeSmallCar, String MinimumParkingFeebigCar, String MinimumParkingTime,
                           String percentage, String Availability,
-                          String ParkingID)
+                          String ParkingID, String Rating)
     {
         this.Capacity = Capacity;
         this.ContactNumber1 = ContactNumber1;
@@ -277,6 +287,7 @@ public class My_Marker_Pojo implements Serializable {
         this.percentage = percentage;
         this.Availability = Availability;
         this.ParkingID = ParkingID;
+        this.Rating = Rating;
 
 
     }

@@ -438,6 +438,7 @@ try {
     SOAD.setPercentage(mMarkersHashMap.get(marker).getPercentage());
     SOAD.setAvailability(mMarkersHashMap.get(marker).getAvailability());
     SOAD.setParkingFullTag(mMarkersHashMap.get(marker).getParkingFullTag());
+    SOAD.setRating(mMarkersHashMap.get(marker).getRating());
 
     if(latLng.latitude!=0) {
         SOAD.setLatitude_my_Location(latLng.latitude);
@@ -663,7 +664,8 @@ try {
                                     obj.getString("MinimumParkingTime"),
                                     obj.getString("percentage"),
                                     obj.getString("Availability"),
-                                    obj.getString("ParkingId")));
+                                    obj.getString("ParkingId"),
+                                    obj.optString("Rating")));
 
                         }
 
