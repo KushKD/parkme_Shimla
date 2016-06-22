@@ -2,7 +2,7 @@
     xmlns:android="http://schemas.android.com/apk/res/android"
     android:id="@+id/rightLayout"
     android:layout_width="match_parent"
-    android:layout_height="match_parent"
+    android:layout_height="wrap_content"
     android:orientation="vertical"
     android:background="#e6e6e6"
     android:weightSum="3">
@@ -481,8 +481,7 @@
                         android:layout_weight="1"
                         android:layout_width="fill_parent"
                         android:layout_height="wrap_content"
-                        android:gravity="center_vertical|center_horizontal|left"
-                        android:text=""/>
+                        android:gravity="center_vertical|center_horizontal|left" />
                 </LinearLayout>
 
             </LinearLayout>
@@ -688,6 +687,8 @@
 
 
                 </LinearLayout>
+
+
 
 
             <!-- Distance and Time -->
@@ -938,6 +939,67 @@
                     </LinearLayout>
 
 
+
+                </LinearLayout>
+
+                <!-- Rating -->
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:background="#FFFFFF"
+                    android:layout_margin="5dp"
+                    android:orientation="vertical"
+                    >
+
+                    <!-- Contact Numbers Numbers1 and Person1 Number 2 and Person2 Number 3 and Person3 -->
+                    <TextView
+                        android:text="Rating"
+                        android:textColor="#366988"
+                        android:textSize="17sp"
+                        android:textStyle="bold"
+                        android:layout_width="fill_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginBottom="5dp"
+                        android:gravity="center_vertical|center_horizontal|center"
+                        />
+
+                    <LinearLayout
+                        android:layout_width="fill_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_margin="5dp"
+                        android:orientation="horizontal"
+                        android:weightSum="2">
+
+                        <LinearLayout
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_weight="1"
+                            android:orientation="vertical">
+                            <TextView
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:text="Parking Rating:"
+                                android:gravity="left"
+                                android:layout_marginBottom="5dp"
+                                android:textColor="#366988"
+                                android:layout_weight="1"/>
+                        </LinearLayout>
+                        <LinearLayout
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_weight="1"
+                            android:orientation="vertical">
+                            <RatingBar
+                                android:id="@+id/myRatingBar"
+                                style="?android:attr/ratingBarStyleSmall"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:numStars="5"
+                                android:layout_gravity="left|center_horizontal|center_vertical"
+                                android:stepSize="1.0"
+                                />
+                        </LinearLayout>
+                    </LinearLayout>
 
                 </LinearLayout>
                 <!-- User Location -->

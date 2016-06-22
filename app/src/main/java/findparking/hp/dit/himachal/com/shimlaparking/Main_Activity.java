@@ -21,6 +21,7 @@ import android.util.Log;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.ProgressBar;
+import android.widget.RatingBar;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -508,7 +509,7 @@ try {
             final My_Marker_Pojo myMarker = mMarkersHashMap.get(marker);
 
             ImageView markerIcon = (ImageView)v.findViewById(R.id.marker_icon);
-
+            RatingBar parking_Rating = (RatingBar)v.findViewById(R.id.myRatingBar);
             TextView parking_place = (TextView) v.findViewById(R.id.parking_place);
             TextView identifier= (TextView) v.findViewById(R.id.identifier);
             TextView capacity= (TextView) v.findViewById(R.id.capacity);
@@ -525,6 +526,9 @@ try {
             capacity.setText(myMarker.getCapacity()+ " vehicles");
             markerid.setText(marker.getId());
             parkingid.setText(myMarker.getParkingID());
+
+            parking_Rating.setRating(Float.valueOf(myMarker.getRating()));
+
           //  available.setText(myMarker.getAvailability()+"("+myMarker.getPercentage()+"%)");
             if(myMarker.getAvailability().equalsIgnoreCase("Not Known")){
                 available.setText(myMarker.getAvailability());

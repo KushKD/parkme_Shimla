@@ -26,6 +26,7 @@ import android.view.WindowManager;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.LinearLayout;
+import android.widget.RatingBar;
 import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -75,6 +76,8 @@ public class ParkingDetails_Activity extends AppCompatActivity  {
             parking_id,
             distance,
             duration;
+
+    RatingBar rt_myRatingBar;
 
     String [] Distance_Time = null;
 
@@ -144,6 +147,7 @@ public class ParkingDetails_Activity extends AppCompatActivity  {
               //  parking_id.setText(MArkerDetails.getParkingId());
                 parking_place.setText(MArkerDetails.getParkingPlace());
                 parking_area.setText(MArkerDetails.getParkingArea());
+                rt_myRatingBar.setRating(Float.valueOf(MArkerDetails.getRating()));
 
                /* if (MArkerDetails.getParkingFullTag().length() == 5) {
                     parking_availability.setText("Available");
@@ -617,6 +621,7 @@ public class ParkingDetails_Activity extends AppCompatActivity  {
 
         try{
 
+            rt_myRatingBar = (RatingBar)findViewById(R.id.myRatingBar);
             parking_place = (TextView)findViewById(R.id.parking_place);
             parking_area = (TextView)findViewById(R.id.parking_area);
             parking_availability = (TextView)findViewById(R.id.parking_availability);
