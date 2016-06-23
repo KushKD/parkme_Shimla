@@ -36,7 +36,7 @@
         -->
         <meta-data
             android:name="com.google.android.geo.API_KEY"
-            android:value="AIzaSyCUaDGT6B2n2-JDVi9AvZ1cM7CMWY9QqZc" />
+            android:value="AIzaSyCkSC2Vk82KdtDEeXxdddD7tL9Q3a9_9-g" />
 
         <activity
             android:name=".SplashScreen_Activity"
@@ -62,6 +62,14 @@
             android:screenOrientation="portrait" />
         <activity
             android:name=".IssuesFeedback_Activity"
+            android:screenOrientation="portrait" />
+
+        <activity
+            android:name=".Notifications_Testing"
+            android:screenOrientation="portrait" />
+
+        <activity
+            android:name=".ResultActivity"
             android:screenOrientation="portrait" />
 
         <!--

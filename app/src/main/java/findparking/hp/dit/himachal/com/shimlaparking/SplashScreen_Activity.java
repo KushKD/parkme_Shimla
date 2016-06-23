@@ -25,11 +25,11 @@ public class SplashScreen_Activity extends Activity {
 
                 if(hasLoggedIn)
                 {
-                    Intent mainIntent = new Intent(SplashScreen_Activity.this, Main_Activity.class);
+                    Intent mainIntent = new Intent(SplashScreen_Activity.this, Main_Activity.class);   //Main_Activity  //Notifications_Testing
                     SplashScreen_Activity.this.startActivity(mainIntent);
                     SplashScreen_Activity.this.finish();
                 }else{
-                    Intent loginIntent = new Intent(SplashScreen_Activity.this, Registration_Activity.class);
+                    Intent loginIntent = new Intent(SplashScreen_Activity.this, Registration_Activity.class);  //Registration_Activity
                     SplashScreen_Activity.this.startActivity(loginIntent);
                     SplashScreen_Activity.this.finish();
 
