@@ -21,6 +21,14 @@ public class MyFirebaseInstanceIDService extends FirebaseInstanceIdService {
 
         //Displaying token on logcat
         Log.d(TAG, "Refreshed token: " + refreshedToken);
+        Log.d(TAG, "Refreshed token: " + "Here");
+        Log.d(TAG, "Refreshed token: " + "ARE");
+        Log.e(TAG, "Refreshed token: " + "WE");
+        Log.e(TAG, "Refreshed token: " + refreshedToken);
+        Log.e(TAG, "Refreshed token: " + refreshedToken);
+        Log.e(TAG, "Refreshed token: " + refreshedToken);
+        Log.e(TAG, "Refreshed token: " + refreshedToken);
+
 
     }
 

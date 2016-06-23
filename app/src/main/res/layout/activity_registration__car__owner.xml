@@ -352,7 +352,7 @@
                     android:background="#40666666"
                     android:gravity="left|center_vertical|center_horizontal"
                     android:padding="10dip"
-                    android:text="**Please input your valid 10 digit Mobile Number. We'll be pushing all our notifications to this number vis SMS facility."
+                    android:text="**Please input your valid 10 digit Mobile Number. We'll be pushing all our notifications to this number via SMS facility."
                     android:textColor="#FF545454"/>
             </LinearLayout>
 

@@ -794,7 +794,7 @@
                     android:visibility="visible">
 
                     <TextView
-                        android:text="Distance:"
+                        android:text="Road Distance:"
                         android:textColor="#366988"
                         android:textSize="17sp"
                         android:layout_weight="1"
