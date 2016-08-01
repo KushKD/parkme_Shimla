@@ -204,7 +204,7 @@ public class IssuesFeedback_Activity extends Activity {
                conn_.connect();
 
                JSONStringer userJson = new JSONStringer()
-                       .object().key("IssuesFeedback_Activity")
+                       .object().key("IssuesFeedback")
                        .object()
                        .key("NatureofComplaint").value(Issue_Type)
                        .key("TypeofComplaint").value(Complaint_Type)
