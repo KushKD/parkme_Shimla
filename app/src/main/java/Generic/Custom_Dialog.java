@@ -2,8 +2,6 @@ package Generic;
 
 import android.app.Activity;
 import android.app.Dialog;
-import android.content.Context;
-import android.content.SharedPreferences;
 import android.util.Log;
 import android.view.View;
 import android.view.Window;
@@ -15,20 +13,18 @@ import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import org.w3c.dom.Text;
-
 import Abstract.AsyncTaskListener;
 import Parse.Manager_Json;
 import Parse.Ratings_Json;
 import Utilities.AppStatus;
 import Utilities.Econstants;
 import findparking.hp.dit.himachal.com.shimlaparking.R;
-import Enum.TaskType;
+import enums.TaskType;
 
 /**
  * Created by kuush on 6/16/2016.
  */
-public class Custom_Dialog implements AsyncTaskListener {
+public class Custom_Dialog  implements AsyncTaskListener {
 
 
 String rating = "1.0";
@@ -57,6 +53,9 @@ String rating = "1.0";
             dialog.show();
 
         }
+
+
+
 
 
 

@@ -2,7 +2,7 @@ package Abstract;
 
 import android.app.Activity;
 
-import Enum.TaskType;
+import enums.TaskType;
 /**
  * Created by kuush on 6/17/2016.
  */

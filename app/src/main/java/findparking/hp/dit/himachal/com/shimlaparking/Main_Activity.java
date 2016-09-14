@@ -1,6 +1,8 @@
 package findparking.hp.dit.himachal.com.shimlaparking;
 
 import android.Manifest;
+import android.app.Activity;
+import android.app.Dialog;
 import android.app.ProgressDialog;
 import android.content.Context;
 import android.content.Intent;
@@ -9,6 +11,7 @@ import android.graphics.Color;
 import android.location.Location;
 import android.net.ConnectivityManager;
 import android.net.NetworkInfo;
+import android.net.Uri;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
@@ -19,6 +22,8 @@ import android.support.v7.app.ActionBar;
 import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
 import android.view.View;
+import android.view.Window;
+import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.ProgressBar;
 import android.widget.RatingBar;
@@ -56,6 +61,7 @@ import java.util.HashMap;
 import java.util.List;
 
 import Abstract.PermissionUtils;
+import Generic.Custom_Dialog;
 import Utilities.helper_Functions;
 import Model.My_Marker_Pojo;
 import Model.Sending_Object_All_details_Pojo;
@@ -78,7 +84,7 @@ public class Main_Activity extends AppCompatActivity implements
     private static final int LOCATION_PERMISSION_REQUEST_CODE = 1;
 
     private boolean mPermissionDenied = false;
-private int Zoom_Value_Camera = 13;
+    private int Zoom_Value_Camera = 13;
     private float Straight_Distance = 0;
     LocationRequest mLocationRequest;
     GoogleApiClient mGoogleApiClient;
@@ -95,6 +101,8 @@ private int Zoom_Value_Camera = 13;
     StringBuilder sb = new StringBuilder();
     float distance =0;
 
+    Button bt_greenfee , bt_parkinglist;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -110,7 +118,63 @@ private int Zoom_Value_Camera = 13;
         mapFragment.getMapAsync(this);
 
 
+        bt_greenfee = (Button)findViewById(R.id.green_fee);
+        bt_parkinglist = (Button)findViewById(R.id.parking_list);
 
+        bt_greenfee.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+
+                    final Dialog dialog = new Dialog(Main_Activity.this);
+                    dialog.requestWindowFeature(Window.FEATURE_NO_TITLE);
+                    dialog.setCancelable(true);
+                    dialog.setContentView(R.layout.dialog_custom);
+
+                    TextView text = (TextView) dialog.findViewById(R.id.dialog_result);
+                    text.setText("You will be redirected to Green Fee website. Press OK to continue and press back button to cancel. ");
+
+                    Button dialog_ok = (Button)dialog.findViewById(R.id.dialog_ok);
+
+                    dialog_ok.setOnClickListener(new View.OnClickListener() {
+                        @Override
+                        public void onClick(View v) {
+                            // activity.finish();
+                            dialog.dismiss();
+                            Uri uri = Uri.parse("http://hpparking.hp.gov.in/web/Green_Fee_Form.aspx"); // missing 'http://' will cause crashed
+                            Intent intent = new Intent(Intent.ACTION_VIEW, uri);
+                            startActivity(intent);
+                        }
+                    });
+
+                    dialog.show();
+
+                }
+
+        });
+
+        bt_parkinglist.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+
+
+
+                        Intent i_List = new Intent(Main_Activity.this,List_Parking.class);
+
+                        if(latLng.latitude!=0) {
+                            i_List.putExtra("Latitude",Double.toString(latLng.latitude));
+
+                        }else{
+                            i_List.putExtra("Latitude","00.000");
+                        }
+                        if(latLng.longitude!=0) {
+                            i_List.putExtra("Longitude",Double.toString(latLng.longitude));
+                        }else{
+                            i_List.putExtra("Longitude","00.000");
+                        }
+
+                        startActivity(i_List);
+                    }
+                });
     }
 
 
@@ -461,6 +525,7 @@ try {
 
             //Now Pass the Object
             Intent userSearch = new Intent();
+            userSearch.putExtra("FLAG", "MARKER");
             userSearch.putExtra("DETAILS_ALL", SOAD);
             userSearch.setClass(Main_Activity.this, ParkingDetails_Activity.class);
 

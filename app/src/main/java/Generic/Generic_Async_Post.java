@@ -8,9 +8,8 @@ import android.app.Activity;
 import android.app.ProgressDialog;
 import android.content.Context;
 import android.os.AsyncTask;
-import android.provider.ContactsContract;
 
-import Enum.TaskType;
+import enums.TaskType;
 import Abstract.AsyncTaskListener;
 import HTTP.HttpManager;
 
