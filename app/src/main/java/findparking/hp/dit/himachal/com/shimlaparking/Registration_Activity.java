@@ -30,6 +30,7 @@ import java.net.URL;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
+import Generic.Custom_Dialog;
 import Parse.JsonParser;
 import Utilities.Econstants;
 
@@ -257,14 +258,16 @@ try{
 
                 finalResult = s;
                 dialog.dismiss();
-                Toast.makeText(getApplicationContext(), finalResult, Toast.LENGTH_SHORT).show();
+                Custom_Dialog CD = new Custom_Dialog();
+                CD.showDialog(Registration_Activity.this,finalResult);
             }else{
                 JP = new JsonParser();
                 finalResult = JP.POST(s);
                 if(finalResult.equals("Registation completed")){
                     // clearData();
                     dialog.dismiss();
-                    Toast.makeText(getApplicationContext(), finalResult, Toast.LENGTH_SHORT).show();
+                    Custom_Dialog CD = new Custom_Dialog();
+                    CD.showDialog(Registration_Activity.this,finalResult);
                     // User has successfully logged in, save this information
                     //  We need an Editor object to make preference changes.
                     SharedPreferences settings = getSharedPreferences(Econstants.PREFRANCE_NAME, 0); // 0 - for private mode
@@ -282,7 +285,8 @@ try{
                 }
                 else{
                     dialog.dismiss();
-                    Toast.makeText(getApplicationContext(), finalResult, Toast.LENGTH_SHORT).show();
+                    Custom_Dialog CD = new Custom_Dialog();
+                    CD.showDialog(Registration_Activity.this,finalResult);
                 }
             }
 

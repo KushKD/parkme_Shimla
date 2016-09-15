@@ -158,21 +158,21 @@ public class Main_Activity extends AppCompatActivity implements
 
 
 
-                        Intent i_List = new Intent(Main_Activity.this,List_Parking.class);
 
-                        if(latLng.latitude!=0) {
+
+                        if((latLng!=null)) {
+                            Intent i_List = new Intent(Main_Activity.this,List_Parking.class);
                             i_List.putExtra("Latitude",Double.toString(latLng.latitude));
-
-                        }else{
-                            i_List.putExtra("Latitude","00.000");
-                        }
-                        if(latLng.longitude!=0) {
                             i_List.putExtra("Longitude",Double.toString(latLng.longitude));
+                            startActivity(i_List);
+
                         }else{
-                            i_List.putExtra("Longitude","00.000");
+                           Custom_Dialog CD = new Custom_Dialog();
+                            CD.showDialog(Main_Activity.this,"Please go to the settings and  enable your GPS Location.");
                         }
 
-                        startActivity(i_List);
+
+
                     }
                 });
     }
@@ -309,9 +309,11 @@ try {
 
             @Override
             public boolean onMyLocationButtonClick() {
-                Toast.makeText(this, "Fetching your location.", Toast.LENGTH_SHORT).show();
-                // Return false so that we don't consume the event and the default behavior still occurs
-                // (the camera animates to the user's current position).
+                if((latLng==null)) {
+                    Custom_Dialog CD = new Custom_Dialog();
+                    CD.showDialog(Main_Activity.this,"Please go to the settings and  enable your GPS Location.");
+
+                }
                 return false;
             }
 
