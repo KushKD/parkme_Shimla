@@ -11,4 +11,5 @@ public interface AsyncTaskListener {
      void onTaskCompleted(String result, TaskType taskType);
 
      void onTaskCompleted(Activity activity, String result, TaskType taskType);
+
 }

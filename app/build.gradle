@@ -8,8 +8,10 @@ android {
         applicationId "findparking.hp.dit.himachal.com.shimlaparking"
         minSdkVersion 16
         targetSdkVersion 23
-        versionCode 8
-        versionName "1.8"
+        versionCode 9
+        versionName "1.9"
+        // Enabling multidex support.
+        multiDexEnabled true
     }
     buildTypes {
         release {
@@ -28,6 +30,7 @@ dependencies {
     compile 'com.google.android.gms:play-services-maps:9.0.2' //8.4.0
     //Add this line
     compile 'com.google.firebase:firebase-messaging:9.0.2'   //9.0.0
+    compile 'com.android.support:multidex:1.0.0'
 
 
 }
