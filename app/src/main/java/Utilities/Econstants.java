@@ -37,3 +37,7 @@ public class Econstants {
 //Debug Key: - AIzaSyCUaDGT6B2n2-JDVi9AvZ1cM7CMWY9QqZc
 
 //http://hpparking.hp.gov.in/HPParking.svc/getparkingLocation_JSON/10297
+
+//New Key
+//Release Key:-
+//Debug Key:- AIzaSyBNyrYcMMImWHZEPKVFiHfjIOQeeyEAcOU

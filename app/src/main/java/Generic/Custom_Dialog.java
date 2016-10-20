@@ -2,6 +2,7 @@ package Generic;
 
 import android.app.Activity;
 import android.app.Dialog;
+import android.content.Intent;
 import android.util.Log;
 import android.view.View;
 import android.view.Window;
@@ -14,17 +15,20 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import Abstract.AsyncTaskListener;
+import Model.Payment_Object;
 import Parse.Manager_Json;
 import Parse.Ratings_Json;
 import Utilities.AppStatus;
 import Utilities.Econstants;
+import findparking.hp.dit.himachal.com.shimlaparking.ParkingDetails_Activity;
 import findparking.hp.dit.himachal.com.shimlaparking.R;
 import enums.TaskType;
+import findparking.hp.dit.himachal.com.shimlaparking.WebViewPayment_Activity;
 
 /**
  * Created by kuush on 6/16/2016.
  */
-public class Custom_Dialog  implements AsyncTaskListener {
+public class Custom_Dialog extends Activity  implements AsyncTaskListener {
 
 
 String rating = "1.0";
@@ -53,6 +57,37 @@ String rating = "1.0";
             dialog.show();
 
         }
+
+   /* public void showDialog_forPayment(final Activity activity, String msg){
+        final Dialog dialog = new Dialog(activity);
+        dialog.requestWindowFeature(Window.FEATURE_NO_TITLE);
+        dialog.setCancelable(false);
+        dialog.setContentView(R.layout.dialog_custom_payment);
+
+
+
+        TextView text = (TextView) dialog.findViewById(R.id.dialog_result);
+        text.setText(msg);
+
+        Button dialog_ok = (Button)dialog.findViewById(R.id.dialog_ok);
+
+        dialog_ok.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+               //  activity.finish();
+              //  activity.
+                dialog.dismiss();
+                //new Intent(getBaseContext(),Activity.class)
+               Intent i = new Intent(activity,WebViewPayment_Activity.class);
+                Log.e("We Are Here",activity.getPackageName().toString());
+               // startActivity(i);
+
+            }
+        });
+
+        dialog.show();
+
+    }*/
 
 
 
@@ -169,11 +204,28 @@ String rating = "1.0";
                     Log.e("Phone no",phonenumber_tv.getText().toString());
                     Log.e("Car Number",carnumber_tv.getText().toString());
 
+                    //Save the Object for tempreroly basis
+
+
                     dialog.dismiss();
 
                     String URL = Econstants.URL_MAIN + "/getParkMeRequest_JSON";
                     Log.e("URL",URL);
-                    new Generic_Async_Post(activity, Custom_Dialog.this, TaskType.PARK_USER).execute("getParkMeRequest_JSON", URL, EstimatedTime_Server,ParkingId_Server,phonenumber_tv.getText().toString().trim(),carnumber_tv.getText().toString().trim(),VehicleType_Server);
+                    new Generic_Async_Post(activity, Custom_Dialog.this, TaskType.PARK_USER).execute("getParkMeRequest_JSON", URL,
+                            EstimatedTime_Server,
+                            ParkingId_Server,
+                            phonenumber_tv.getText().toString().trim(),
+                            carnumber_tv.getText().toString().trim(),
+                            VehicleType_Server);
+                    //Save the Object for tempreroly basis
+
+                    Payment_Object PO = new Payment_Object();
+                    PO.setEstimatedTime_Server(EstimatedTime_Server);
+                    PO.setParkingId_Server(ParkingId_Server);
+                    PO.setPhone_Number(phonenumber_tv.getText().toString());
+                    PO.setCar_Number(carnumber_tv.getText().toString());
+                    PO.setVehicleType_Server(VehicleType_Server);
+
                 }else{
                     Toast.makeText(activity, "Network not found" ,Toast.LENGTH_LONG).show();
                 }
@@ -261,7 +313,7 @@ String rating = "1.0";
         }else if(taskType.equals(TaskType.PARK_USER)){
             String Result_to_Show = null;
             Result_to_Show = Manager_Json.Parse_PArkME(result);
-            showDialog(activity,Result_to_Show);
+                showDialog(activity,Result_to_Show);
         }else if(taskType.equals(TaskType.PARK_OUT_USER)){
             String Result_to_Show = null;
             Result_to_Show = Manager_Json.Parse_ParkOut(result);

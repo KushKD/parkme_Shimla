@@ -24,7 +24,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import Adapters.RatesAdapter;
-import Model.Rates_Pojo;
+import Model.Rates_POJO;
 import Parse.Fee_Parse_Json;
 import Utilities.Econstants;
 
@@ -38,7 +38,7 @@ public class Rates_Activity extends Activity {
     ListView listv;
     Context context;
     List<Get_Rates_Data_Server> tasks;
-    List<Rates_Pojo> Rates_Server;
+    List<Rates_POJO> Rates_Server;
     RatesAdapter adapter;
     TextView header;
     Button back;

@@ -10,18 +10,18 @@ import android.widget.TextView;
 
 import java.util.List;
 
-import Model.Rates_Pojo;
+import Model.Rates_POJO;
 import findparking.hp.dit.himachal.com.shimlaparking.R;
 
 /**
  * Created by kuush on 5/30/2016.
  */
-public class RatesAdapter extends ArrayAdapter<Rates_Pojo>  {
+public class RatesAdapter extends ArrayAdapter<Rates_POJO>  {
 
     private Context context;
-    private List<Rates_Pojo> userlist;
+    private List<Rates_POJO> userlist;
 
-    public RatesAdapter(Context context, int resource, List<Rates_Pojo> objects) {
+    public RatesAdapter(Context context, int resource, List<Rates_POJO> objects) {
         super(context, resource, objects);
         this.context = context;
         this.userlist = objects;
@@ -32,7 +32,7 @@ public class RatesAdapter extends ArrayAdapter<Rates_Pojo>  {
         LayoutInflater inflater = (LayoutInflater) context.getSystemService(Activity.LAYOUT_INFLATER_SERVICE);
         View view = inflater.inflate(R.layout.item_rates_small, parent, false);
        // Rates_Pojo rates_object = rates.get(position);
-        Rates_Pojo RO = userlist.get(position);
+        Rates_POJO RO = userlist.get(position);
         TextView tv1 = (TextView)view.findViewById(R.id.feetype);
         TextView tv2 = (TextView)view.findViewById(R.id.feeamount);
 

@@ -20,13 +20,13 @@
     <uses-permission android:name="android.permission.WAKE_LOCK" />
 
     <application
+        android:name="android.support.multidex.MultiDexApplication"
         android:allowBackup="true"
         android:icon="@mipmap/ic_launcher"
         android:label="@string/app_name"
         android:largeHeap="true"
         android:supportsRtl="true"
-        android:theme="@style/Theme.AppCompat.Light.NoActionBar"
-        android:name="android.support.multidex.MultiDexApplication">
+        android:theme="@style/Theme.AppCompat.Light.NoActionBar">
 
         <!--
              The API key for Google Maps-based APIs is defined as a string resource.
@@ -38,7 +38,7 @@
         -->
         <meta-data
             android:name="com.google.android.geo.API_KEY"
-            android:value="AIzaSyCkSC2Vk82KdtDEeXxdddD7tL9Q3a9_9-g" />
+            android:value="AIzaSyBNyrYcMMImWHZEPKVFiHfjIOQeeyEAcOU" />
 
         <activity
             android:name=".SplashScreen_Activity"
@@ -85,7 +85,8 @@
         </service>
 
         <activity android:name=".List_Parking" />
-        <activity android:name=".ParkingDetailsList_Activity"></activity>
+        <activity android:name=".ParkingDetailsList_Activity" />
+        <activity android:name=".WebViewPayment_Activity"></activity>
     </application>
 
 </manifest>

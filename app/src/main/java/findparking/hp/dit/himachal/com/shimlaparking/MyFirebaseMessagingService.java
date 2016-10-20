@@ -75,7 +75,7 @@ public class MyFirebaseMessagingService extends FirebaseMessagingService {
 
     private int getNotificationIcon() {
         boolean useWhiteIcon = (android.os.Build.VERSION.SDK_INT >= android.os.Build.VERSION_CODES.LOLLIPOP);
-        return useWhiteIcon ? R.mipmap.notification : R.mipmap.ic_launcher;
+        return useWhiteIcon ? R.mipmap.ic_launcher : R.mipmap.ic_launcher; //change to notification icon
     }
 
     private Notification setCustomViewNotification(String Message) {

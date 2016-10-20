@@ -8,14 +8,14 @@ import org.json.JSONTokener;
 import java.util.ArrayList;
 import java.util.List;
 
-import Model.Rates_Pojo;
+import Model.Rates_POJO;
 
 /**
  * Created by kuush on 5/30/2016.
  */
 public class Fee_Parse_Json {
 
-    public static List<Rates_Pojo> parseFeed(String content) {
+    public static List<Rates_POJO> parseFeed(String content) {
 
         try {
 
@@ -30,11 +30,11 @@ public class Fee_Parse_Json {
             }
 
             JSONArray ar = new JSONArray(g_Table);
-            List<Rates_Pojo>AdmiCardList = new ArrayList<>();
+            List<Rates_POJO>AdmiCardList = new ArrayList<>();
 
             for (int i = 0; i < ar.length(); i++) {
                 JSONObject obj = ar.getJSONObject(i);
-                Rates_Pojo pojo_rates = new Rates_Pojo();
+                Rates_POJO pojo_rates = new Rates_POJO();
                 pojo_rates.setFeeAmount(obj.getString("Amount"));
                 System.out.println(obj.getString("Amount"));
                 pojo_rates.setDuration(obj.getString("Duration"));
