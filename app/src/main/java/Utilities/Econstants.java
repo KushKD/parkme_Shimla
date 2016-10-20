@@ -31,7 +31,7 @@ public class Econstants {
 // http://192.168.0.171/HPParking/HPParking.svc/getparkingLocation_JSON/10297
 //"http://10.241.9.72/HPParking/HPParking.svc/getparkingLocation_JSON/1"
 //http://aadhaar.hp.gov.in/hpparking
-// keytool -list -v -keystore /home/david/Desktop/Keys/key.jks -alias MyAlias -storepass paswword -keypass password
+// keytool -list -v -keystore C:\Users\kuush\OneDrive\App Keystore\HP_Parking\HP_Parking.jks -alias hp_parking -storepass Carmelo_07 -keypass Carmelo_07
 
 //Release Key: - AIzaSyCkSC2Vk82KdtDEeXxdddD7tL9Q3a9_9-g
 //Debug Key: - AIzaSyCUaDGT6B2n2-JDVi9AvZ1cM7CMWY9QqZc
@@ -39,5 +39,5 @@ public class Econstants {
 //http://hpparking.hp.gov.in/HPParking.svc/getparkingLocation_JSON/10297
 
 //New Key
-//Release Key:-
-//Debug Key:- AIzaSyBNyrYcMMImWHZEPKVFiHfjIOQeeyEAcOU
+//Release Key:- AIzaSyA_wWkIUgpWgjIe45eS2UdykFtEA3aQC-g
+//Debug Key:- AIzaSyBmotnNrA5pAQ88rJNCY5hcxO4mAlxoVvE

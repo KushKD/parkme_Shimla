@@ -17,5 +17,5 @@
     -->
 
 
-    <string name="google_maps_key" translatable="false" templateMergeStrategy="preserve"></string>
+    <string name="google_maps_key" templateMergeStrategy="preserve" translatable="false"></string>
 </resources>

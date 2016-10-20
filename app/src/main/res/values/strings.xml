@@ -48,5 +48,6 @@
         <item>Parked vehicle used by parking person</item>
         <item>Others</item>
     </string-array>
+    <string name="title_activity_main__new_">Map</string>
 
 </resources>

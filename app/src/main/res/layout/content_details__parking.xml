@@ -559,6 +559,89 @@
 
                 </LinearLayout>
 
+
+                <!-- Online Payment  -->
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:background="#FFFFFF"
+                    android:layout_margin="5dp"
+                    android:orientation="vertical"
+                    >
+                    <TextView
+                        android:text="Pay Instantly  "
+                        android:textColor="#366988"
+                        android:textSize="17sp"
+                        android:textStyle="bold"
+                        android:layout_marginTop="5dp"
+                        android:layout_width="fill_parent"
+                        android:layout_height="wrap_content"
+                        android:gravity="center_vertical|center_horizontal|center"
+                        />
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:gravity="left"
+                        android:layout_margin="5dp"
+                        android:weightSum="2"
+                        android:orientation="horizontal"
+                        android:visibility="visible">
+
+                        <LinearLayout
+                            android:layout_width="wrap_content"
+                            android:layout_height="fill_parent"
+                            android:gravity="center|center_horizontal|center_vertical"
+                            android:layout_margin="5dp"
+                            android:layout_weight="1">
+
+                            <!-- <Button
+                                 android:layout_gravity="center|center_vertical|center_horizontal"
+                                 android:layout_width="80dp"
+                                 android:layout_height="70dp"
+                                 android:background="@drawable/parkout"/>-->
+
+                            <TextView
+                                android:layout_width="fill_parent"
+                                android:layout_height="fill_parent"
+                                android:gravity="center|center_horizontal|center_vertical"
+                                android:text="Book Online"
+                                android:textColor="#765498"/>
+
+                        </LinearLayout>
+
+                        <LinearLayout
+                            android:layout_width="wrap_content"
+                            android:layout_height="fill_parent"
+                            android:layout_margin="5dp"
+                            android:gravity="center|center_vertical|center_horizontal"
+                            android:layout_weight="1">
+
+                            <Button
+                                android:id="@+id/payment_online"
+                                android:layout_width="80dp"
+                                android:layout_height="70dp"
+                                android:layout_gravity="center|center_vertical|center_horizontal"
+                                android:background="@drawable/parkme"/>
+                        </LinearLayout>
+
+
+
+
+
+
+
+
+
+                    </LinearLayout>
+
+
+
+                </LinearLayout>
+
+
+
+
                 <!-- Contact Details  -->
                 <LinearLayout
                     android:layout_width="match_parent"

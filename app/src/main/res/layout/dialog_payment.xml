@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:background="#FFFFFF">
+
+    <TextView
+        android:id="@+id/dialog_info"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:textSize="20sp"
+        android:background="#40666666"
+        android:textColor="#3d3d29"
+        android:textStyle="bold"
+        android:padding="10dp"
+        />
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal">
+        <Button
+            android:id="@+id/dialog_exit"
+            android:layout_margin="10dp"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="#366988"
+            android:textColor="#FFFFFF"
+            android:layout_weight="1"
+            android:text="Quit"/>
+
+
+        <Button
+            android:id="@+id/dialog_ok"
+            android:layout_margin="10dp"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="#366988"
+            android:textColor="#FFFFFF"
+            android:layout_weight="1"
+            android:text="Proceed"/>
+
+    </LinearLayout>
+
+
+</LinearLayout>

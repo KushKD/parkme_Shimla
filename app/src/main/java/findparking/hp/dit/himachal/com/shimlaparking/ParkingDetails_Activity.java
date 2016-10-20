@@ -87,7 +87,7 @@ public class ParkingDetails_Activity extends AppCompatActivity  {
 
 
     private LinearLayout contactperson1_layout,contactperson2_layout,contactperson3_layout;
-    private Button call1 , call2,call3,get_directions , rates , issues,parkme_bt,parkout_bt,rating_bt;
+    private Button call1 , call2,call3,get_directions , rates , issues,parkme_bt,parkout_bt,rating_bt , payment_online_bt;
     final Context context = this;
     private static final int PERMISSION_REQUEST_CODE = 1;
    // MArkerDetails = null;
@@ -232,7 +232,28 @@ public class ParkingDetails_Activity extends AppCompatActivity  {
                     alertDialog.show();
                 }
 
+                /**
+                 * ToDo Tomorrow
+                 */
 
+                payment_online_bt.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+
+                        ShowAlert_Payment();
+                        StringBuilder SB_URL = new StringBuilder();
+                        SB_URL.append("websiteurl");
+                        SB_URL.append("/");
+                        SB_URL.append("HPParking_web");
+                        SB_URL.append("/");
+                        SB_URL.append("ParkingFeePayment.aspx");
+                        SB_URL.append("?");  SB_URL.append("VehicleType=");  SB_URL.append("____VehicleType____");
+                        SB_URL.append("?");  SB_URL.append("VehicleNo=");  SB_URL.append("____VehicleNo____");
+                        SB_URL.append("?");  SB_URL.append("Mobile=");  SB_URL.append("____Mobile____");
+                        SB_URL.append("?");  SB_URL.append("ParkTime=");  SB_URL.append("____ParkTime____");
+                        SB_URL.append("?");  SB_URL.append("ParkId=");  SB_URL.append("____ParkID____");
+                    }
+                });
 
 
                 issues.setOnClickListener(new View.OnClickListener() {
@@ -617,6 +638,40 @@ public class ParkingDetails_Activity extends AppCompatActivity  {
         }
     }
 
+    private void ShowAlert_Payment() {
+
+        final Dialog dialog = new Dialog(ParkingDetails_Activity.this);
+        dialog.setContentView(R.layout.dialog_payment);
+        dialog.setTitle("Pay Online");
+        dialog.setCancelable(false);
+        dialog.show();
+
+        TextView DialogInfo = (TextView)dialog.findViewById(R.id.dialog_info);
+        DialogInfo.setText("You are about to pay online for your parking slot. Do you want to continue?");
+
+        Button agree = (Button)dialog.findViewById(R.id.dialog_ok);
+        Button disagree = (Button)dialog.findViewById(R.id.dialog_exit);
+
+        agree.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+
+               Intent i = new Intent(ParkingDetails_Activity.this,WebViewPayment_Activity.class);
+                startActivity(i);
+
+
+            }
+        });
+
+        disagree.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                dialog.dismiss();
+            }
+        });
+
+    }
+
     private Boolean Initialize_View() {
 
         try{
@@ -657,6 +712,7 @@ public class ParkingDetails_Activity extends AppCompatActivity  {
             parkme_bt = (Button)findViewById(R.id.parkme);
             parkout_bt = (Button)findViewById(R.id.parkout);
             rating_bt = (Button)findViewById(R.id.rating);
+            payment_online_bt = (Button)findViewById(R.id.payment_online);
             duration = (TextView)findViewById(R.id.duration);
 
 
