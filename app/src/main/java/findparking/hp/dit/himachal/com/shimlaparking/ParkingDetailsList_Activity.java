@@ -692,9 +692,9 @@ dialog.show();
                     //    VehicleType_Server
                     //Create URL
                     StringBuilder SB_URL = new StringBuilder();
-                    SB_URL.append("websiteurl");
+                    SB_URL.append("http://10.241.9.72");
                     SB_URL.append("/");
-                    SB_URL.append("HPParking_web");
+                    SB_URL.append("hpparking_latest");
                     SB_URL.append("/");
                     SB_URL.append("ParkingFeePayment.aspx");
                     SB_URL.append("?");  SB_URL.append("VehicleType=");  SB_URL.append(VehicleType_Server);
