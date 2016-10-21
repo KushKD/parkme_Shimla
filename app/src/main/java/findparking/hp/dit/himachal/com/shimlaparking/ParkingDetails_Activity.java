@@ -41,13 +41,16 @@ import java.net.MalformedURLException;
 import java.net.URL;
 
 import Generic.Custom_Dialog;
+import Generic.Generic_Async_Post;
 import HTTP.DateTime;
+import Model.Payment_Object;
 import Model.Sending_Object_All_details_Pojo;
 import Parse.Manager_Json;
 import Parse.Parse_Google_API_Json;
 import Utilities.AppStatus;
 import Utilities.Econstants;
 import HTTP.HttpManager;
+import enums.TaskType;
 
 public class ParkingDetails_Activity extends AppCompatActivity  {
 
@@ -239,19 +242,21 @@ public class ParkingDetails_Activity extends AppCompatActivity  {
                 payment_online_bt.setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View v) {
+                        try{
+                            SharedPreferences prfs = getSharedPreferences(Econstants.PREFRANCE_NAME, Context.MODE_PRIVATE);
 
-                        ShowAlert_Payment();
-                        StringBuilder SB_URL = new StringBuilder();
-                        SB_URL.append("websiteurl");
-                        SB_URL.append("/");
-                        SB_URL.append("HPParking_web");
-                        SB_URL.append("/");
-                        SB_URL.append("ParkingFeePayment.aspx");
-                        SB_URL.append("?");  SB_URL.append("VehicleType=");  SB_URL.append("____VehicleType____");
-                        SB_URL.append("?");  SB_URL.append("VehicleNo=");  SB_URL.append("____VehicleNo____");
-                        SB_URL.append("?");  SB_URL.append("Mobile=");  SB_URL.append("____Mobile____");
-                        SB_URL.append("?");  SB_URL.append("ParkTime=");  SB_URL.append("____ParkTime____");
-                        SB_URL.append("?");  SB_URL.append("ParkId=");  SB_URL.append("____ParkID____");
+                            final String ParkingId_Server  = MArkerDetails.getParkingId();
+                            String PhoneNumber_Server = prfs.getString("phonenumber","");
+                            String VehicleNo_Server = prfs.getString("VehicleNumber","");
+
+                            Log.e("Phone",PhoneNumber_Server);
+                            Log.e("Vehicle No",VehicleNo_Server);
+                            ShowAlert_Payment(ParkingId_Server,PhoneNumber_Server,VehicleNo_Server);
+                        }catch(Exception e){
+
+                        }
+
+
                     }
                 });
 
@@ -638,9 +643,94 @@ public class ParkingDetails_Activity extends AppCompatActivity  {
         }
     }
 
-    private void ShowAlert_Payment() {
+    private void ShowAlert_Payment(final String ParkingId_Server,final String PhoneNumber_Server,final String VehicleNo_Server) {
 
         final Dialog dialog = new Dialog(ParkingDetails_Activity.this);
+        dialog.setContentView(R.layout.dialog_parkme);
+        dialog.setTitle("Park Me");
+        dialog.setCancelable(false);
+        dialog.getWindow().clearFlags(WindowManager.LayoutParams.FLAG_NOT_FOCUSABLE  | WindowManager.LayoutParams.FLAG_ALT_FOCUSABLE_IM);
+        dialog.getWindow().setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_STATE_VISIBLE);
+
+        dialog.show();
+
+
+        Button dialog_ok = (Button)dialog.findViewById(R.id.dialog_ok);
+        Button exit = (Button)dialog.findViewById(R.id.dialog_exit);
+        final  EditText carnumber_tv = (EditText)dialog.findViewById(R.id.carnumber);
+        carnumber_tv.setText(VehicleNo_Server);
+        final EditText phonenumber_tv  = (EditText)dialog.findViewById(R.id.phonenumber);
+        phonenumber_tv.setText(PhoneNumber_Server);
+        final Spinner typecar_sp = (Spinner)dialog.findViewById(R.id.typecar);
+        final Spinner estimatedtime_sp = (Spinner)dialog.findViewById(R.id.estimatedtime);
+
+        final String WSTS = Long.toString( estimatedtime_sp.getSelectedItemId());
+        exit.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+
+                dialog.dismiss();
+            }
+        });
+
+        dialog_ok.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                if(AppStatus.getInstance(ParkingDetails_Activity.this).isOnline()) {
+                    String EstimatedTime_Server = null;
+                    EstimatedTime_Server  = Long.toString(estimatedtime_sp.getSelectedItemId());
+
+                    String VehicleType_Server = typecar_sp.getSelectedItem().toString().trim();
+                    Log.e("EstimatedTime_Server",WSTS);
+                    Log.e("VehicleType_Server",VehicleType_Server);
+                    Log.e("ParkingId_Server",ParkingId_Server);
+                    Log.e("Phone no",phonenumber_tv.getText().toString());
+                    Log.e("Car Number",carnumber_tv.getText().toString());
+
+                    //Save the Object for tempreroly basis
+                    if(VehicleType_Server.equalsIgnoreCase("Big Car")){
+                        VehicleType_Server = "1";
+                    }else {
+                        VehicleType_Server = "0";
+                    }
+
+
+
+                  //  String URL = Econstants.URL_MAIN + "/getParkMeRequest_JSON";
+                   // Log.e("URL",URL);
+                      //  EstimatedTime_Server
+                        //    ParkingId_Server
+                        //    phonenumber_tv.getText().toString().trim()
+                        //    carnumber_tv.getText().toString().trim()
+                        //    VehicleType_Server
+                    //Create URL
+                    StringBuilder SB_URL = new StringBuilder();
+                    SB_URL.append("websiteurl");
+                    SB_URL.append("/");
+                    SB_URL.append("HPParking_web");
+                    SB_URL.append("/");
+                    SB_URL.append("ParkingFeePayment.aspx");
+                    SB_URL.append("?");  SB_URL.append("VehicleType=");  SB_URL.append(VehicleType_Server);
+                    SB_URL.append("&");  SB_URL.append("VehicleNo=");  SB_URL.append(carnumber_tv.getText().toString().trim());
+                    SB_URL.append("&");  SB_URL.append("Mobile=");  SB_URL.append(phonenumber_tv.getText().toString().trim());
+                    SB_URL.append("&");  SB_URL.append("ParkTime=");  SB_URL.append(EstimatedTime_Server);
+                    SB_URL.append("&");  SB_URL.append("ParkId=");  SB_URL.append(ParkingId_Server);
+
+                    Log.e("SB URL",SB_URL.toString());
+
+                    Intent i = new Intent(ParkingDetails_Activity.this,WebViewPayment_Activity.class);
+                    i.putExtra("URL_PAYMENT",SB_URL.toString());
+                    startActivity(i);
+                    dialog.dismiss();
+
+                }else{
+                    Toast.makeText(ParkingDetails_Activity.this, "Network not found" ,Toast.LENGTH_LONG).show();
+                }
+            }
+        });
+
+
+       /* final Dialog dialog = new Dialog(ParkingDetails_Activity.this);
         dialog.setContentView(R.layout.dialog_payment);
         dialog.setTitle("Pay Online");
         dialog.setCancelable(false);
@@ -656,6 +746,21 @@ public class ParkingDetails_Activity extends AppCompatActivity  {
             @Override
             public void onClick(View v) {
 
+                //Create URL
+                StringBuilder SB_URL = new StringBuilder();
+                SB_URL.append("websiteurl");
+                SB_URL.append("/");
+                SB_URL.append("HPParking_web");
+                SB_URL.append("/");
+                SB_URL.append("ParkingFeePayment.aspx");
+                SB_URL.append("?");  SB_URL.append("VehicleType=");  SB_URL.append("____VehicleType____");
+                SB_URL.append("?");  SB_URL.append("VehicleNo=");  SB_URL.append(VehicleNo_Server);
+                SB_URL.append("?");  SB_URL.append("Mobile=");  SB_URL.append(PhoneNumber_Server);
+                SB_URL.append("?");  SB_URL.append("ParkTime=");  SB_URL.append("____ParkTime____");
+                SB_URL.append("?");  SB_URL.append("ParkId=");  SB_URL.append(ParkingId_Server);
+
+                Log.e("SB URL",SB_URL.toString());
+
                Intent i = new Intent(ParkingDetails_Activity.this,WebViewPayment_Activity.class);
                 startActivity(i);
 
@@ -668,7 +773,7 @@ public class ParkingDetails_Activity extends AppCompatActivity  {
             public void onClick(View v) {
                 dialog.dismiss();
             }
-        });
+        });*/
 
     }
 
