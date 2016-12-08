@@ -13,6 +13,8 @@ public class Econstants {
 
     public static final String PREFRANCE_NAME = "Maps_Registration";
 
+    public static final String DISCLAIMER = "In case you book through this facility, the Fee will be charged or chargeable even though you have not entered the Parking. However Parking shall be made available to you till your check out time.";
+    public static final String  FEE_INFO= "The Parking fee will be applicable from the time of booking and making the Payment.";
     //Amit PC
    /* public static final String URL_GENERIC = "http://192.168.0.171/HPParking/HPParking.svc/getparkingLocation_JSON/10297";
     public static final String  URL_MAIN = "http://192.168.0.171/HPParking/HPParking.svc";

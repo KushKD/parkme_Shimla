@@ -597,6 +597,7 @@
                             android:layout_weight="1">
 
                              <Button
+                                 android:id="@+id/help"
                                  android:layout_gravity="center|center_vertical|center_horizontal"
                                  android:layout_width="60dp"
                                  android:layout_height="60dp"

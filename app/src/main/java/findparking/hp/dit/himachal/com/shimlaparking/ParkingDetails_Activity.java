@@ -90,7 +90,7 @@ public class ParkingDetails_Activity extends AppCompatActivity  {
 
 
     private LinearLayout contactperson1_layout,contactperson2_layout,contactperson3_layout;
-    private Button call1 , call2,call3,get_directions , rates , issues,parkme_bt,parkout_bt,rating_bt , payment_online_bt;
+    private Button call1 , call2,call3,get_directions , rates , issues,parkme_bt,parkout_bt,rating_bt , payment_online_bt , help_bt;
     final Context context = this;
     private static final int PERMISSION_REQUEST_CODE = 1;
    // MArkerDetails = null;
@@ -257,6 +257,14 @@ public class ParkingDetails_Activity extends AppCompatActivity  {
                         }
 
 
+                    }
+                });
+
+                help_bt.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+                        Custom_Dialog DC = new Custom_Dialog();
+                        DC.showDialog(ParkingDetails_Activity.this,Econstants.DISCLAIMER);
                     }
                 });
 
@@ -655,6 +663,8 @@ public class ParkingDetails_Activity extends AppCompatActivity  {
         dialog.show();
 
 
+        TextView message = (TextView)dialog.findViewById(R.id.messages);
+        message.setText(Econstants.FEE_INFO);
         Button dialog_ok = (Button)dialog.findViewById(R.id.dialog_ok);
         Button exit = (Button)dialog.findViewById(R.id.dialog_exit);
         final  EditText carnumber_tv = (EditText)dialog.findViewById(R.id.carnumber);
@@ -819,6 +829,7 @@ public class ParkingDetails_Activity extends AppCompatActivity  {
             rating_bt = (Button)findViewById(R.id.rating);
             payment_online_bt = (Button)findViewById(R.id.payment_online);
             duration = (TextView)findViewById(R.id.duration);
+            help_bt = (Button)findViewById(R.id.help);
 
 
             return true;
