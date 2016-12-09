@@ -13,8 +13,8 @@ android {
         applicationId "findparking.hp.dit.himachal.com.shimlaparking"
         minSdkVersion 16
         targetSdkVersion 23
-        versionCode 12
-        versionName "1.12"
+        versionCode 13
+        versionName "1.13"
         // Enabling multidex support.
         multiDexEnabled true
     }
